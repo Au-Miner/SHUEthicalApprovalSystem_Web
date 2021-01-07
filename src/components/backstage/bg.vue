@@ -4,12 +4,14 @@
     <img id="shu_badge" src="../../assets/shu_pic.png" />
     <div id="pureblue_bg"></div>
     <div id="lightblue_sidebar">
-        <el-button type="primary" id="tutorial">申报指南</el-button><br>
-        <el-button type="primary" id="apply">申请</el-button><br>
-        <el-button type="primary" id="myapplies">我的申请</el-button><br>
-        <el-button type="primary" id="approve">项目审批</el-button>
+      <el-button type="primary" id="tutorial">申报指南</el-button><br />
+      <el-button type="primary" id="apply">申请</el-button><br />
+      <el-button type="primary" id="myapplies">我的申请</el-button><br />
+      <el-button type="primary" id="approve">项目审批</el-button>
     </div>
-    <router-view>sth</router-view>
+    <div class="content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -18,9 +20,8 @@ export default {
   name: "backstage_bg",
   data() {
     return {};
-  }
+  },
 };
-
 </script>
 
 
@@ -44,46 +45,53 @@ export default {
   top: 0px;
   left: 0px;
 }
-#lightblue_sidebar{
-    height:1080px;
-    width:140px;
-    background-image: linear-gradient(#BFE1FD);
-    position:absolute;
-    top:70px;
-    left:0px;
-    visibility:visible;
-    z-index:1;
-    border-right:3px solid;
-    border-right-color:#245086
+#lightblue_sidebar {
+  height: 1010px;
+  width: 140px;
+  background-image: linear-gradient(#bfe1fd);
+  position: absolute;
+  top: 70px;
+  left: 0px;
+  visibility: visible;
+  z-index: 1;
+  border-right: 3px solid;
+  border-right-color: #245086;
 }
-button{
-    height:30px;
-    width:140px;
-    background-image: linear-gradient(#769DC5);
-    border-radius:0px;
-    border:none;
+button {
+  height: 30px;
+  width: 140px;
+  background-image: linear-gradient(#769dc5);
+  border-radius: 0px;
+  border: none;
 }
-button#tutorial{
-    height:30px;
-    width:140px;
-    background-image: linear-gradient(#245086,#769DC5);
-    border-radius:0px;
-    border:none;
+button#tutorial {
+  height: 30px;
+  width: 140px;
+  background-image: linear-gradient(#245086, #769dc5);
+  border-radius: 0px;
+  border: none;
 }
-button#tutorial:hover
+button#tutorial:hover {
+  height: 30px;
+  width: 140px;
+  background-image: linear-gradient(#66b1ff);
+  border-radius: 0px;
+  border: none;
+}
+button#tutorial:active {
+  height: 30px;
+  width: 140px;
+  background-image: linear-gradient(#3a8ee6);
+  border-radius: 0px;
+  border: none;
+}
+.content
 {
-    height:30px;
-    width:140px;
-    background-image: linear-gradient(#66B1FF);
-    border-radius:0px;
-    border:none;
-}
-button#tutorial:active
-{
-    height:30px;
-    width:140px;
-    background-image: linear-gradient(#3A8EE6);
-    border-radius:0px;
-    border:none;
+  background-image: linear-gradient(#F0F8FA);
+  position: absolute;
+  left:140px;
+  top: 70px;
+  height:1010px;
+  width:1780px;
 }
 </style>
