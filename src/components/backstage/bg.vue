@@ -4,10 +4,15 @@
     <img id="shu_badge" src="../../assets/shu_pic.png" />
     <div id="pureblue_bg"></div>
     <div id="lightblue_sidebar">
-      <el-button type="primary" id="tutorial">申报指南</el-button><br />
-      <el-button type="primary" id="apply">申请</el-button><br />
-      <el-button type="primary" id="myapplies">我的申请</el-button><br />
-      <el-button type="primary" id="approve">项目审批</el-button>
+      <el-button @click="jmp_tutor({path:'tutorial'})" type="primary" id="tutorial">申报指南</el-button><br />
+      <el-button @mouseenter="show_applies()"  type="primary" id="apply">申请</el-button><br />
+      <el-button @click="jmp_tutor({path:'myapplications'})" type="primary" id="myapplies">我的申请</el-button><br />
+      <el-button @click="jmp_tutor({path:'approve'})" type="primary" id="approve">项目审批</el-button>
+    </div>
+    <div id="applies">
+        <el-button @click="jmp_tutor({path:'apply_program'})" @mouseleave="show_applies()" type="primary" id="apply">项目申请</el-button><br />
+        <el-button @click="jmp_tutor({path:'apply_personal'})" @mouseleave="show_applies()" type="primary" id="apply">个人申请</el-button><br />
+        <el-button @click="jmp_tutor({path:'apply_other'})" @mouseleave="show_applies()" type="primary" id="apply">其他申请</el-button>
     </div>
     <div class="content">
       <router-view></router-view>
@@ -21,6 +26,14 @@ export default {
   data() {
     return {};
   },
+  methods:{
+    jmp_tutor: function(path){
+      this.$router.push(path)
+    },
+    show_applies: function(){
+      document.getElementById("applies")
+    }
+  }
 };
 </script>
 
@@ -28,6 +41,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#applies{
+  width:140px;
+  position:absolute;
+  top:100px;
+  left:140px;
+  z-index: 5;
+}
 #pureblue_bg {
   width: 1920px;
   height: 70px;

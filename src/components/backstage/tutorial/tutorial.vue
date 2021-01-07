@@ -1,5 +1,5 @@
 <template>
-<div><h1>教学页</h1></div>
+<p style="color: red; left:25px; position:absolute;">教学页</p>
 </template>
 
 <script>
