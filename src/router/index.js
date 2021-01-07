@@ -13,8 +13,8 @@ export default new Router({
       component: Homepage
     },
     {
-      path: '/bg',
-      name: 'bg',
+      path: '/backstage',
+      name: 'backstage',
       component: bg
     }
   ]

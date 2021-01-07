@@ -9,6 +9,7 @@
         <el-button type="primary" id="myapplies">我的申请</el-button><br>
         <el-button type="primary" id="approve">项目审批</el-button>
     </div>
+    <router-view>sth</router-view>
   </div>
 </template>
 
