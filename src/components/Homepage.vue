@@ -5,8 +5,8 @@
       <img id="picture01" src="../assets/shu_pic.png" />
       <div id="background01"></div>
       <div id="title_text01">项目伦理申报中心</div>
-      <el-button type="primary" id="button01">活动展示</el-button>
-      <el-button type="primary" id="button02">伦理常识</el-button>
+      <el-button @click="clickEvent03" type="primary" id="button01">活动展示</el-button>
+      <el-button @click="clickEvent02" type="primary" id="button02">伦理常识</el-button>
       <el-button @click="jmp('backstage')" type="primary" id="button03">我要申报</el-button>
     </div>
 
