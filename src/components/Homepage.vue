@@ -106,7 +106,7 @@
       <img src="../assets/mainbody_Interface_pic03.png" alt id="background_pic02" />
     </div>
 
-    <div id="background"  style="display:none">
+    <div id="background" style="display:none">
       <div id="background_fake"></div>
       <div>
         <img src="../assets/background_pic03.jpg" alt id="background_pic01" />
@@ -119,16 +119,16 @@
       <div id="background_line"></div>
       <img src="../assets/background_pic01.png" alt id="background_pic03" />
       <img src="../assets/background_pic02.png" alt id="background_pic04" />
-      <div id="background_text03" class="background_class01"></div>
-      <div id="background_text03" class="background_class01"></div>
-      <div id="background_text03" class="background_class01"></div>
-      <div id="background_text03" class="background_class01"></div>
-      <div id="background_text03" class="background_class01"></div>
-      <div id="background_text03" class="background_class01"></div>
-      <div id="background_text03" class="background_class01"></div>
-      <div id="background_text03" class="background_class01"></div>
-      <div id="background_text03" class="background_class01"></div>
-      <div id="background_text03" class="background_class01"></div>
+      <div id="background_text03" class="background_class01">{{mainbody_Text11}}</div>
+      <div id="background_text04" class="background_class01">{{mainbody_Text12}}</div>
+      <div id="background_text05" class="background_class01">{{mainbody_Text13}}</div>
+      <div id="background_text06" class="background_class01">{{mainbody_Text14}}</div>
+      <div id="background_text07" class="background_class01">{{mainbody_Text15}}</div>
+      <div id="background_text08" class="background_class01">{{mainbody_Text16}}</div>
+      <div id="background_text09" class="background_class01">{{mainbody_Text17}}</div>
+      <div id="background_text10" class="background_class01">{{mainbody_Text18}}</div>
+      <div id="background_text11" class="background_class01">{{mainbody_Text19}}</div>
+      <div id="background_text12" class="background_class01">{{mainbody_Text20}}</div>
     </div>
   </div>
 </template>
@@ -139,6 +139,54 @@
 
 
 <style>
+#background .background_class01 {
+  font-size: 20px;
+  color: #a0bcd8;
+  width: 200px;
+  z-index: 8;
+  height: 50px;
+  position: absolute;
+}
+#background #background_text03 {
+  left: 550px;
+  top: 1600px;
+}
+#background #background_text04 {
+  left: 550px;
+  top: 1660px;
+}
+#background #background_text05 {
+  left: 550px;
+  top: 1720px;
+}
+#background #background_text06 {
+  left: 550px;
+  top: 1780px;
+}
+#background #background_text07 {
+  left: 550px;
+  top: 1840px;
+}
+#background #background_text08 {
+  left: 750px;
+  top: 1600px;
+}
+#background #background_text09 {
+  left: 750px;
+  top: 1660px;
+}
+#background #background_text10 {
+  left: 750px;
+  top: 1720px;
+}
+#background #background_text11 {
+  left: 750px;
+  top: 1780px;
+}
+#background #background_text12 {
+  left: 750px;
+ top: 1840px;
+}
 #background_fake {
   position: absolute;
   left: 0px;
@@ -271,7 +319,17 @@ export default {
       mainbody_Text07: "上海大学与江西省签署新一轮战略合作协议",
       mainbody_Text08: "上海大学与江西省签署新一轮战略合作协议",
       mainbody_Text09: "更多新闻",
-      mainbody_Text10: "校内通知"
+      mainbody_Text10: "校内通知",
+      mainbody_Text11: "上海大学信息网",
+      mainbody_Text12: "上海大学信息网",
+      mainbody_Text13: "上海大学信息网",
+      mainbody_Text14: "上海大学信息网",
+      mainbody_Text15: "上海大学信息网",
+      mainbody_Text16: "上海大学信息网",
+      mainbody_Text17: "上海大学信息网",
+      mainbody_Text18: "上海大学信息网",
+      mainbody_Text19: "上海大学信息网",
+      mainbody_Text20: "上海大学信息网"
     };
   },
   methods: {
