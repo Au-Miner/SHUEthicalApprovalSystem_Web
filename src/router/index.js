@@ -23,11 +23,8 @@ export default new Router({
       path: '/backstage',
       name: 'backstage',
       component: bg,
-      children: [{
-        path:'',
-        name:'default',
-        component: tutorial
-      },
+      redirect:{name:'tutorial'},
+      children: [
       {
         path: 'tutorial',
         name:'tutorial',
