@@ -47,90 +47,87 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #applies{
-  width:140px;
+  width:15%;
   position:absolute;
-  top:100px;
-  left:140px;
+  top:15.5%;
+  left:15%;
   z-index: 5;
   display: none;
 }
 #darkblue_bg {
-  width: 1920px;
-  height: 70px;
+  width: 100%;
+  height: 10%;
   background-image: linear-gradient(#245086);
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0%;
+  left: 0%;
   z-index: -1;
 }
 #shu_badge {
-  height: 86px;
+  height: 12.5%;
   width: 216px;
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0%;
+  left: 0%;
+  z-index: 2;
 }
 #lightblue_sidebar {
-  height: 1010px;
-  width: 140px;
+  height: 90%;
+  width: 15%;
   background-image: linear-gradient(#bfe1fd);
   position: absolute;
-  top: 70px;
-  left: 0px;
+  top: 10%;
+  left: 0%;
   visibility: visible;
   z-index: 1;
   border-right: 3px solid;
   border-right-color: #245086;
 }
 button {
-  font-size: 15px;
-  height: 30px;
-  width: 140px;
+  font-size: 18px;
+  height: 6%;
+  width: 100%;
   background-image: linear-gradient(#769dc5);
   border-radius: 0px;
   border: none;
 }
 button#tutorial {
-  font-size: 15px;
-  height: 30px;
-  width: 140px;
+  font-size: 18px;
+  height: 6%;
+  width: 100%;
   background-image: linear-gradient(#245086, #769dc5);
   border-radius: 0px;
   border: none;
 }
 button#tutorial:hover {
-  height: 30px;
-  width: 140px;
   background-image: linear-gradient(#66b1ff);
   border-radius: 0px;
   border: none;
 }
 button#tutorial:active {
-  height: 30px;
-  width: 140px;
   background-image: linear-gradient(#3a8ee6);
   border-radius: 0px;
   border: none;
 }
 button#logout{
-  height: 40px;
-  width: 140px;
+  height: 10%;
+  width: 10%;
   position: absolute;
-  left: 1750px;
-  top: 18px;
-  font-size: 15px;
+  left: 90%;
+  top: 22%;
+  font-size: 18px;
   color: #fefefe;
   background: rgba(0, 0, 0, 0);
   border: 0px;
-  z-index: 2;
+  z-index: 5;
 }
 .content
 {
   background-image: linear-gradient(#F0F8FA);
   position: absolute;
-  left:140px;
-  top: 70px;
-  height:1010px;
-  width:1780px;
+  left:15%;
+  top: 10%;
+  height:90%;
+  width:85%;
 }
 </style>
