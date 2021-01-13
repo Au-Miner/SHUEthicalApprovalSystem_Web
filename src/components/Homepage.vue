@@ -5,9 +5,9 @@
       <img id="picture01" src="../assets/shu_pic.png" />
       <div id="background01"></div>
       <div id="title_text01">项目伦理申报中心</div>
-      <el-button type="primary" id="button01" @click="clickEvent03">活动展示</el-button>
-      <el-button type="primary" id="button02" @click="clickEvent02">伦理常识</el-button>
-      <el-button type="primary" id="button03">我要申报</el-button>
+      <el-button @click="clickEvent03" type="primary" id="button01">活动展示</el-button>
+      <el-button @click="clickEvent02" type="primary" id="button02">伦理常识</el-button>
+      <el-button @click="jmp('backstage')" type="primary" id="button03">我要申报</el-button>
     </div>
 
     <div id="carousel_Map">
@@ -377,6 +377,9 @@ export default {
       change3.style.display = "none";
       change4.style.display = "inline";
       change5.style.display = "inline";
+    },
+    jmp: function(path){
+      this.$router.push(path)
     }
   }
 };
