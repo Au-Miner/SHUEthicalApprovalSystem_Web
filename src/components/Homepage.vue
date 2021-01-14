@@ -138,138 +138,6 @@
 
 
 
-<style>
-#background .background_class01 {
-  font-size: 20px;
-  color: #a0bcd8;
-  width: 200px;
-  z-index: 8;
-  height: 50px;
-  position: absolute;
-}
-#background #background_text03 {
-  left: 550px;
-  top: 1600px;
-}
-#background #background_text04 {
-  left: 550px;
-  top: 1660px;
-}
-#background #background_text05 {
-  left: 550px;
-  top: 1720px;
-}
-#background #background_text06 {
-  left: 550px;
-  top: 1780px;
-}
-#background #background_text07 {
-  left: 550px;
-  top: 1840px;
-}
-#background #background_text08 {
-  left: 750px;
-  top: 1600px;
-}
-#background #background_text09 {
-  left: 750px;
-  top: 1660px;
-}
-#background #background_text10 {
-  left: 750px;
-  top: 1720px;
-}
-#background #background_text11 {
-  left: 750px;
-  top: 1780px;
-}
-#background #background_text12 {
-  left: 750px;
- top: 1840px;
-}
-#background_fake {
-  position: absolute;
-  left: 0px;
-  top: 1460px;
-  width: 1920px;
-  height: 580px;
-  background-color: #0c4175;
-}
-#background #background_pic01 {
-  position: absolute;
-  left: 80px;
-  top: 1470px;
-  width: 60px;
-  height: 60px;
-  z-index: 8;
-}
-#background #background_pic02 {
-  position: absolute;
-  left: 1020px;
-  top: 1470px;
-  width: 60px;
-  height: 60px;
-  z-index: 8;
-}
-#background #background_text01 {
-  position: absolute;
-  left: 100px;
-  top: 1484px;
-  width: 200px;
-  height: 60px;
-  font-size: 20px;
-  color: #a0bcd8;
-  z-index: 8;
-}
-#background #background_text02 {
-  position: absolute;
-  left: 1050px;
-  top: 1484px;
-  width: 200px;
-  height: 60px;
-  font-size: 20px;
-  color: #a0bcd8;
-  z-index: 8;
-}
-#background #background_line {
-  position: absolute;
-  left: 80px;
-  top: 1484px;
-  width: 1760px;
-  height: 47px;
-  font-size: 20px;
-  color: #a0bcd8;
-  z-index: 8;
-  border-bottom: 2px solid #a0bcd8;
-}
-#background #background_pic03 {
-  position: absolute;
-  left: 79px;
-  top: 1554px;
-  width: 360px;
-  height: 400px;
-  font-size: 20px;
-  color: #a0bcd8;
-  z-index: 8;
-  border-bottom: 2px solid #a0bcd8;
-}
-#background #background_pic04 {
-  position: absolute;
-  left: 1130px;
-  top: 1554px;
-  width: 764px;
-  height: 469px;
-  font-size: 20px;
-  color: #a0bcd8;
-  z-index: 8;
-  border-bottom: 2px solid #a0bcd8;
-}
-</style>
-
-
-
-
-
 <script>
 export default {
   name: "Homepage",
@@ -781,5 +649,136 @@ export default {
   width: 324px;
   height: 176px;
   z-index: 8;
+}
+</style>
+
+
+
+
+<style>
+#background .background_class01 {
+  font-size: 20px;
+  color: #a0bcd8;
+  width: 200px;
+  z-index: 8;
+  height: 50px;
+  position: absolute;
+}
+#background #background_text03 {
+  left: 550px;
+  top: 1600px;
+}
+#background #background_text04 {
+  left: 550px;
+  top: 1660px;
+}
+#background #background_text05 {
+  left: 550px;
+  top: 1720px;
+}
+#background #background_text06 {
+  left: 550px;
+  top: 1780px;
+}
+#background #background_text07 {
+  left: 550px;
+  top: 1840px;
+}
+#background #background_text08 {
+  left: 750px;
+  top: 1600px;
+}
+#background #background_text09 {
+  left: 750px;
+  top: 1660px;
+}
+#background #background_text10 {
+  left: 750px;
+  top: 1720px;
+}
+#background #background_text11 {
+  left: 750px;
+  top: 1780px;
+}
+#background #background_text12 {
+  left: 750px;
+ top: 1840px;
+}
+#background_fake {
+  position: absolute;
+  left: 0px;
+  top: 1460px;
+  width: 1920px;
+  height: 580px;
+  background-color: #0c4175;
+}
+#background #background_pic01 {
+  position: absolute;
+  left: 80px;
+  top: 1470px;
+  width: 60px;
+  height: 60px;
+  z-index: 8;
+}
+#background #background_pic02 {
+  position: absolute;
+  left: 1020px;
+  top: 1470px;
+  width: 60px;
+  height: 60px;
+  z-index: 8;
+}
+#background #background_text01 {
+  position: absolute;
+  left: 100px;
+  top: 1484px;
+  width: 200px;
+  height: 60px;
+  font-size: 20px;
+  color: #a0bcd8;
+  z-index: 8;
+}
+#background #background_text02 {
+  position: absolute;
+  left: 1050px;
+  top: 1484px;
+  width: 200px;
+  height: 60px;
+  font-size: 20px;
+  color: #a0bcd8;
+  z-index: 8;
+}
+#background #background_line {
+  position: absolute;
+  left: 80px;
+  top: 1484px;
+  width: 1760px;
+  height: 47px;
+  font-size: 20px;
+  color: #a0bcd8;
+  z-index: 8;
+  border-bottom: 2px solid #a0bcd8;
+}
+#background #background_pic03 {
+  position: absolute;
+  left: 79px;
+  top: 1554px;
+  width: 360px;
+  height: 400px;
+  font-size: 20px;
+  color: #a0bcd8;
+  z-index: 8;
+  border-bottom: 2px solid #a0bcd8;
+}
+#background #background_pic04 {
+  position: absolute;
+  left: 1130px;
+  top: 1554px;
+  width: 764px;
+  height: 469px;
+  font-size: 20px;
+  color: #a0bcd8;
+  z-index: 8;
+  border-bottom: 2px solid #a0bcd8;
 }
 </style>
