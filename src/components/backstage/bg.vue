@@ -45,7 +45,7 @@ export default {
     },
     foo(){
       axios({
-        url:'/user/info',
+        url:'/user/info?userId='+localStorage.getItem('userId'),
         method:'get',
       }).then((res)=>{
         if(res.data.code===200)
