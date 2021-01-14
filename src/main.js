@@ -6,6 +6,9 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import '@/interceptors'
+import axios from 'axios'
+axios.defaults.baseURL = '/api'
 
 Vue.use(ElementUI)//全局使用ElementUI
 

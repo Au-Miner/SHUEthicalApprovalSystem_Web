@@ -8,6 +8,7 @@ import apply_program from '@/components/backstage/apply/apply_program'
 import apply_personal from '@/components/backstage/apply/apply_personal'
 import apply_other from '@/components/backstage/apply/apply_other'
 import myapplications from '@/components/backstage/myapplications/myapplications'
+import login from '@/components/login'
 
 Vue.use(Router)
 
@@ -18,6 +19,11 @@ export default new Router({
       path: '',
       name: 'Homepage',
       component: Homepage
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login
     },
     {
       path: '/backstage',

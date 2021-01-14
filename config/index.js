@@ -10,7 +10,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/api': {   //匹配所有以/api开头的请求路径
+        target: 'http://techethics.songcm.cn/api', //代理目标的基础路径
+        changeOrigin: true, //支持跨域
+        pathRewrite: {  //重写路径：去掉路径中开头的/api
+          '^/api': ''
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

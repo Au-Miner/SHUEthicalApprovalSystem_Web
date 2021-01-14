@@ -3,6 +3,7 @@
   <div id="backstage_bg">
     <img id="shu_badge" src="../../assets/shu_pic.png" />
     <div id="darkblue_bg">
+      <div id='test'>{{information}}</div>
       <el-button @click="jmp('/')" type="primary" id="logout">退出登录</el-button>
     </div>
     <div id="lightblue_sidebar">
@@ -10,6 +11,7 @@
       <el-button @mouseenter.native="show_applies()" @mouseleave.native="hide_applies()" type="primary" id="apply">申请</el-button><br />
       <el-button @click="jmp('myapplications')" type="primary" id="myapplies">我的申请</el-button><br />
       <el-button @click="jmp('approve')" type="primary" id="approve">项目审批</el-button>
+      <br><el-button @click="foo()" type="primary" id="test">测试</el-button>
     </div>
     <div id="applies">
         <el-button @mouseenter.native="show_applies()" @mouseleave.native="hide_applies()" @click="jmp('apply_program')" @mouseleave="hide_applies()" type="primary" id="apply">项目申请</el-button><br />
@@ -23,10 +25,13 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "backstage_bg",
   data() {
-    return {};
+    return {
+      information:'something'
+      }
   },
   methods:{
     jmp: function(path){
@@ -37,6 +42,20 @@ export default {
     },
     hide_applies: function(){
       document.getElementById("applies").style.display="none";
+    },
+    foo(){
+      axios({
+        url:'/user/info?userId='+localStorage.getItem('userId'),
+        method:'get',
+      }).then((res)=>{
+        if(res.data.code===200)
+        {
+          this.information = res.data.data
+        }
+        else this.information = res.data.code;
+      }).catch(()=>{
+        //alert("error");
+      })
     }
   }
 };
@@ -46,6 +65,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#test{
+  z-index:100;
+  font-size:50;
+  color:red;
+}
 #applies{
   width:15%;
   position:absolute;
