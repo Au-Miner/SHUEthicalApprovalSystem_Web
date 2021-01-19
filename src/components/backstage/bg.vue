@@ -1,10 +1,10 @@
 
 <template>
   <div id="backstage_bg">
-    <img id="shu_badge" src="../../assets/shu_pic.png" />
     <div id="darkblue_bg">
-      <div id='test'>{{information}}</div>
-      <el-button @click="jmp('/')" type="primary" id="logout">退出登录</el-button>
+      <img id="shu_badge" src="../../assets/shu_pic.png" />
+      <div id="info"><span>欢迎: {{information}}</span></div>
+      <el-button @click="logout()" type="primary" id="logout">退出登录</el-button>
     </div>
     <div id="lightblue_sidebar">
       <el-button @click="jmp('tutorial')" type="primary" id="tutorial">申报指南</el-button><br />
@@ -19,7 +19,14 @@
         <el-button @mouseenter.native="show_applies()" @mouseleave.native="hide_applies()" @click="jmp('apply_other')" @mouseleave="hide_applies()" type="primary" id="apply">其他申请</el-button>
     </div>
     <div class="content">
+        <div class="infinite-list-wrapper" style="overflow:auto">
+    <ul
+      class="list"
+      v-infinite-scroll="load"
+      infinite-scroll-disabled="disabled">
       <router-view></router-view>
+    </ul>
+    </div> 
     </div>
   </div>
 </template>
@@ -30,8 +37,11 @@ export default {
   name: "backstage_bg",
   data() {
     return {
-      information:'something'
+      information:''
       }
+  },
+  mounted(){
+    this.info_update()
   },
   methods:{
     jmp: function(path){
@@ -43,19 +53,23 @@ export default {
     hide_applies: function(){
       document.getElementById("applies").style.display="none";
     },
-    foo(){
+    info_update(){
       axios({
         url:'/user/info?userId='+localStorage.getItem('userId'),
         method:'get',
       }).then((res)=>{
         if(res.data.code===200)
         {
-          this.information = res.data.data
+          this.information = res.data.data.name+' '+res.data.data.userId;
         }
         else this.information = res.data.code;
       }).catch(()=>{
-        //alert("error");
+        console.log('error occur')
       })
+    },
+    logout(){
+      localStorage.clear()
+      this.$router.push('/')
     }
   }
 };
@@ -65,10 +79,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#test{
-  z-index:100;
-  font-size:50;
-  color:red;
+#info{
+  width:200px;
+  right:10%;
+  top:35%;
+  font-size:120%;
+  position:absolute;
+  color:white;
 }
 #applies{
   width:15%;
@@ -88,7 +105,7 @@ export default {
   z-index: -1;
 }
 #shu_badge {
-  height: 12.5%;
+  height: 120%;
   width: 216px;
   position: absolute;
   top: 0%;
@@ -153,5 +170,6 @@ button#logout{
   top: 10%;
   height:90%;
   width:85%;
+  overflow:auto;
 }
 </style>
