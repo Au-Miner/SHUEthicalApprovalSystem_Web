@@ -3,8 +3,7 @@
     <template>
       <el-table
         :data="information.userApplicationList"
-        style="width: 95%"
-        :row-class-name="ApplicationList"
+        style="width: 95%;height: 100%;"
       >
         <el-table-column width="150" fixed prop="id" label="项目编号">
         </el-table-column>
@@ -55,14 +54,6 @@ export default {
     this.load();
   },
   methods: {
-    ApplicationList({ row, rowIndex }) {
-      if (rowIndex === 1) {
-        return "warning-row";
-      } else if (rowIndex === 3) {
-        return "success-row";
-      }
-      return "";
-    },
     load: function () {
       axios({
         url: "/user/applicationList",
@@ -80,3 +71,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .el-table .warning-row {
+    background: oldlace;
+  }
+  .el-table .success-row {
+    background: #f0f9eb;
+  }
+</style>
