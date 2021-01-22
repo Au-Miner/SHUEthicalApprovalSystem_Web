@@ -9,6 +9,7 @@ import apply_personal from '@/components/backstage/apply/apply_personal'
 import apply_other from '@/components/backstage/apply/apply_other'
 import myapplications from '@/components/backstage/myapplications/myapplications'
 import login from '@/components/login'
+import appointment from '@/components/backstage/appointment/appointment'
 
 Vue.use(Router)
 
@@ -60,6 +61,11 @@ export default new Router({
         path: 'myapplications',
         name:'myapplications',
         component: myapplications
+      },
+      {
+        path: 'appointment',
+        name: 'appointment',
+        component: appointment
       }
     ]
     }

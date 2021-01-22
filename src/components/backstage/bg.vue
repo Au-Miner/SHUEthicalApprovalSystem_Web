@@ -11,7 +11,7 @@
       <el-button @mouseenter.native="show_applies()" @mouseleave.native="hide_applies()" type="primary" id="apply">申请</el-button><br />
       <el-button @click="jmp('myapplications')" type="primary" id="myapplies">我的申请</el-button><br />
       <el-button @click="jmp('approve')" type="primary" id="approve">项目审批</el-button>
-      <br><el-button @click="test()" type="primary" id="test">测试</el-button>
+      <br><el-button @click="jmp('appointment')" type="primary" id="test">委员指派</el-button>
     </div>
     <div id="applies">
         <el-button @mouseenter.native="show_applies()" @mouseleave.native="hide_applies()" @click="jmp('apply_program')" @mouseleave="hide_applies()" type="primary" id="apply">项目申请</el-button><br />
@@ -78,26 +78,39 @@ export default {
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- background: rgba(0, 0, 0, 0); -->
 <style scoped>
 #info{
   width:200px;
   right:10%;
-  top:35%;
-  font-size:120%;
+  top: 20px;
+  font-size:18px;
   position:absolute;
   color:white;
 }
+button#logout{
+  background:rgba(0, 0, 0, 0);
+  height: 10%;
+  width: 10%;
+  position: absolute;
+  left: 90%;
+  top: 22%;
+  font-size: 18px;
+  color: #fefefe;
+  border: 0px;
+  z-index: 5;
+}
 #applies{
-  width:15%;
+  width:200px;
   position:absolute;
-  top:15.5%;
-  left:15%;
+  top:100px;
+  left:200px;
   z-index: 5;
   display: none;
 }
 #darkblue_bg {
   width: 100%;
-  height: 10%;
+  height: 60px;
   background-image: linear-gradient(#245086);
   position: absolute;
   top: 0%;
@@ -113,11 +126,11 @@ export default {
   z-index: 2;
 }
 #lightblue_sidebar {
-  height: 90%;
-  width: 15%;
+  bottom:0px;
+  width: 200px;
   background-image: linear-gradient(#bfe1fd);
   position: absolute;
-  top: 10%;
+  top: 60px;
   left: 0%;
   visibility: visible;
   z-index: 1;
@@ -126,7 +139,7 @@ export default {
 }
 button {
   font-size: 18px;
-  height: 6%;
+  height: 40px;
   width: 100%;
   background-image: linear-gradient(#769dc5);
   border-radius: 0px;
@@ -134,7 +147,7 @@ button {
 }
 button#tutorial {
   font-size: 18px;
-  height: 6%;
+  height: 40px;
   width: 100%;
   background-image: linear-gradient(#245086, #769dc5);
   border-radius: 0px;
@@ -150,26 +163,14 @@ button#tutorial:active {
   border-radius: 0px;
   border: none;
 }
-button#logout{
-  height: 10%;
-  width: 10%;
-  position: absolute;
-  left: 90%;
-  top: 22%;
-  font-size: 18px;
-  color: #fefefe;
-  background: rgba(0, 0, 0, 0);
-  border: 0px;
-  z-index: 5;
-}
 .content
 {
   background-image: linear-gradient(#F0F8FA);
   position: absolute;
-  left:15%;
-  top: 10%;
-  height:90%;
-  width:85%;
+  left:200px;
+  top: 60px;
+  bottom:0px;
+  right:0px;
   overflow:auto;
 }
 </style>
