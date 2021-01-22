@@ -11,7 +11,7 @@
       <el-button @mouseenter.native="show_applies()" @mouseleave.native="hide_applies()" type="primary" id="apply">申请</el-button><br />
       <el-button @click="jmp('myapplications')" type="primary" id="myapplies">我的申请</el-button><br />
       <el-button @click="jmp('approve')" type="primary" id="approve">项目审批</el-button>
-      <br><el-button @click="test()" type="primary" id="test">测试</el-button>
+      <br><el-button @click="jmp('appointment')" type="primary" id="test">委员指派</el-button>
     </div>
     <div id="applies">
         <el-button @mouseenter.native="show_applies()" @mouseleave.native="hide_applies()" @click="jmp('apply_program')" @mouseleave="hide_applies()" type="primary" id="apply">项目申请</el-button><br />
