@@ -41,7 +41,7 @@ export default {
       this.hide("appointment");
     }
     if(localStorage.getItem('identity').includes('委员长')||
-       localStorage.getItem('identity').includes('科研秘书')||
+       localStorage.getItem('identity').includes('学院秘书')||
        localStorage.getItem('identity').includes('部门领导')||
        localStorage.getItem('identity').includes('委员')){
         this.show("approve");

@@ -17,7 +17,7 @@ export default {
   },
   mounted(){
       if(localStorage.getItem("identity").includes("委员长"))this.show("weiyuanzhang")
-      if(localStorage.getItem("identity").includes("科研秘书"))this.show("mishu")
+      if(localStorage.getItem("identity").includes("学院秘书"))this.show("mishu")
       if(localStorage.getItem("identity").includes("部门领导"))this.show("lingdao")
       if(localStorage.getItem("identity").includes("委员"))this.show("weiyuan")
   },
