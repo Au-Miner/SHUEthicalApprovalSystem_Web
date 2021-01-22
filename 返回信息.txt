@@ -1,0 +1,8 @@
+/user/info {"code":200,"message":null,"data":{"userId":"","name":"","gender":0,"department":"计算机工程与科学学院","education":"本科","identity":["学院秘书","部门领导","委员","委员长"],"officePhone":"","mobilePhone":"","email":"","pending":false}}
+
+/login {"code":200,"message":null,"data":{"token":" ","userId":"","name":"","identity":["学院秘书","部门领导","委员","委员长"],"department":"计算机工程与科学学院"}}
+
+/user/applicationList {"code":200,"message":null,"data":{"totalNum":2,"userApplicationList":[{"id":13,"ordernum":"","name":"项目名称测试d","userId":"","creationTime":null,"beginTime":null,"type":1,"status":"执行情况表与总结待提交"},{"id":7,"ordernum":"","name":"项目名称测试1","userId":"18120198","creationTime":"2021年01月06日 16:57:23","beginTime":null,"type":1,"status":"初审"}]}}
+
+权限:0001 学院秘书
+       
