@@ -7,7 +7,7 @@
       <div id="title_text01">项目伦理申报中心</div>
       <el-button @click="clickEvent03" type="primary" id="button01">活动展示</el-button>
       <el-button @click="clickEvent02" type="primary" id="button02">伦理常识</el-button>
-      <el-button @click="jmp('backstage')" type="primary" id="button03">我要申报</el-button>
+      <el-button @click="jmp('login')" type="primary" id="button03">我要申报</el-button>
     </div>
 
     <div id="carousel_Map">
@@ -261,13 +261,13 @@ export default {
   position: absolute;
   top: 0px;
   left: 0px;
-  width: 1920px;
+  width: 100%;
   height: 170px;
   z-index: 10;
 }
 #title_Start:hover #background01 {
   transition: all 0.2s ease-in;
-  width: 1920px;
+  width: 100%;
   height: 125px;
   background-color: #245086;
   background-image: linear-gradient(#245086, #245086);
@@ -279,7 +279,7 @@ export default {
 }
 #background01 {
   transition: all 0.2s ease-in;
-  width: 1920px;
+  width: 100%;
   height: 170px;
   background-image: linear-gradient(#245086, #698cb6 70%);
   position: absolute;
@@ -348,7 +348,7 @@ export default {
 <style>
 #carousel_Map .el-carousel {
   position: absolute;
-  width: 1920px;
+  width: 100%;
   height: 812px;
   top: 125px;
   left: 0px;
@@ -398,7 +398,7 @@ export default {
 <style>
 #knowledge_Ethics .el-carousel {
   position: absolute;
-  width: 1920px;
+  width: 100%;
   height: 937px;
   top: 0px;
   left: 0px;
@@ -505,7 +505,7 @@ export default {
   background-color: #eeebea;
   position: absolute;
   top: 125px;
-  width: 1920px;
+  width: 100%;
   height: 1525px;
   left: 0px;
 }
@@ -708,7 +708,7 @@ export default {
   position: absolute;
   left: 0px;
   top: 1460px;
-  width: 1920px;
+  width: 100%;
   height: 580px;
   background-color: #0c4175;
 }

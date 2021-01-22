@@ -2,25 +2,27 @@
   <div>
     <template>
       <el-table
-        :data="information.userApplicationList"
+        :data="memberlist.data"
         style="width: 95%;height: 100%;"
         id="list"
       >
-        <el-table-column width="150" fixed prop="id" label="项目编号">
+        <el-table-column width="150" fixed prop="name" label="姓名">
         </el-table-column>
-        <el-table-column width="200" prop="ordernum" label="ordernum">
+        <el-table-column width="150" fixed prop="userId" label="用户Id">
         </el-table-column>
-        <el-table-column width="200" fixed prop="name" label="项目名称">
+        <el-table-column width="200" prop="gender" label="性别">
         </el-table-column>
-        <el-table-column width="200" prop="userId" label="用户Id">
+        <el-table-column width="200" prop="department" label="学院">
         </el-table-column>
-        <el-table-column width="200" prop="creationTime" label="创建时间">
+        <el-table-column width="200" prop="education" label="学历">
         </el-table-column>
-        <el-table-column width="200" prop="beginTime" label="开始时间">
+        <el-table-column width="200" prop="identity" label="身份">
         </el-table-column>
-        <el-table-column width="200" prop="type" label="类型">
+        <el-table-column width="200" prop="officePhone" label="办公室电话">
         </el-table-column>
-        <el-table-column width="200" prop="status" label="状态">
+        <el-table-column width="200" prop="mobilePhone" label="移动电话">
+        </el-table-column>
+        <el-table-column width="200" prop="pending" label="待定">
         </el-table-column>
         <el-table-column width="150" fixed="right" label="操作">
           <template slot-scope="scope">
@@ -39,16 +41,13 @@
     </template>
   </div>
 </template>
-</div>
-</template>
 
 <script>
 import axios from "axios";
 export default {
-  name: "myapplications",
   data() {
     return {
-      information: "",
+      memberlist: "",
     };
   },
   mounted() {
@@ -57,13 +56,13 @@ export default {
   methods: {
     load: function () {
       axios({
-        url: "/user/applicationList",
+        url: "/chairman/memberList",
         method: "get",
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.information = res.data.data;
-          } else this.information = res.data.code;
+            this.memberlist = res.data;
+          } else this.memberlist = res.data.code;
         })
         .catch(() => {
           console.log("error occur");
