@@ -4,6 +4,7 @@
       <el-table
         :data="memberlist.data"
         style="width: 95%;height: 100%;"
+        id="list"
       >
         <el-table-column width="150" fixed prop="name" label="姓名">
         </el-table-column>
@@ -40,8 +41,6 @@
     </template>
   </div>
 </template>
-</div>
-</template>
 
 <script>
 import axios from "axios";
@@ -72,3 +71,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+#list{
+  left:25px;
+  top: 25px;
+}
+</style>

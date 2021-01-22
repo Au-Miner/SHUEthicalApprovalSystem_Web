@@ -4,6 +4,7 @@
       <el-table
         :data="information.userApplicationList"
         style="width: 95%;height: 100%;"
+        id="list"
       >
         <el-table-column width="150" fixed prop="id" label="项目编号">
         </el-table-column>
@@ -71,3 +72,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+#list{
+  left:25px;
+  top: 25px;
+}
+</style>
