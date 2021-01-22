@@ -10,8 +10,8 @@
       <el-button @click="jmp('tutorial')" type="primary" id="tutorial">申报指南</el-button><br />
       <el-button @mouseenter.native="show_applies()" @mouseleave.native="hide_applies()" type="primary" id="apply">申请</el-button><br />
       <el-button @click="jmp('myapplications')" type="primary" id="myapplies">我的申请</el-button><br />
-      <el-button @click="jmp('approve')" type="primary" id="approve">项目审批</el-button>
-      <br><el-button @click="jmp('appointment')" type="primary" id="test">委员指派</el-button>
+      <el-button style="display:none;" @click="jmp('approve')" type="primary" id="approve">项目审批</el-button><br />
+      <el-button @click="jmp('appointment')" type="primary" id="appointment">委员指派</el-button>
     </div>
     <div id="applies">
         <el-button @mouseenter.native="show_applies()" @mouseleave.native="hide_applies()" @click="jmp('apply_program')" @mouseleave="hide_applies()" type="primary" id="apply">项目申请</el-button><br />
@@ -42,6 +42,14 @@ export default {
   },
   mounted(){
     this.info_update()
+    if(!localStorage.getItem('identity').includes('委员长')){
+      document.getElementById("appointment").style.display="none";
+    }
+    if(localStorage.getItem('identity').includes('委员长')||
+       localStorage.getItem('identity').includes('科研秘书')||
+       localStorage.getItem('identity').includes('部门领导')){
+         document.getElementById("approve").style.display="inline";
+    }
   },
   methods:{
     jmp: function(path){

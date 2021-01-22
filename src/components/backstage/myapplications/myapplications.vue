@@ -71,12 +71,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-  .el-table .warning-row {
-    background: oldlace;
-  }
-  .el-table .success-row {
-    background: #f0f9eb;
-  }
-</style>
