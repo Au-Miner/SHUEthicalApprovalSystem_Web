@@ -290,7 +290,7 @@ export default {
 }
 #picture01 {
   height: 180px;
-  width: 430px;
+  width: 22.4%;
   position: absolute;
   top: 0px;
   left: 15px;
@@ -298,7 +298,7 @@ export default {
 }
 #title_text01 {
   height: 40px;
-  width: 330px;
+  width: 17.2%;
   position: absolute;
   left: 390px;
   top: 45px;
@@ -308,7 +308,7 @@ export default {
 }
 #button01 {
   height: 40px;
-  width: 140px;
+  width: 7.3%;
   position: absolute;
   left: 1200px;
   top: 55px;
@@ -320,7 +320,7 @@ export default {
 }
 #button02 {
   height: 40px;
-  width: 140px;
+  width: 7.3%;
   position: absolute;
   left: 1425px;
   top: 55px;
@@ -332,7 +332,7 @@ export default {
 }
 #button03 {
   height: 40px;
-  width: 140px;
+  width: 7.3%;
   position: absolute;
   left: 1650px;
   top: 55px;
@@ -357,7 +357,7 @@ export default {
 #carousel_Map .el-carousel__arrow.el-carousel__arrow--left {
   position: absolute;
   top: 405px;
-  width: 80px;
+  width: 4.2%;
   height: 80px;
   background-color: rgb(240, 137, 137);
   opacity: 0.5;
@@ -366,7 +366,7 @@ export default {
 #carousel_Map .el-carousel__arrow.el-carousel__arrow--right {
   position: absolute;
   top: 405px;
-  width: 80px;
+  width: 4.2%;
   height: 80px;
   background-color: rgb(240, 137, 137);
   opacity: 0.5;
@@ -383,7 +383,7 @@ export default {
   height: 812px;
 }
 #carousel_Map .el-carousel__button {
-  width: 100px;
+  width: 5.2%;
   height: 8px;
 }
 #carousel_Map .el-carousel__item:nth-child(2n + 1) {
@@ -407,7 +407,7 @@ export default {
   border-radius: 100px;
   position: absolute;
   top: 405px;
-  width: 80px;
+  width: 4.2%;
   height: 80px;
   left: 50px;
   background-color: rgb(240, 137, 137);
@@ -418,7 +418,7 @@ export default {
 #knowledge_Ethics .el-carousel__arrow.el-carousel__arrow--right {
   position: absolute;
   top: 405px;
-  width: 80px;
+  width: 4.2%;
   height: 80px;
   left: 50px;
   background-color: rgb(240, 137, 137);
@@ -438,7 +438,7 @@ export default {
   height: 937px;
 }
 #knowledge_Ethics .el-carousel__button {
-  width: 100px;
+  width: 5.2%;
   height: 8px;
 }
 #knowledge_Ethics .el-carousel__item:nth-child(2n + 1) {
@@ -452,7 +452,7 @@ export default {
 <style>
 #mainbody_Interface #background_pic01 {
   height: 864px;
-  width: 419px;
+  width: 21.8%;
   position: absolute;
   top: 461px;
   left: 0px;
@@ -463,7 +463,7 @@ export default {
 }
 #mainbody_Interface #background_pic02 {
   height: 479px;
-  width: 339x;
+  width: 17.6%;
   position: absolute;
   top: 846px;
   left: 1581px;
@@ -471,7 +471,7 @@ export default {
 }
 #mainbody_Interface #title_text02 {
   height: 170px;
-  width: 529px;
+  width: 27.6%;
   position: absolute;
   top: 205px;
   left: 696px;
@@ -481,7 +481,7 @@ export default {
 }
 #mainbody_Interface #mainbody_carousel_pic01 {
   height: 382px;
-  width: 678px;
+  width: 35.3%;
   position: absolute;
   top: 295px;
   left: 267px;
@@ -489,7 +489,7 @@ export default {
 }
 #mainbody_Interface #mainbody_carousel_pic02 {
   height: 382px;
-  width: 678px;
+  width: 35.3%;
   position: absolute;
   top: 707px;
   left: 975px;
