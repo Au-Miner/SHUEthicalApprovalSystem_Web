@@ -49,7 +49,7 @@ export default {
   },
   methods:{
     jmp: function(path){
-      this.$router.push(path)
+      this.$router.replace('/backstage/'+path).catch(err => {err})
     },
     show: function(id){
       document.getElementById(id).style.display="inline";
@@ -73,7 +73,7 @@ export default {
     },
     logout(){
       localStorage.clear()
-      this.$router.push('/')
+      this.$router.push('/').catch(err => {err})
     }
   }
 };

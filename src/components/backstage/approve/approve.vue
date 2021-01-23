@@ -1,11 +1,14 @@
 <template>
   <div id="approve">
     <el-button-group id="top">
-      <el-button style="display:none;" type="primary" id="mishu">学院秘书审批</el-button>
-      <el-button style="display:none;" type="primary" id="weiyuan">委员审批</el-button>
-      <el-button style="display:none;" type="primary" id="weiyuanzhang">委员长审批</el-button>
-      <el-button style="display:none;" type="primary" id="lingdao">领导审批</el-button>
+      <el-button @click="jmp('secretary_approve')" style="display:none;" type="primary" id="mishu">学院秘书审批</el-button>
+      <el-button @click="jmp('member_approve')" style="display:none;" type="primary" id="weiyuan">委员审批</el-button>
+      <el-button @click="jmp('chairman_approve')" style="display:none;" type="primary" id="weiyuanzhang">委员长审批</el-button>
+      <el-button @click="jmp('leader_approve')" style="display:none;" type="primary" id="lingdao">领导审批</el-button>
     </el-button-group>
+    <div id="approve_type">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -28,6 +31,9 @@ export default {
     hide: function(id){
       document.getElementById(id).style.display="none";
     },
+    jmp: function(path){
+      this.$router.replace('/backstage/approve/'+path).catch(err => {err})
+    }
   }
 };
 </script>
@@ -50,5 +56,11 @@ button{
   background-image: linear-gradient(#003d7a);
   border-radius: 0px;
   border: none;
+}
+#approve_type{
+  width: 100%;
+  top: 40px;
+  bottom: 0px;
+  position: absolute;
 }
 </style>
