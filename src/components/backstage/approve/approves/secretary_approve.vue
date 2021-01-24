@@ -108,7 +108,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 #list {
   left: 25px;
   top: 25px;
