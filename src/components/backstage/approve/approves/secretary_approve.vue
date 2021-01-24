@@ -6,17 +6,42 @@
       style="width: 95%; height: 100%"
       id="list"
     >
-      <el-table-column type="expand">
+      <el-table-column type="expand" width="1">
         <template slot-scope="props">
-          <el-form label-position="left" inline class="demo-table-expand">
+          <el-form inline class="table-expand">
             <el-form-item label="领导单位">
               <span>{{ props.row.leaderAgent }}</span>
+            </el-form-item>
+            <br />
+            <el-form-item label="修改意见">
+              <el-input
+                type="textarea"
+                :autosize="{ minRows: 2, maxRows: 4 }"
+                placeholder="若批准则不需要输入"
+                v-model="textarea"
+                @input="change($event)"
+              >
+              </el-input>
+            </el-form-item><br />
+            <el-form-item label=""
+              ><!--按钮，无名称-->
+              <template slot-scope="scope">
+                <el-button size="mini" type="success" @click="approval(1)"
+                  >批准</el-button
+                >
+                <el-button size="mini" type="warning" @click="approval(0)"
+                  >修改</el-button
+                >
+                <el-button size="mini" type="danger" @click="approval(-1)"
+                  >驳回</el-button
+                >
+              </template>
             </el-form-item>
           </el-form>
         </template>
       </el-table-column>
 
-      <el-table-column width="150" fixed prop="id" label="项目编号">
+      <el-table-column width="100" fixed prop="id" label="项目编号">
       </el-table-column>
       <el-table-column width="200" fixed prop="name" label="项目名称">
       </el-table-column>
@@ -29,10 +54,12 @@
       </el-table-column>
       <el-table-column width="150" fixed="right" label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" type="info" @click="post(scope)"
-            >详情</el-button
+          <el-button size="mini" type="primary" @click="expand(scope.row)"
+            >展开</el-button
           >
-          <el-button size="mini" type="success" @click="">批准 </el-button>
+          <el-button size="mini" type="info" @click="contract()"
+            >收起</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -46,25 +73,32 @@ export default {
   data() {
     return {
       information: "",
+      textarea: "",
     };
   },
   mounted() {
     this.load();
   },
   methods: {
-      print:function(sth){console.log(sth)},
-    post: function (scope) {
+    change(event){
+      this.$forceUpdate();
+    },
+    contract() {
+      this.$refs.multipleTable.toggleRowExpansion(row, false);
+    },
+    print: function (sth) {
+      console.log(sth);
+    },
+    expand: function (row) {
       axios({
         method: "get",
-        url: "/user/applicationInfo?applicationId=" + scope.row.id,
+        url: "/user/applicationInfo?applicationId=" + row.id,
         data: {},
       })
         .then((res) => {
           if (res.data.code === 200) {
-            console.log(res.data.data);
-            scope.row.leaderAgent=res.data.data.leaderAgent;
-            this.$refs.multipleTable.toggleRowExpansion(scope.row,true);
-            console.log(scope.$index);
+            row.leaderAgent = res.data.data.leaderAgent;
+            this.$refs.multipleTable.toggleRowExpansion(row, true);
           } else alert(res.data.code);
         })
         .catch(() => {
@@ -94,5 +128,8 @@ export default {
 #list {
   left: 25px;
   top: 25px;
+}
+>>> .el-table__expand-icon {
+  visibility: hidden;
 }
 </style>
