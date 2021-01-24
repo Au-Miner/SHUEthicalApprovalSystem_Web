@@ -67,14 +67,46 @@
             <el-input v-model="form.block3"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item
+        <!-- <el-form-item
           label="项目起止时间"
           label-width="20%"
           class="apply_program_input01"
-          id="apply_program_block4"
+          id="apply_program_block41"
         >
           <el-col :span="12">
-            <el-input v-model="form.block4"></el-input>
+            <el-input v-model="form.block41"></el-input>
+          </el-col>
+        </el-form-item>
+                <el-form-item
+          label="项目起止时间"
+          label-width="20%"
+          class="apply_program_input01"
+          id="apply_program_block42"
+        >
+          <el-col :span="12">
+            <el-input v-model="form.block42"></el-input>
+          </el-col>
+        </el-form-item> -->
+        <el-form-item label="活动时间" id="apply_program_timeLabel01">
+          <el-col :span="8">
+            <el-date-picker
+              type="date"
+              placeholder="选择日期"
+              v-model="form.block41"
+              style="width: 100%;"
+              id="apply_program_block41"
+              class="apply_program_input01"
+            ></el-date-picker>
+          </el-col>
+          <el-col class="line" :span="2" id="apply_program_timeCol01">-</el-col>
+          <el-col :span="8">
+            <el-time-picker
+              placeholder="选择时间"
+              v-model="form.block42"
+              style="width: 100%;"
+              id="apply_program_block42"
+              class="apply_program_input01"
+            ></el-time-picker>
           </el-col>
         </el-form-item>
         <el-form-item label="项目类别" label-width="10%" id="el-form-item01">
@@ -103,6 +135,16 @@
         >
           <el-col :span="12">
             <el-input v-model="form.block6"></el-input>
+          </el-col>
+        </el-form-item>
+        <el-form-item
+          label="学号"
+          label-width="20%"
+          class="apply_program_input01"
+          id="apply_program_block17"
+        >
+          <el-col :span="12">
+            <el-input v-model="form.block17"></el-input>
           </el-col>
         </el-form-item>
         <el-form-item
@@ -186,11 +228,11 @@
           </el-col>
         </el-form-item>
         <el-form-item label="经费来源" label-width="10%">
-          <el-checkbox-group v-model="form.type">
-            <el-checkbox label="政府" name="type" class="apply_program_moneyFromClass"></el-checkbox>
-            <el-checkbox label="基金会" name="type" class="apply_program_moneyFromClass"></el-checkbox>
-            <el-checkbox label="国际组织" name="type" class="apply_program_moneyFromClass"></el-checkbox>
-            <el-checkbox label="其他" name="type" class="apply_program_moneyFromClass"></el-checkbox>
+          <el-checkbox-group v-model="form.temp">
+            <el-checkbox label="政府" name="temp" class="apply_program_moneyFromClass" @click="el_checkbox_click01"></el-checkbox>
+            <el-checkbox label="基金会" name="temp" class="apply_program_moneyFromClass" @click="el_checkbox_click02"></el-checkbox>
+            <el-checkbox label="国际组织" name="temp" class="apply_program_moneyFromClass" @click="el_checkbox_click03"></el-checkbox>
+            <el-checkbox label="其他" name="temp" class="apply_program_moneyFromClass" @click="el_checkbox_click04"></el-checkbox>
           </el-checkbox-group>
         </el-form-item>
         <el-form-item
@@ -212,12 +254,12 @@
           <el-input type="textarea" v-model="form.block16"></el-input>
         </el-form-item>
       </el-form>
-      <el-button type="primary" plain id="apply_program_button02" @click="clickEvent02">提交</el-button>
+      <el-button type="primary" plain id="apply_program_button02" @click="submitButton01">提交</el-button>
     </div>
   </div>
 </template>
-
 <script>
+import axios from "axios";
 export default {
   name: "apply_program",
   data() {
@@ -226,7 +268,8 @@ export default {
         block1: "",
         block2: "",
         block3: "",
-        block4: "",
+        block41: "",
+        block42: "",
         block5: "",
         block6: "",
         block7: "",
@@ -239,11 +282,13 @@ export default {
         block14: "",
         block15: "",
         block16: "",
+        block17: "",
         region: "",
         date1: "",
         date2: "",
         delivery: false,
-        type: [],
+        type: 0,
+        temp: [],
         resource: "",
         desc: ""
       }
@@ -256,14 +301,72 @@ export default {
       temp = document.getElementById("apply_program_next");
       temp.style.display = "inline";
     },
-        clickEvent02: function() {
-      var temp = document.getElementById("apply_program_first");
-      temp.style.display = "inline";
-      temp = document.getElementById("apply_program_next");
-      temp.style.display = "none";
-    },
+    // clickEvent02: function() {
+    //   var temp = document.getElementById("apply_program_first");
+    //   temp.style.display = "inline";
+    //   temp = document.getElementById("apply_program_next");
+    //   temp.style.display = "none";
+    // },
     onSubmit() {
       console.log("submit!");
+    },
+    submitButton01: function() {
+      axios({
+        method: 'post',
+        url: '/user/createApplicationForProjectDemo',
+        data: {
+          application_file: "",
+          application_type: 0,
+          email: this.form.block13,
+          fax: this.form.block11,
+          funding_source: this.form.type,
+          id: parseInt(this.form.block1),
+          institution: this.form.block2,
+          name: this.form.block6,
+          office_phone: parseInt(this.form.block10),
+          phone: parseInt(this.form.block12),
+          project_abstract: this.form.block15,
+          project_direction: this.form.block14,
+          project_type: this.form.resource,
+          schedule_time: this.form.block41 + '-' + this.form.block42,
+          user_id: parseInt(this.form.block17)
+        },
+      message: "申请提交"
+      }).then((res) => {
+          if (res.data.code === 200) {
+            localStorage.setItem("application_file", res.data.data.application_file);
+            localStorage.setItem("application_type", res.data.data.application_type);
+            localStorage.setItem("email", res.data.data.email);
+            localStorage.setItem("fax", res.data.data.fax);
+            localStorage.setItem("funding_source", res.data.data.funding_source);
+            localStorage.setItem("id", res.data.data.id);
+            localStorage.setItem("institution", res.data.data.institution);
+            localStorage.setItem("name", res.data.data.name);
+            localStorage.setItem("office_phone", res.data.data.office_phone);
+            localStorage.setItem("phone", res.data.data.phone);
+            localStorage.setItem("project_abstract", res.data.data.project_abstract);
+            localStorage.setItem("project_direction", res.data.data.project_direction);
+            localStorage.setItem("project_type", res.data.data.project_type);
+            localStorage.setItem("schedule_time", res.data.data.schedule_time);
+            localStorage.setItem("user_id", res.data.data.user_id);
+            alert("提交成功！")
+            this.$router.push("apply_program");
+          } else alert(res.data.code);
+        }).catch(() => {
+          alert("error");
+        });
+    },
+    el_checkbox_click01: function() {
+      this.form.type = 1;
+    },
+    el_checkbox_click02: function() {
+      this.form.type = 2;
+    },
+    el_checkbox_click03: function() {
+      this.form.type = 3;
+    },
+    el_checkbox_click04: function() {
+      this.form.type = 4;
     }
   }
 };
@@ -353,5 +456,12 @@ export default {
 #apply_program_button02 {
   position: relative;
   top: 1%;
+}
+#apply_program_timeCol01 {
+  font-size: 20px;
+  width: 6%;
+  position: relative;
+  left: 6.5%;
+  margin-top: 0.8%;
 }
 </style>
