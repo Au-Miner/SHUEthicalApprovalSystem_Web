@@ -6,7 +6,7 @@
       style="width: 95%; height: 100%"
       id="list"
     >
-      <el-table-column type="expand" width="1">
+      <el-table-column type="expand">
         <template slot-scope="props">
           <el-form inline class="table-expand">
             <el-form-item label="领导单位">
@@ -16,34 +16,27 @@
             <el-form-item label="修改意见">
               <el-input
                 type="textarea"
-                :autosize="{ minRows: 2, maxRows: 4 }"
+                :autosize="{ minRows: 5, maxRows: 50 }"
                 placeholder="若批准则不需要输入"
                 v-model="textarea"
                 @input="change($event)"
               >
               </el-input>
             </el-form-item><br />
-            <el-form-item label=""
-              ><!--按钮，无名称-->
+            <el-form-item label=""><!--按钮，无名称-->
               <template slot-scope="scope">
-                <el-button size="mini" type="success" @click="approval(1)"
-                  >批准</el-button
-                >
-                <el-button size="mini" type="warning" @click="approval(0)"
-                  >修改</el-button
-                >
-                <el-button size="mini" type="danger" @click="approval(-1)"
-                  >驳回</el-button
-                >
+                <el-button size="mini" type="success" @click="approval(1)">批准</el-button>
+                <el-button size="mini" type="warning" @click="approval(0)">修改</el-button>
+                <el-button size="mini" type="danger" @click="approval(-1)">驳回</el-button>
               </template>
             </el-form-item>
           </el-form>
         </template>
       </el-table-column>
 
-      <el-table-column width="100" fixed prop="id" label="项目编号">
+      <el-table-column width="100" prop="id" label="项目编号">
       </el-table-column>
-      <el-table-column width="200" fixed prop="name" label="项目名称">
+      <el-table-column width="200" prop="name" label="项目名称">
       </el-table-column>
       <el-table-column width="200" prop="userId" label="用户Id">
       </el-table-column>
