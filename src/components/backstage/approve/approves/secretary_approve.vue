@@ -8,26 +8,43 @@
     >
       <el-table-column type="expand">
         <template slot-scope="props">
-          <el-form label-position="left" inline class="demo-table-expand">
-            <el-button type="success" plain @click="choice1" id="choice1Id">成功按钮</el-button>
-            <el-button type="danger" plain @click="choice2" id="choice2Id">危险按钮</el-button>
-            <el-button type="info" plain @click="choice3" id="choice3Id">信息按钮</el-button>
-            <!-- <br /> -->
-            <input type="text" value="请输入审批选择原因" id="input1Id">
+          <el-form inline class="table-expand">
+            <el-form-item label="领导单位">
+              <span>{{ props.row.leaderAgent }}</span>
+            </el-form-item>
+            <br />
+            <el-form-item label="修改意见">
+              <el-input
+                type="textarea"
+                :autosize="{ minRows: 5, maxRows: 50 }"
+                placeholder="若批准则不需要输入"
+                v-model="textarea"
+                @input="change($event)"
+              ></el-input>
+            </el-form-item>
+            <br />
+            <el-form-item label>
+              <!--按钮，无名称-->
+              <template slot-scope="scope">
+                <el-button size="mini" type="success" @click="approval(1)">批准</el-button>
+                <el-button size="mini" type="warning" @click="approval(0)">修改</el-button>
+                <el-button size="mini" type="danger" @click="approval(-1)">驳回</el-button>
+              </template>
+            </el-form-item>
           </el-form>
         </template>
       </el-table-column>
 
-      <el-table-column width="150" fixed prop="id" label="项目编号"></el-table-column>
-      <el-table-column width="200" fixed prop="name" label="项目名称"></el-table-column>
+      <el-table-column width="100" prop="id" label="项目编号"></el-table-column>
+      <el-table-column width="200" prop="name" label="项目名称"></el-table-column>
       <el-table-column width="200" prop="userId" label="用户Id"></el-table-column>
       <el-table-column width="200" prop="creationTime" label="创建时间"></el-table-column>
       <el-table-column width="200" prop="type" label="类型"></el-table-column>
       <el-table-column width="200" prop="status" label="状态"></el-table-column>
       <el-table-column width="150" fixed="right" label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" type="info" @click="choice4">审批</el-button>
-          <el-button size="mini" type="success" @click="choice5">确定</el-button>
+          <el-button size="mini" type="primary" @click="expand(scope.row)">展开</el-button>
+          <el-button size="mini" type="info" @click="contract(scope.row)">收起</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -41,17 +58,37 @@ export default {
   data() {
     return {
       information: "",
-      applicationId: 0,
-      rejectReason: " ",
-      state: 0
+      textarea: ""
     };
   },
   mounted() {
     this.load();
   },
   methods: {
+    change(event) {
+      this.$forceUpdate();
+    },
+    contract(row) {
+      this.$refs.multipleTable.toggleRowExpansion(row, false);
+    },
     print: function(sth) {
       console.log(sth);
+    },
+    expand: function(row) {
+      axios({
+        method: "get",
+        url: "/user/applicationInfo?applicationId=" + row.id,
+        data: {}
+      })
+        .then(res => {
+          if (res.data.code === 200) {
+            row.leaderAgent = res.data.data.leaderAgent;
+            this.$refs.multipleTable.toggleRowExpansion(row, true);
+          } else alert(res.data.code);
+        })
+        .catch(() => {
+          alert("error");
+        });
     },
     load: function() {
       axios({
@@ -67,40 +104,7 @@ export default {
           console.log("error occur");
         });
     },
-    SecretaryApproval: function(Choice, Text = "") {
-      axios({
-        url: "/secretary/approval",
-        method: "post",
-        data: {
-          applicationId: 0,
-          rejectReason: Text,
-          state: Choice
-        }
-      })
-        .then((res) => {
-          if (res.data.code === 200) {
-            console.log(res.data.data);
-          }
-        })
-        .catch(() => {
-          alert("error");
-        });
-    },
-    choice1: function() {
-      this.state = 1;
-    },
-    choice2: function() {
-      this.state = 2;
-    },
-    choice3: function() {
-      this.state = 3;
-    },
-    choice4: function() {
-      // 显露按钮
-    },
-    choice5: function() { 
-      this.SecretaryApproval(this.state, document.getElementById("input1Id").value);
-    }
+    test_post() {}
   }
 };
 </script>
@@ -109,5 +113,8 @@ export default {
 #list {
   left: 25px;
   top: 25px;
+}
+>>> .el-table__expand-icon {
+  visibility: hidden;
 }
 </style>
