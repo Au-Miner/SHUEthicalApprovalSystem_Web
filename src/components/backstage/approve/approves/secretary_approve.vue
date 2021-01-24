@@ -50,7 +50,7 @@
           <el-button size="mini" type="primary" @click="expand(scope.row)"
             >展开</el-button
           >
-          <el-button size="mini" type="info" @click="contract()"
+          <el-button size="mini" type="info" @click="contract(scope.row)"
             >收起</el-button
           >
         </template>
@@ -76,7 +76,7 @@ export default {
     change(event){
       this.$forceUpdate();
     },
-    contract() {
+    contract(row) {
       this.$refs.multipleTable.toggleRowExpansion(row, false);
     },
     print: function (sth) {
