@@ -20,11 +20,10 @@
                 placeholder="若批准则不需要输入"
                 v-model="textarea"
                 @input="change($event)"
-              ></el-input>
-            </el-form-item>
-            <br />
-            <el-form-item label>
-              <!--按钮，无名称-->
+              >
+              </el-input>
+            </el-form-item><br />
+            <el-form-item label=""><!--按钮，无名称-->
               <template slot-scope="scope">
                 <el-button size="mini" type="success" @click="approval(1)">批准</el-button>
                 <el-button size="mini" type="warning" @click="approval(0)">修改</el-button>
@@ -58,7 +57,7 @@ export default {
   data() {
     return {
       information: "",
-      textarea: ""
+      textarea: "",
     };
   },
   mounted() {
@@ -71,14 +70,14 @@ export default {
     contract(row) {
       this.$refs.multipleTable.toggleRowExpansion(row, false);
     },
-    print: function(sth) {
+    print: function (sth) {
       console.log(sth);
     },
-    expand: function(row) {
+    expand: function (row) {
       axios({
         method: "get",
         url: "/user/applicationInfo?applicationId=" + row.id,
-        data: {}
+        data: {},
       })
         .then(res => {
           if (res.data.code === 200) {
