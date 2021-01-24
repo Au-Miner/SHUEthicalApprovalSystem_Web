@@ -293,14 +293,14 @@ export default {
   width: 22.4%;
   position: absolute;
   top: 0px;
-  left: 15px;
+  left: 0.8%;
   z-index: 10;
 }
 #title_text01 {
   height: 40px;
   width: 17.2%;
   position: absolute;
-  left: 390px;
+  left: 20.3%;
   top: 45px;
   font-size: 40px;
   color: #fefefe;
@@ -310,7 +310,7 @@ export default {
   height: 40px;
   width: 7.3%;
   position: absolute;
-  left: 1200px;
+  left: 62.5%;
   top: 55px;
   font-size: 20px;
   color: #fefefe;
@@ -322,7 +322,7 @@ export default {
   height: 40px;
   width: 7.3%;
   position: absolute;
-  left: 1425px;
+  left: 74.2%;
   top: 55px;
   font-size: 20px;
   color: #fefefe;
@@ -334,7 +334,7 @@ export default {
   height: 40px;
   width: 7.3%;
   position: absolute;
-  left: 1650px;
+  left: 85.9%;
   top: 55px;
   font-size: 20px;
   color: #fefefe;
@@ -409,7 +409,7 @@ export default {
   top: 405px;
   width: 4.2%;
   height: 80px;
-  left: 50px;
+  left: 2.6%;
   background-color: rgb(240, 137, 137);
   opacity: 0.5;
   font-size: 30px;
@@ -420,7 +420,7 @@ export default {
   top: 405px;
   width: 4.2%;
   height: 80px;
-  left: 50px;
+  left: 2.6%;
   background-color: rgb(240, 137, 137);
   opacity: 0.5;
   font-size: 30px;
@@ -466,7 +466,7 @@ export default {
   width: 17.6%;
   position: absolute;
   top: 846px;
-  left: 1581px;
+  left: 82.3%;
   z-index: 7;
 }
 #mainbody_Interface #title_text02 {
@@ -474,7 +474,7 @@ export default {
   width: 27.6%;
   position: absolute;
   top: 205px;
-  left: 696px;
+  left: 36.25%;
   font-size: 40px;
   z-index: 8;
   text-align: center;
@@ -484,7 +484,7 @@ export default {
   width: 35.3%;
   position: absolute;
   top: 295px;
-  left: 267px;
+  left: 13.9%;
   z-index: 8;
 }
 #mainbody_Interface #mainbody_carousel_pic02 {
@@ -492,7 +492,7 @@ export default {
   width: 35.3%;
   position: absolute;
   top: 707px;
-  left: 975px;
+  left: 50.8%;
   z-index: 8;
 }
 </style>
@@ -511,25 +511,25 @@ export default {
 }
 #mainbody_Interface #mainbody_Interface_background_pic01 {
   position: absolute;
-  left: 650px;
+  left: 33.9%;
   top: 1180px;
-  width: 120px;
+  width: 6.25%;
   height: 80px;
   z-index: 8;
 }
 #mainbody_Interface #mainbody_Interface_background_pic02 {
   position: absolute;
-  left: 1020px;
+  left: 53.1%;
   top: 1180px;
-  width: 120px;
+  width: 6.25%;
   height: 80px;
   z-index: 8;
 }
 #mainbody_Interface #mainbody_Interface_background_text01 {
   position: absolute;
-  left: 765px;
+  left: 39.8%;
   top: 1180px;
-  width: 120px;
+  width: 6.25%;
   height: 80px;
   z-index: 8;
   font-size: 20px;
@@ -538,9 +538,9 @@ export default {
 }
 #mainbody_Interface #mainbody_Interface_background_text02 {
   position: absolute;
-  left: 1135px;
+  left: 59.1%;
   top: 1180px;
-  width: 120px;
+  width: 6.25%;
   height: 80px;
   z-index: 8;
   font-size: 20px;
@@ -560,9 +560,9 @@ export default {
   background-size: cover;
   position: absolute;
   background-color: white;
-  left: 975px;
+  left: 50.8%;
   top: 295px;
-  width: 324px;
+  width: 16.9%;
   height: 176px;
   z-index: 8;
 }
@@ -572,9 +572,9 @@ export default {
   background-size: cover;
   background-color: white;
   position: absolute;
-  left: 1329px;
+  left: 69.2%;
   top: 295px;
-  width: 324px;
+  width: 16.9%;
   height: 176px;
   z-index: 8;
 }
@@ -584,9 +584,9 @@ export default {
   background-size: cover;
   background-color: white;
   position: absolute;
-  left: 975px;
+  left: 50.8%;
   top: 501px;
-  width: 324px;
+  width: 16.9%;
   height: 176px;
   z-index: 8;
 }
@@ -596,9 +596,9 @@ export default {
   background-size: cover;
   background-color: white;
   position: absolute;
-  left: 1329px;
+  left: 69.2%;
   top: 501px;
-  width: 324px;
+  width: 16.9%;
   height: 176px;
   z-index: 8;
 }
@@ -608,9 +608,9 @@ export default {
   background-size: cover;
   background-color: white;
   position: absolute;
-  left: 267px;
+  left: 13.9%;
   top: 707px;
-  width: 324px;
+  width: 16.9%;
   height: 176px;
   z-index: 8;
 }
@@ -620,9 +620,9 @@ export default {
   background-size: cover;
   background-color: white;
   position: absolute;
-  left: 621px;
+  left: 32.3%;
   top: 707px;
-  width: 324px;
+  width: 16.9%;
   height: 176px;
   z-index: 8;
 }
@@ -632,9 +632,9 @@ export default {
   background-size: cover;
   background-color: white;
   position: absolute;
-  left: 267px;
+  left: 13.9%;
   top: 913px;
-  width: 324px;
+  width: 16.9%;
   height: 176px;
   z-index: 8;
 }
@@ -644,9 +644,9 @@ export default {
   background-size: cover;
   background-color: white;
   position: absolute;
-  left: 621px;
+  left: 32.3%;
   top: 913px;
-  width: 324px;
+  width: 16.9%;
   height: 176px;
   z-index: 8;
 }
@@ -659,49 +659,49 @@ export default {
 #background .background_class01 {
   font-size: 20px;
   color: #a0bcd8;
-  width: 200px;
+  width: 10.4%;
   z-index: 8;
   height: 50px;
   position: absolute;
 }
 #background #background_text03 {
-  left: 550px;
+  left: 28.6%;
   top: 1600px;
 }
 #background #background_text04 {
-  left: 550px;
+  left: 28.6%;
   top: 1660px;
 }
 #background #background_text05 {
-  left: 550px;
+  left: 28.6%;
   top: 1720px;
 }
 #background #background_text06 {
-  left: 550px;
+  left: 28.6%;
   top: 1780px;
 }
 #background #background_text07 {
-  left: 550px;
+  left: 28.6%;
   top: 1840px;
 }
 #background #background_text08 {
-  left: 750px;
+  left: 39.1%;
   top: 1600px;
 }
 #background #background_text09 {
-  left: 750px;
+  left: 39.1%;
   top: 1660px;
 }
 #background #background_text10 {
-  left: 750px;
+  left: 39.1%;
   top: 1720px;
 }
 #background #background_text11 {
-  left: 750px;
+  left: 39.1%;
   top: 1780px;
 }
 #background #background_text12 {
-  left: 750px;
+  left: 39.1%;
  top: 1840px;
 }
 #background_fake {
@@ -714,25 +714,25 @@ export default {
 }
 #background #background_pic01 {
   position: absolute;
-  left: 80px;
+  left: 4.2%;
   top: 1470px;
-  width: 60px;
+  width: 3.125%;
   height: 60px;
   z-index: 8;
 }
 #background #background_pic02 {
   position: absolute;
-  left: 1020px;
+  left: 53.1%;
   top: 1470px;
-  width: 60px;
+  width: 3.125%;
   height: 60px;
   z-index: 8;
 }
 #background #background_text01 {
   position: absolute;
-  left: 100px;
+  left: 5.2%;
   top: 1484px;
-  width: 200px;
+  width: 10.4%;
   height: 60px;
   font-size: 20px;
   color: #a0bcd8;
@@ -740,9 +740,9 @@ export default {
 }
 #background #background_text02 {
   position: absolute;
-  left: 1050px;
+  left: 54.68%;
   top: 1484px;
-  width: 200px;
+  width: 10.4%;
   height: 60px;
   font-size: 20px;
   color: #a0bcd8;
@@ -750,9 +750,9 @@ export default {
 }
 #background #background_line {
   position: absolute;
-  left: 80px;
+  left: 4.2%;
   top: 1484px;
-  width: 1760px;
+  width: 91.7%;
   height: 47px;
   font-size: 20px;
   color: #a0bcd8;
@@ -761,9 +761,9 @@ export default {
 }
 #background #background_pic03 {
   position: absolute;
-  left: 79px;
+  left: 4.1%;
   top: 1554px;
-  width: 360px;
+  width: 18.75%;
   height: 400px;
   font-size: 20px;
   color: #a0bcd8;
@@ -772,9 +772,9 @@ export default {
 }
 #background #background_pic04 {
   position: absolute;
-  left: 1130px;
+  left: 58.85%;
   top: 1554px;
-  width: 764px;
+  width: 39.6%;
   height: 469px;
   font-size: 20px;
   color: #a0bcd8;
