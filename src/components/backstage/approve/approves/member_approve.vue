@@ -9,6 +9,15 @@
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form inline class="table-expand">
+            <el-form-item label="项目类别">
+              <span>{{ props.row.projectType }}</span>
+            </el-form-item>
+            <el-form-item label="研究方向">
+              <span>{{ props.row.direction }}</span>
+            </el-form-item>
+            <el-form-item label="项目摘要">
+              <span>{{ props.row.projectAbstract }}</span>
+            </el-form-item><br />
             <el-form-item label="项目单位">
               <span>{{ props.row.institution }}</span>
             </el-form-item><br />
@@ -53,6 +62,13 @@
               ></el-input>
             </el-form-item>
             <br />
+            <el-form-item label="附件">
+              <!--按钮，无名称-->
+              <template slot-scope="scope">
+                <el-button size="mini" type="primary" @click="download(props.row.applicationFile)">下载附件</el-button>
+              </template>
+            </el-form-item>
+            <br />
             <el-form-item label>
               <!--按钮，无名称-->
               <template slot-scope="scope">
@@ -68,7 +84,7 @@
       <el-table-column width="100" prop="id" label="项目编号"></el-table-column>
       <el-table-column width="200" prop="name" label="项目名称"></el-table-column>
       <el-table-column width="200" prop="userId" label="用户Id"></el-table-column>
-      <el-table-column width="200" prop="creationTime" label="创建时间"></el-table-column>
+      <el-table-column width="250" prop="creationTime" label="创建时间"></el-table-column>
       <el-table-column width="200" prop="type" label="类型"></el-table-column>
       <el-table-column width="200" prop="status" label="状态"></el-table-column>
       <el-table-column width="150" fixed="right" label="操作">
@@ -95,6 +111,21 @@ export default {
     this.load();
   },
   methods: {
+    download(url){
+      axios({
+        method: "get",
+        url: "/file/download?fileAddress=" + url,
+        data: {}
+      })
+        .then(res => {
+          if (res.data.code === 200) {
+            console.log(res.data);
+          } else alert(res.data.code);
+        })
+        .catch(() => {
+          alert("error");
+        });
+    },
     change(event) {
       this.$forceUpdate();
     },
@@ -123,6 +154,10 @@ export default {
             row.executionTime = res.data.data.executionTime;
             row.endTime = res.data.data.endTime;
             row.status = res.data.data.status;
+            row.projectType = res.data.data.projectType
+            row.direction = res.data.data.direction
+            row.fundingSource = res.data.data.fundingSource
+            row.projectAbstract = res.data.data.projectAbstract
             this.$refs.multipleTable.toggleRowExpansion(row, true);
           } else alert(res.data.code);
         })
