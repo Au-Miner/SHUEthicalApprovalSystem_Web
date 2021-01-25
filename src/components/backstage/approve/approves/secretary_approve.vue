@@ -14,7 +14,7 @@
             </el-form-item>
             <el-form-item label="研究方向">
               <span>{{ props.row.direction }}</span>
-            </el-form-item>
+            </el-form-item><br />
             <el-form-item label="项目摘要">
               <span>{{ props.row.projectAbstract }}</span>
             </el-form-item><br />
