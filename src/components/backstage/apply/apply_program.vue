@@ -34,6 +34,21 @@
     </div>
 
     <div id="apply_program_next" style="display:none">
+      <el-upload
+        class="upload-demo"
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :on-preview="handlePreview"
+        :on-remove="handleRemove"
+        :before-remove="beforeRemove"
+        multiple
+        :limit="3"
+        :on-exceed="handleExceed"
+        :file-list="fileList"
+      >
+        <el-button size="small" type="primary" @click="fileUpload01">点击上传</el-button>
+        <div slot="tip" class="el-upload__tip">只能上传pdf文件，且不超过1M</div>
+      </el-upload>
+
       <!-- label-width="auto" -->
       <!-- label-position="left" -->
       <el-form ref="form" :model="form">
@@ -86,7 +101,7 @@
           <el-col :span="12">
             <el-input v-model="form.block42"></el-input>
           </el-col>
-        </el-form-item> -->
+        </el-form-item>-->
         <el-form-item label="活动时间" id="apply_program_timeLabel01">
           <el-col :span="8">
             <el-date-picker
@@ -229,10 +244,30 @@
         </el-form-item>
         <el-form-item label="经费来源" label-width="10%">
           <el-checkbox-group v-model="form.temp">
-            <el-checkbox label="政府" name="temp" class="apply_program_moneyFromClass" @click="el_checkbox_click01"></el-checkbox>
-            <el-checkbox label="基金会" name="temp" class="apply_program_moneyFromClass" @click="el_checkbox_click02"></el-checkbox>
-            <el-checkbox label="国际组织" name="temp" class="apply_program_moneyFromClass" @click="el_checkbox_click03"></el-checkbox>
-            <el-checkbox label="其他" name="temp" class="apply_program_moneyFromClass" @click="el_checkbox_click04"></el-checkbox>
+            <el-checkbox
+              label="政府"
+              name="temp"
+              class="apply_program_moneyFromClass"
+              @click="el_checkbox_click01"
+            ></el-checkbox>
+            <el-checkbox
+              label="基金会"
+              name="temp"
+              class="apply_program_moneyFromClass"
+              @click="el_checkbox_click02"
+            ></el-checkbox>
+            <el-checkbox
+              label="国际组织"
+              name="temp"
+              class="apply_program_moneyFromClass"
+              @click="el_checkbox_click03"
+            ></el-checkbox>
+            <el-checkbox
+              label="其他"
+              name="temp"
+              class="apply_program_moneyFromClass"
+              @click="el_checkbox_click04"
+            ></el-checkbox>
           </el-checkbox-group>
         </el-form-item>
         <el-form-item
@@ -264,6 +299,13 @@ export default {
   name: "apply_program",
   data() {
     return {
+      fileList: [
+        // {
+        //   name: "food.jpeg",
+        //   url:
+        //     "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"
+        // }
+      ],
       form: {
         block1: "",
         block2: "",
@@ -295,6 +337,25 @@ export default {
     };
   },
   methods: {
+    fileUpload01: function() {
+        console.log(this.fileList[0])
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning(
+        `当前限制选择 3 个文件，本次选择了 ${
+          files.length
+        } 个文件，共选择了 ${files.length + fileList.length} 个文件`
+      );
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}？`);
+    },
     clickEvent01: function() {
       var temp = document.getElementById("apply_program_first");
       temp.style.display = "none";
@@ -312,8 +373,8 @@ export default {
     },
     submitButton01: function() {
       axios({
-        method: 'post',
-        url: '/user/createApplicationForProjectDemo',
+        method: "post",
+        url: "/user/createApplicationForProjectDemo",
         data: {
           application_file: "",
           application_type: 0,
@@ -328,31 +389,48 @@ export default {
           project_abstract: this.form.block15,
           project_direction: this.form.block14,
           project_type: this.form.resource,
-          schedule_time: this.form.block41 + '-' + this.form.block42,
+          schedule_time: this.form.block41 + "-" + this.form.block42,
           user_id: parseInt(this.form.block17)
         },
-      message: "申请提交"
-      }).then((res) => {
+        message: "申请提交"
+      })
+        .then(res => {
           if (res.data.code === 200) {
-            localStorage.setItem("application_file", res.data.data.application_file);
-            localStorage.setItem("application_type", res.data.data.application_type);
+            localStorage.setItem(
+              "application_file",
+              res.data.data.application_file
+            );
+            localStorage.setItem(
+              "application_type",
+              res.data.data.application_type
+            );
             localStorage.setItem("email", res.data.data.email);
             localStorage.setItem("fax", res.data.data.fax);
-            localStorage.setItem("funding_source", res.data.data.funding_source);
+            localStorage.setItem(
+              "funding_source",
+              res.data.data.funding_source
+            );
             localStorage.setItem("id", res.data.data.id);
             localStorage.setItem("institution", res.data.data.institution);
             localStorage.setItem("name", res.data.data.name);
             localStorage.setItem("office_phone", res.data.data.office_phone);
             localStorage.setItem("phone", res.data.data.phone);
-            localStorage.setItem("project_abstract", res.data.data.project_abstract);
-            localStorage.setItem("project_direction", res.data.data.project_direction);
+            localStorage.setItem(
+              "project_abstract",
+              res.data.data.project_abstract
+            );
+            localStorage.setItem(
+              "project_direction",
+              res.data.data.project_direction
+            );
             localStorage.setItem("project_type", res.data.data.project_type);
             localStorage.setItem("schedule_time", res.data.data.schedule_time);
             localStorage.setItem("user_id", res.data.data.user_id);
-            alert("提交成功！")
+            alert("提交成功！");
             this.$router.push("apply_program");
           } else alert(res.data.code);
-        }).catch(() => {
+        })
+        .catch(() => {
           alert("error");
         });
     },
@@ -465,3 +543,7 @@ export default {
   margin-top: 0.8%;
 }
 </style>
+
+
+
+
