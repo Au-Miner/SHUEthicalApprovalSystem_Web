@@ -27,55 +27,65 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   name: "backstage_bg",
   data() {
     return {
-      information:''
-      }
+      information: "",
+    };
   },
-  mounted(){
-    this.info_update()
-    if(!localStorage.getItem('identity').includes('委员长')){
+  mounted() {
+    this.info_update();
+    if (!localStorage.getItem("identity").includes("委员长")) {
       this.hide("appointment");
     }
-    if(localStorage.getItem('identity').includes('委员长')||
-       localStorage.getItem('identity').includes('学院秘书')||
-       localStorage.getItem('identity').includes('部门领导')||
-       localStorage.getItem('identity').includes('委员')){
-        this.show("approve");
+    if (
+      localStorage.getItem("identity").includes("委员长") ||
+      localStorage.getItem("identity").includes("学院秘书") ||
+      localStorage.getItem("identity").includes("部门领导") ||
+      localStorage.getItem("identity").includes("委员")
+    ) {
+      this.show("approve");
     }
   },
-  methods:{
-    jmp: function(path){
-      this.$router.replace('/backstage/'+path).catch(err => {err})
+  methods: {
+    jmp: function (path) {
+      this.$router.replace("/backstage/" + path).catch((err) => {
+        err;
+      });
     },
-    show: function(id){
-      document.getElementById(id).style.display="inline";
+    show: function (id) {
+      document.getElementById(id).style.display = "inline";
     },
-    hide: function(id){
-      document.getElementById(id).style.display="none";
+    hide: function (id) {
+      document.getElementById(id).style.display = "none";
     },
-    info_update(){
+    info_update() {
       axios({
-        url:'/user/info?userId='+localStorage.getItem('userId'),
-        method:'get',
-      }).then((res)=>{
-        if(res.data.code===200)
-        {
-          this.information = res.data.data.name+' '+res.data.data.userId;
-        }
-        else this.information = res.data.code;
-      }).catch(()=>{
-        console.log('error occur')
+        url: "/user/info?userId=" + localStorage.getItem("userId"),
+        method: "get",
       })
+        .then((res) => {
+          if (res.data.code === 200) {
+            this.information = res.data.data.name + " " + res.data.data.userId;
+            localStorage.setItem("email", res.data.data.email);
+            localStorage.setItem("institution", res.data.data.department);
+            localStorage.setItem("office_phone", res.data.data.officePhone);
+            localStorage.setItem("phone", res.data.data.mobilePhone);
+          } else this.information = res.data.code;
+        })
+        .catch(() => {
+          console.log("error occur");
+        });
     },
-    logout(){
-      localStorage.clear()
-      this.$router.push('/').catch(err => {err})
-    }
-  }
+    logout() {
+      localStorage.clear();
+      this.$router.push("/").catch((err) => {
+        err;
+      });
+    },
+  },
 };
 </script>
 
@@ -84,16 +94,16 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <!-- background: rgba(0, 0, 0, 0); -->
 <style scoped>
-#info{
-  width:200px;
-  right:10%;
+#info {
+  width: 200px;
+  right: 10%;
   top: 20px;
-  font-size:18px;
-  position:absolute;
-  color:white;
+  font-size: 18px;
+  position: absolute;
+  color: white;
 }
-button#logout{
-  background:rgba(0, 0, 0, 0);
+button#logout {
+  background: rgba(0, 0, 0, 0);
   height: 10%;
   width: 10%;
   position: absolute;
@@ -104,11 +114,11 @@ button#logout{
   border: 0px;
   z-index: 5;
 }
-#applies{
-  width:200px;
-  position:absolute;
-  top:100px;
-  left:200px;
+#applies {
+  width: 200px;
+  position: absolute;
+  top: 100px;
+  left: 200px;
   z-index: 5;
   display: none;
 }
@@ -130,7 +140,7 @@ button#logout{
   z-index: 2;
 }
 #lightblue_sidebar {
-  bottom:0px;
+  bottom: 0px;
   width: 200px;
   background-image: linear-gradient(#bfe1fd);
   position: absolute;
@@ -167,14 +177,13 @@ button#tutorial:active {
   border-radius: 0px;
   border: none;
 }
-.content
-{
-  background-image: linear-gradient(#F0F8FA);
+.content {
+  background-image: linear-gradient(#f0f8fa);
   position: absolute;
-  left:200px;
+  left: 200px;
   top: 60px;
-  bottom:0px;
-  right:0px;
-  overflow:auto;
+  bottom: 0px;
+  right: 0px;
+  overflow: auto;
 }
 </style>
