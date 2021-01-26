@@ -425,6 +425,7 @@ export default {
                 return;
               },
             });
+        return;
       }
       axios({
         method: "post",
