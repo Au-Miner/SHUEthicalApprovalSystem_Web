@@ -154,6 +154,7 @@
             ></el-radio>
             <el-col :span="10">
               <el-input
+                @input="change($event)"
                 :disabled="disable_type_input"
                 v-model="project_typeE"
                 id="apply_program_programInput"
@@ -379,6 +380,10 @@ export default {
     };
   },
   methods: {
+    change(event) {
+      this.$forceUpdate();
+      this.form.project_type=this.project_typeE;
+    },
     saveInfo(){
       localStorage.setItem("email", this.form.email);
       localStorage.setItem("fax",this.form.fax); 
