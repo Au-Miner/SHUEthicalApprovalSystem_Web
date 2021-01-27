@@ -65,7 +65,7 @@
             <el-form-item label="附件">
               <!--按钮，无名称-->
               <template slot-scope="scope">
-                <el-button size="mini" type="primary" @click="download(props.row.applicationFile)">下载附件</el-button>
+                <el-button :disabled="props.row.applicationFile==''" size="mini" type="primary" @click="download(props.row.applicationFile)">下载附件</el-button>
               </template>
             </el-form-item>
             <br />
@@ -111,16 +111,22 @@ export default {
     this.load();
   },
   methods: {
-    download(url){
+    download: function (url) {
       axios({
         method: "get",
         url: "/file/download?fileAddress=" + url,
-        data: {}
+        data: {},
+        responseType: "blob"
       })
-        .then(res => {
-          if (res.data.code === 200) {
-            console.log(res.data);
-          } else alert(res.data.code);
+        .then((res) => {
+          var new_element = document.createElement('a');
+          new_element.download = res.config.url.slice(res.config.url.search('---')+3);
+          new_element.style.display = 'none';
+          var blob = new Blob([res.data]);
+          new_element.href = URL.createObjectURL(blob);
+          document.body.appendChild(new_element);
+          new_element.click();
+          document.body.removeChild(new_element);
         })
         .catch((err) => {
           alert(err);
@@ -154,10 +160,11 @@ export default {
             row.executionTime = res.data.data.executionTime;
             row.endTime = res.data.data.endTime;
             row.status = res.data.data.status;
-            row.projectType = res.data.data.projectType
-            row.direction = res.data.data.direction
-            row.fundingSource = res.data.data.fundingSource
-            row.projectAbstract = res.data.data.projectAbstract
+            row.projectType = res.data.data.projectType;
+            row.direction = res.data.data.direction;
+            row.fundingSource = res.data.data.fundingSource;
+            row.projectAbstract = res.data.data.projectAbstract;
+            row.applicationFile = res.data.data.applicationFile;
             this.$refs.multipleTable.toggleRowExpansion(row, true);
           } else alert(res.data.code);
         })
