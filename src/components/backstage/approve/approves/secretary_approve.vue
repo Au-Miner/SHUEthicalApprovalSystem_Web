@@ -13,14 +13,14 @@
               <span>{{ props.row.projectType }}</span>
             </el-form-item>
             <el-form-item label="研究方向">
-              <span>{{ props.row.direction }}</span>
-            </el-form-item><br />
+              <span>{{ props.row.direction }}</span> </el-form-item
+            ><br />
             <el-form-item label="项目摘要">
-              <span>{{ props.row.projectAbstract }}</span>
-            </el-form-item><br />
+              <span>{{ props.row.projectAbstract }}</span> </el-form-item
+            ><br />
             <el-form-item label="项目单位">
-              <span>{{ props.row.institution }}</span>
-            </el-form-item><br />
+              <span>{{ props.row.institution }}</span> </el-form-item
+            ><br />
             <el-form-item label="学院秘书经办人">
               <span>{{ props.row.secretaryAgent }}</span>
             </el-form-item>
@@ -31,14 +31,14 @@
               <span>{{ props.row.chairmanAgent }}</span>
             </el-form-item>
             <el-form-item label="委员经办人">
-              <span>{{ props.row.memberAgent }}</span>
-            </el-form-item><br />
+              <span>{{ props.row.memberAgent }}</span> </el-form-item
+            ><br />
             <el-form-item label="预定的起止时间">
               <span>{{ props.row.scheduleTime }}</span>
             </el-form-item>
             <el-form-item label="申请创建时间">
-              <span>{{ props.row.creationTime }}</span>
-            </el-form-item><br />
+              <span>{{ props.row.creationTime }}</span> </el-form-item
+            ><br />
             <el-form-item label="申请同意时间">
               <span>{{ props.row.beginTime }}</span>
             </el-form-item>
@@ -46,8 +46,8 @@
               <span>{{ props.row.executionTime }}</span>
             </el-form-item>
             <el-form-item label="结束时间">
-              <span>{{ props.row.endTime }}</span>
-            </el-form-item><br />
+              <span>{{ props.row.endTime }}</span> </el-form-item
+            ><br />
             <el-form-item label="状态">
               <span>{{ props.row.status }}</span>
             </el-form-item>
@@ -66,15 +66,37 @@
             <el-form-item label="附件">
               <!--按钮，无名称-->
               <template slot-scope="scope">
-                <el-button :disabled="props.row.applicationFile==''" size="mini" type="primary" @click="download(props.row.applicationFile)">下载附件</el-button>
+                <el-button
+                  :disabled="props.row.applicationFile == ''"
+                  size="mini"
+                  type="primary"
+                  @click="download(props.row.applicationFile)"
+                  >下载附件</el-button
+                >
               </template>
             </el-form-item>
             <br />
-            <el-form-item label=""><!--按钮，无名称-->
+            <el-form-item label=""
+              ><!--按钮，无名称-->
               <template slot-scope="scope">
-                <el-button size="mini" type="success" @click="approval(1)">批准</el-button>
-                <el-button size="mini" type="warning" @click="approval(0)">修改</el-button>
-                <el-button size="mini" type="danger" @click="approval(-1)">驳回</el-button>
+                <el-button
+                  size="mini"
+                  type="success"
+                  @click="approval(props.row, 1)"
+                  >批准</el-button
+                >
+                <el-button
+                  size="mini"
+                  type="warning"
+                  @click="approval(props.row, 0)"
+                  >修改</el-button
+                >
+                <el-button
+                  size="mini"
+                  type="danger"
+                  @click="approval(props.row, -1)"
+                  >驳回</el-button
+                >
               </template>
             </el-form-item>
           </el-form>
@@ -82,15 +104,31 @@
       </el-table-column>
 
       <el-table-column width="100" prop="id" label="项目编号"></el-table-column>
-      <el-table-column width="200" prop="name" label="项目名称"></el-table-column>
-      <el-table-column width="200" prop="userId" label="用户Id"></el-table-column>
-      <el-table-column width="250" prop="creationTime" label="创建时间"></el-table-column>
+      <el-table-column
+        width="200"
+        prop="name"
+        label="项目名称"
+      ></el-table-column>
+      <el-table-column
+        width="200"
+        prop="userId"
+        label="用户Id"
+      ></el-table-column>
+      <el-table-column
+        width="250"
+        prop="creationTime"
+        label="创建时间"
+      ></el-table-column>
       <el-table-column width="200" prop="type" label="类型"></el-table-column>
       <el-table-column width="200" prop="status" label="状态"></el-table-column>
       <el-table-column width="150" fixed="right" label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary" @click="expand(scope.row)">展开</el-button>
-          <el-button size="mini" type="info" @click="contract(scope.row)">收起</el-button>
+          <el-button size="mini" type="primary" @click="expand(scope.row)"
+            >展开</el-button
+          >
+          <el-button size="mini" type="info" @click="contract(scope.row)"
+            >收起</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -111,17 +149,41 @@ export default {
     this.load();
   },
   methods: {
+    approval: function (row, choice) {
+      axios({
+        method: "post",
+        url: "/secretary/approval",
+        data: {
+          applicationId: row.id,
+          rejectReason: this.textarea,
+          state: choice,
+        },
+      })
+        .then((res) => {
+          if (res.data.code === 200) {
+            this.$alert("项目编号为" + row.id + "的申请已审核", "审核成功", {
+              confirmButtonText: "确定",
+            });
+            this.load();
+          } else alert(res.data.code);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    },
     download: function (url) {
       axios({
         method: "get",
         url: "/file/download?fileAddress=" + url,
         data: {},
-        responseType: "blob"
+        responseType: "blob",
       })
         .then((res) => {
-          var new_element = document.createElement('a');
-          new_element.download = res.config.url.slice(res.config.url.search('---')+3);
-          new_element.style.display = 'none';
+          var new_element = document.createElement("a");
+          new_element.download = res.config.url.slice(
+            res.config.url.search("---") + 3
+          );
+          new_element.style.display = "none";
           var blob = new Blob([res.data]);
           new_element.href = URL.createObjectURL(blob);
           document.body.appendChild(new_element);
@@ -147,7 +209,7 @@ export default {
         url: "/user/applicationInfo?applicationId=" + row.id,
         data: {},
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.code === 200) {
             row.leaderAgent = res.data.data.leaderAgent;
             row.institution = res.data.data.institution;
@@ -160,11 +222,12 @@ export default {
             row.executionTime = res.data.data.executionTime;
             row.endTime = res.data.data.endTime;
             row.status = res.data.data.status;
-            row.projectType = res.data.data.projectType
-            row.direction = res.data.data.direction
-            row.fundingSource = res.data.data.fundingSource
-            row.projectAbstract = res.data.data.projectAbstract
+            row.projectType = res.data.data.projectType;
+            row.direction = res.data.data.direction;
+            row.fundingSource = res.data.data.fundingSource;
+            row.projectAbstract = res.data.data.projectAbstract;
             row.applicationFile = res.data.data.applicationFile;
+            row.id = res.data.data.id;
             this.$refs.multipleTable.toggleRowExpansion(row, true);
           } else alert(res.data.code);
         })
@@ -172,12 +235,12 @@ export default {
           alert(err);
         });
     },
-    load: function() {
+    load: function () {
       axios({
         url: "/secretary/auditSet",
-        method: "get"
+        method: "get",
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.code === 200) {
             this.information = res.data.data;
           } else this.information = res.data.code;
@@ -186,8 +249,8 @@ export default {
           alert(err);
         });
     },
-    test_post() {}
-  }
+    test_post() {},
+  },
 };
 </script>
 
