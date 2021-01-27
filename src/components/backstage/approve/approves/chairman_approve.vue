@@ -122,8 +122,8 @@ export default {
             console.log(res.data);
           } else alert(res.data.code);
         })
-        .catch(() => {
-          alert("error");
+        .catch((err) => {
+          alert(err);
         });
     },
     change(event) {

@@ -37,8 +37,8 @@ export default {
                     this.$router.push('backstage')
                 }
                 else alert(res.data.code);
-            }).catch(()=>{
-                alert('error');
+            }).catch((err)=>{
+                alert(err);
             })
         }
     }

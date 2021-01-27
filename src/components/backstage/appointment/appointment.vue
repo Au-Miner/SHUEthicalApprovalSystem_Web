@@ -64,8 +64,8 @@ export default {
             this.memberlist = res.data;
           } else this.memberlist = res.data.code;
         })
-        .catch(() => {
-          console.log("error occur");
+        .catch((err) => {
+          alert(err);
         });
     },
   },
