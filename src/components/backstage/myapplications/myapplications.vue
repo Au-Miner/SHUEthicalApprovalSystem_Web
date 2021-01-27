@@ -59,14 +59,12 @@
                     >下载附件</el-button
                   >
                   <el-button
-                    :disabled="props.row.status != '未提交'"
                     size="mini"
                     type="success"
                     @click="confirmSubmit(props.row.id)"
                     >提交</el-button
                   >
                   <el-button
-                    :disabled="props.row.status != '未提交'"
                     size="mini"
                     type="danger"
                     @click="confirmDelete(props.row.id)"
@@ -80,14 +78,12 @@
 
         <el-table-column
           width="150"
-          fixed
           prop="id"
           label="项目编号"
         ></el-table-column>
         <!--<el-table-column width="200" prop="ordernum" label="ordernum"></el-table-column>-->
         <el-table-column
           width="200"
-          fixed
           prop="name"
           label="项目名称"
         ></el-table-column>
@@ -104,9 +100,10 @@
         ></el-table-column>
         <el-table-column width="200" prop="type" label="类型"></el-table-column>
         <el-table-column
-          width="200"
+          width="100"
           prop="status"
           label="状态"
+          fixed="right"
         ></el-table-column>
         <el-table-column width="150" fixed="right" label="操作">
           <template slot-scope="scope">
@@ -148,7 +145,10 @@ export default {
             this.$alert("项目编号为" + id + "的申请已提交", "提交成功", {
               confirmButtonText: "确定",
             });
-          } else alert(res.data.code);
+          } else this.$alert("项目编号为" + id + res.data.message, "提交失败", {
+              confirmButtonText: "确认",
+              type: "info",
+            });
         })
         .catch((err) => {
           alert(err);
@@ -179,10 +179,10 @@ export default {
         confirmButtonText: "确认",
         cancelButtonText: "放弃",
       })
-        .then(() => {
+        .then((res) => {
           this.$message({
             type: "info",
-            message: "已删除",
+            message: "进行删除",
           });
           this.deleteApplication(id)
         })
@@ -204,7 +204,10 @@ export default {
             this.$alert("项目编号为" + id + "的申请已被删除", "删除成功", {
               confirmButtonText: "确定",
             });
-          } else alert(res.data.code);
+          } else this.$alert("项目编号为" + id + res.data.message, "删除失败", {
+              confirmButtonText: "确认",
+              type: "info",
+            });
         })
         .catch((err) => {
           alert(err);
