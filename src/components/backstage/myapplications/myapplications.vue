@@ -295,4 +295,3 @@ export default {
   visibility: hidden;
 }
 </style>
-</style>

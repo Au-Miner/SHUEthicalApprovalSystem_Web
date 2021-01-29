@@ -37,9 +37,9 @@ export default {
   },
   mounted() {
     this.info_update();
-    if (!localStorage.getItem("identity").includes("委员长")) {
+    //if (!localStorage.getItem("identity").includes("委员长")) {
       this.hide("appointment");
-    }
+    //}
     if (
       localStorage.getItem("identity").includes("委员长") ||
       localStorage.getItem("identity").includes("学院秘书") ||

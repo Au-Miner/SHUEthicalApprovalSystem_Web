@@ -2,15 +2,14 @@
   <div>
     <template>
       <el-table
+        ref="multipleTable"
         :data="memberlist.data"
-        style="width: 95%;height: 100%;"
+        style="width: 95%; height: 100%"
         id="list"
       >
-        <el-table-column width="150" fixed prop="name" label="姓名">
+        <el-table-column width="150" prop="name" label="姓名">
         </el-table-column>
-        <el-table-column width="150" fixed prop="userId" label="用户Id">
-        </el-table-column>
-        <el-table-column width="200" prop="gender" label="性别">
+        <el-table-column width="150" prop="userId" label="用户Id">
         </el-table-column>
         <el-table-column width="200" prop="department" label="学院">
         </el-table-column>
@@ -24,21 +23,28 @@
         </el-table-column>
         <el-table-column width="200" prop="pending" label="待定">
         </el-table-column>
-        <el-table-column width="150" fixed="right" label="操作">
+        <el-table-column width="350" fixed="right" label="选项">
           <template slot-scope="scope">
-            <el-button
-              size="mini"
-              @click="">编辑
-            </el-button>
-            <el-button
-              size="mini"
-              type="danger"
-              @click="">删除
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </template>
+            <div style="width: 250px; float: left">
+              <el-select v-model="value" filterable placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.id"
+                  :label="item.name"
+                  :value="item.id"
+                >
+                </el-option>
+              </el-select>
+            </div>
+            <div style="text-align: right; float: right">
+              <el-button size="medium" type="primary" @click="appoint()"
+                >委派</el-button
+              >
+            </div></template
+          ></el-table-column
+        ></el-table
+      ></template
+    >
   </div>
 </template>
 
@@ -48,12 +54,15 @@ export default {
   data() {
     return {
       memberlist: "",
+      options: [],
+      value: "",
     };
   },
   mounted() {
     this.load();
   },
   methods: {
+    appoint: function () {},
     load: function () {
       axios({
         url: "/chairman/memberList",
@@ -67,13 +76,33 @@ export default {
         .catch((err) => {
           alert(err);
         });
+      axios({
+        url: "/chairman/auditSet",
+        method: "get",
+      })
+        .then((res) => {
+          if (res.data.code === 200) {
+            this.options = res.data.data.auditResList;
+          } else {
+            this.$alert("错误代码" + res.data.code, "错误", {
+              confirmButtonText: "确定",
+            });
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
+      console.log(this.options);
     },
   },
 };
 </script>
 <style scoped>
-#list{
-  left:25px;
+#list {
+  left: 25px;
   top: 25px;
+}
+>>> .el-table__expand-icon {
+  visibility: hidden;
 }
 </style>

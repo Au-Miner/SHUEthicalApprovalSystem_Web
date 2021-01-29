@@ -182,8 +182,8 @@ export default {
             this.information = res.data.data;
           } else this.information = res.data.code;
         })
-        .catch(() => {
-          console.log("error occur");
+        .catch((err) => {
+          alert(err);
         });
     },
     test_post() {}
