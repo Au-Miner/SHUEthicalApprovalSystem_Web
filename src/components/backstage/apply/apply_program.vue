@@ -371,7 +371,7 @@ export default {
         email: localStorage.getItem("email"),
         project_direction: "",
         project_abstract: "",
-        type: 0,
+        type: 0,//这个是funding source但我不知道为什么被命名为type了，请千万注意！！！
         temp: [],
         project_type: "",
         desc: "",
