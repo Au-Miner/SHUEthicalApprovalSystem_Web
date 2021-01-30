@@ -571,8 +571,12 @@ export default {
     this.load();
   },
   methods: {
+    uploadSummary: function(response, file, fileList) {
+      //console.log(response.data);
+      this.summary = response.data;
+    },
     projectProcessManagement: function(id){
-      if(this.ExecuteInfo==''){
+      if(this.ExecuteInfo==''||this.summary==''){
         this.$alert("您忘记上传文件了！", "请上传文件", {
               confirmButtonText: "确定",
             });
