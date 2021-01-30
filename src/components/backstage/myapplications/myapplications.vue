@@ -7,7 +7,7 @@
         style="width: 95%; height: 100%"
         id="list"
       >
-        <el-table-column type="expand">
+        <el-table-column type="expand" width="1">
           <template slot-scope="props">
             <el-form inline class="table-expand">
               <el-form-item label="项目类别">
@@ -77,13 +77,13 @@
         </el-table-column>
 
         <el-table-column
-          width="150"
+          width="125"
           prop="id"
           label="项目编号"
         ></el-table-column>
         <!--<el-table-column width="200" prop="ordernum" label="ordernum"></el-table-column>-->
         <el-table-column
-          width="200"
+          width="450"
           prop="name"
           label="项目名称"
         ></el-table-column>
@@ -98,7 +98,7 @@
           prop="beginTime"
           label="开始时间"
         ></el-table-column>
-        <el-table-column width="200" prop="type" label="类型"></el-table-column>
+        <el-table-column width="75" prop="type" label="类型"></el-table-column>
         <el-table-column
           width="100"
           prop="status"
