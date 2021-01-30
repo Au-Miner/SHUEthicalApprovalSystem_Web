@@ -13,14 +13,14 @@
               <span>{{ props.row.projectType }}</span>
             </el-form-item>
             <el-form-item label="研究方向">
-              <span>{{ props.row.direction }}</span>
-            </el-form-item><br />
+              <span>{{ props.row.direction }}</span> </el-form-item
+            ><br />
             <el-form-item label="项目摘要">
-              <span>{{ props.row.projectAbstract }}</span>
-            </el-form-item><br />
+              <span>{{ props.row.projectAbstract }}</span> </el-form-item
+            ><br />
             <el-form-item label="项目单位">
-              <span>{{ props.row.institution }}</span>
-            </el-form-item><br />
+              <span>{{ props.row.institution }}</span> </el-form-item
+            ><br />
             <el-form-item label="学院秘书经办人">
               <span>{{ props.row.secretaryAgent }}</span>
             </el-form-item>
@@ -31,14 +31,14 @@
               <span>{{ props.row.chairmanAgent }}</span>
             </el-form-item>
             <el-form-item label="委员经办人">
-              <span>{{ props.row.memberAgent }}</span>
-            </el-form-item><br />
+              <span>{{ props.row.memberAgent }}</span> </el-form-item
+            ><br />
             <el-form-item label="预定的起止时间">
               <span>{{ props.row.scheduleTime }}</span>
             </el-form-item>
             <el-form-item label="申请创建时间">
-              <span>{{ props.row.creationTime }}</span>
-            </el-form-item><br />
+              <span>{{ props.row.creationTime }}</span> </el-form-item
+            ><br />
             <el-form-item label="申请同意时间">
               <span>{{ props.row.beginTime }}</span>
             </el-form-item>
@@ -46,8 +46,8 @@
               <span>{{ props.row.executionTime }}</span>
             </el-form-item>
             <el-form-item label="结束时间">
-              <span>{{ props.row.endTime }}</span>
-            </el-form-item><br />
+              <span>{{ props.row.endTime }}</span> </el-form-item
+            ><br />
             <el-form-item label="状态">
               <span>{{ props.row.status }}</span>
             </el-form-item>
@@ -65,16 +65,90 @@
             <el-form-item label="附件">
               <!--按钮，无名称-->
               <template slot-scope="scope">
-                <el-button :disabled="props.row.applicationFile==''" size="mini" type="primary" @click="download(props.row.applicationFile)">下载附件</el-button>
+                <el-button
+                  :disabled="props.row.applicationFile == ''"
+                  size="mini"
+                  type="primary"
+                  @click="download(props.row.applicationFile)"
+                  >下载附件</el-button
+                >
               </template>
             </el-form-item>
             <br />
             <el-form-item label>
               <!--按钮，无名称-->
               <template slot-scope="scope">
-                <el-button size="mini" type="success" @click="approval(1)">批准</el-button>
-                <el-button size="mini" type="warning" @click="approval(0)">修改</el-button>
-                <el-button size="mini" type="danger" @click="approval(-1)">驳回</el-button>
+                <el-button
+                  size="mini"
+                  type="success"
+                  @click="dialogTableVisible = true"
+                  >批准</el-button
+                >
+                <el-button
+                    size="mini"
+                    type="warning"
+                    @click="confirmRejct(props.row.id, 0)"
+                    >修改</el-button
+                  >
+                <el-button
+                    size="mini"
+                    type="danger"
+                    @click="confirmRejct(props.row.id,-1)"
+                    >驳回</el-button
+                  >
+                <el-dialog
+                  width="90%"
+                  title="委员任命"
+                  :visible.sync="dialogTableVisible"
+                  append-to-body
+                >
+                <div style="float:right;">
+                  <el-select v-model="value" filterable placeholder="请选择">
+                    <el-option
+                      v-for="item in options"
+                      :key="item.userId"
+                      :label="item.name"
+                      :value="item.userId"
+                    >
+                    </el-option>
+                  </el-select>
+                  <el-button
+                  size="medium"
+                  type="primary"
+                  @click="confirmAppoint(props.row.id)"
+                  >确认</el-button>
+                  </div>
+                  <el-table
+                    :data="memberlist.data"
+                    style="width: 95%; height: 100%"
+                    id="list"
+                  >
+                    <el-table-column width="150" prop="name" label="姓名">
+                    </el-table-column>
+                    <el-table-column width="150" prop="userId" label="用户Id">
+                    </el-table-column>
+                    <el-table-column width="200" prop="department" label="学院">
+                    </el-table-column>
+                    <el-table-column width="200" prop="education" label="学历">
+                    </el-table-column>
+                    <el-table-column width="200" prop="identity" label="身份">
+                    </el-table-column>
+                    <el-table-column
+                      width="200"
+                      prop="officePhone"
+                      label="办公室电话"
+                    >
+                    </el-table-column>
+                    <el-table-column
+                      width="200"
+                      prop="mobilePhone"
+                      label="移动电话"
+                    >
+                    </el-table-column>
+                    <!--<el-table-column width="200" prop="pending" label="待定">
+                    </el-table-column>-->
+                  </el-table>
+                </el-dialog>
               </template>
             </el-form-item>
           </el-form>
@@ -82,15 +156,31 @@
       </el-table-column>
 
       <el-table-column width="100" prop="id" label="项目编号"></el-table-column>
-      <el-table-column width="200" prop="name" label="项目名称"></el-table-column>
-      <el-table-column width="200" prop="userId" label="用户Id"></el-table-column>
-      <el-table-column width="250" prop="creationTime" label="创建时间"></el-table-column>
+      <el-table-column
+        width="200"
+        prop="name"
+        label="项目名称"
+      ></el-table-column>
+      <el-table-column
+        width="200"
+        prop="userId"
+        label="用户Id"
+      ></el-table-column>
+      <el-table-column
+        width="250"
+        prop="creationTime"
+        label="创建时间"
+      ></el-table-column>
       <el-table-column width="200" prop="type" label="类型"></el-table-column>
       <el-table-column width="200" prop="status" label="状态"></el-table-column>
       <el-table-column width="150" fixed="right" label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary" @click="expand(scope.row)">展开</el-button>
-          <el-button size="mini" type="info" @click="contract(scope.row)">收起</el-button>
+          <el-button size="mini" type="primary" @click="expand(scope.row)"
+            >展开</el-button
+          >
+          <el-button size="mini" type="info" @click="contract(scope.row)"
+            >收起</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -104,24 +194,122 @@ export default {
   data() {
     return {
       information: "",
-      textarea: ""
+      textarea: "",
+      value: "",
+      options: [],
+      dialogTableVisible: false,
+      memberlist: "",
     };
   },
   mounted() {
     this.load();
   },
   methods: {
+    reject: function(applicationId,method){
+      axios({
+                method:'post',
+                url:'/chairman/rejection',
+                data:{
+                    applicationId: applicationId,
+                    rejectReason: this.textarea,
+                    state: method,
+                }
+            }).then((res)=>
+            {
+                if(res.data.code===200)
+                {
+                    this.$alert("已审核项目编号为："+applicationId+"的项目", "审核成功", {
+                      confirmButtonText: "确定",
+                      });
+                      this.load();
+                }
+                else this.$alert("错误信息："+res.data.message, "审核失败", {
+                      confirmButtonText: "确定",
+                      });
+                      this.load();
+            }).catch((err)=>{
+                alert(err);
+            })
+            this.load();
+    },
+    confirmRejct: function(applicationId,method){
+      this.$confirm("您确定要修改/驳回项目：" +applicationId+"吗？", "确认信息", {
+        type: "warning",
+        confirmButtonText: "确认",
+        cancelButtonText: "放弃",
+      })
+        .then((res) => {
+          this.$message({
+            type: "info",
+            message: "进行审批",
+          });
+          this.reject(applicationId,method)
+        })
+        .catch((action) => {
+          this.$message({
+            type: "info",
+            message: "放弃审批",
+          });
+        });
+    },
+    confirmAppoint: function (applicationId) {
+      this.$confirm("您确定要委任" + this.value + "为项目"+applicationId+"的委员吗？", "确认信息", {
+        distinguishCancelAndClose: true,
+        type: "warning",
+        confirmButtonText: "确认",
+        cancelButtonText: "放弃",
+      })
+        .then((res) => {
+          this.$message({
+            type: "info",
+            message: "进行委任",
+          });
+          this.appoint(applicationId)
+        })
+        .catch((action) => {
+          this.$message({
+            type: "info",
+            message: "放弃委任",
+          });
+        });
+    },
+    appoint:function(applicationId){
+      axios({
+                method:'post',
+                url:'/chairman/assign',
+                data:{
+                    applicationId: applicationId,
+                    userId: this.value
+                }
+            }).then((res)=>
+            {
+                if(res.data.code===200)
+                {
+                    this.$alert("已委任" + this.value + "为项目"+applicationId+"的委员", "委任成功", {
+                      confirmButtonText: "确定",
+                      });
+                }
+                else this.$alert("错误信息："+res.data.message, "委任失败", {
+                      confirmButtonText: "确定",
+                      });
+            }).catch((err)=>{
+                alert(err);
+            })
+            this.load();
+    },
     download: function (url) {
       axios({
         method: "get",
         url: "/file/download?fileAddress=" + url,
         data: {},
-        responseType: "blob"
+        responseType: "blob",
       })
         .then((res) => {
-          var new_element = document.createElement('a');
-          new_element.download = res.config.url.slice(res.config.url.search('---')+3);
-          new_element.style.display = 'none';
+          var new_element = document.createElement("a");
+          new_element.download = res.config.url.slice(
+            res.config.url.search("---") + 3
+          );
+          new_element.style.display = "none";
           var blob = new Blob([res.data]);
           new_element.href = URL.createObjectURL(blob);
           document.body.appendChild(new_element);
@@ -138,16 +326,16 @@ export default {
     contract(row) {
       this.$refs.multipleTable.toggleRowExpansion(row, false);
     },
-    print: function(sth) {
+    print: function (sth) {
       console.log(sth);
     },
-    expand: function(row) {
+    expand: function (row) {
       axios({
         method: "get",
         url: "/user/applicationInfo?applicationId=" + row.id,
-        data: {}
+        data: {},
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.code === 200) {
             row.leaderAgent = res.data.data.leaderAgent;
             row.institution = res.data.data.institution;
@@ -165,6 +353,7 @@ export default {
             row.fundingSource = res.data.data.fundingSource;
             row.projectAbstract = res.data.data.projectAbstract;
             row.applicationFile = res.data.data.applicationFile;
+            row.id = res.data.data.id;
             this.$refs.multipleTable.toggleRowExpansion(row, true);
           } else alert(res.data.code);
         })
@@ -172,12 +361,12 @@ export default {
           alert("error");
         });
     },
-    load: function() {
+    load: function () {
       axios({
         url: "/chairman/auditSet",
-        method: "get"
+        method: "get",
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.code === 200) {
             this.information = res.data.data;
           } else this.information = res.data.code;
@@ -185,9 +374,21 @@ export default {
         .catch((err) => {
           alert(err);
         });
+      axios({
+        url: "/chairman/memberList",
+        method: "get",
+      })
+        .then((res) => {
+          if (res.data.code === 200) {
+            this.memberlist = res.data;
+            this.options = res.data.data;
+          } else this.memberlist = res.data.code;
+        })
+        .catch((err) => {
+          alert(err);
+        });
     },
-    test_post() {}
-  }
+  },
 };
 </script>
 
