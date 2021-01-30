@@ -437,7 +437,7 @@ export default {
         url: "/user/createApplicationForProjectDemo",
         data: {
           application_file: this.form.application_file,
-          application_type: 0,
+          application_type: 1,
           email: this.form.email,
           fax: this.form.fax,
           funding_source: this.form.type,

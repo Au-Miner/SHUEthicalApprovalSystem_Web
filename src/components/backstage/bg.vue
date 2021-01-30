@@ -38,7 +38,7 @@
     </div>
     <div id="applies">
         <el-button @mouseenter.native="show('applies')" @mouseleave.native="hide('applies')" @click="jmp('apply_program')" @mouseleave="hide_applies()" type="primary" id="apply">项目申请</el-button><br />
-        <el-button @mouseenter.native="show('applies')" @mouseleave.native="hide('applies')" @click="jmp('apply_personal')" @mouseleave="hide_applies()" type="primary" id="apply">个人申请</el-button><br />
+        <el-button @mouseenter.native="show('applies')" @mouseleave.native="hide('applies')" @click="jmp('apply_personal')" @mouseleave="hide_applies()" type="primary" id="apply">文章申请</el-button><br />
         <el-button @mouseenter.native="show('applies')" @mouseleave.native="hide('applies')" @click="jmp('apply_other')" @mouseleave="hide_applies()" type="primary" id="apply">其他申请</el-button>
     </div>
     <div class="content">
