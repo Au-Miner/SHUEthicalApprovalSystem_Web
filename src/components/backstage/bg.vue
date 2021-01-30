@@ -3,8 +3,31 @@
   <div id="backstage_bg">
     <div id="darkblue_bg">
       <img id="shu_badge" src="../../assets/shu_pic.png" />
-      <div id="info"><span>欢迎: {{information}}</span></div>
-      <el-button @click="logout()" type="primary" id="logout">退出登录</el-button>
+      <div id="info">欢迎: {{information}}</div>
+      <el-button size="mini" id="changeInfo" type="text" @click="changeInfoDialogVisible = true">修改信息</el-button>
+      <el-dialog
+      title="修改个人信息"
+      :visible.sync="changeInfoDialogVisible"
+      width="25%"
+      append-to-body
+      >
+      <el-form label-width="100px" :model="infoForm">
+        <el-form-item label="邮箱">
+          <el-input v-model="infoForm.email"></el-input>
+          </el-form-item>
+          <el-form-item label="传真">
+            <el-input v-model="infoForm.fax"></el-input>
+            </el-form-item>
+            <el-form-item label="移动电话">
+              <el-input v-model="infoForm.mobilePhone"></el-input>
+              </el-form-item>
+              <el-form-item label="办公室电话">
+              <el-input v-model="infoForm.officePhone"></el-input>
+              </el-form-item>
+              </el-form>
+              <el-button size="mini" type="primary" @click="updateInfo()">确认修改</el-button>
+      </el-dialog>
+      <el-button size="mini" @click="logout()" type="primary" id="logout">退出登录</el-button>
     </div>
     <div id="lightblue_sidebar">
       <el-button @click="jmp('tutorial')" type="primary" id="tutorial">申报指南</el-button><br />
@@ -33,12 +56,14 @@ export default {
   data() {
     return {
       information: "",
+      changeInfoDialogVisible: false,
+      infoForm: { email: "", fax: "", mobilePhone: "", officePhone: "" },
     };
   },
   mounted() {
     this.info_update();
     //if (!localStorage.getItem("identity").includes("委员长")) {
-      this.hide("appointment");
+    this.hide("appointment");
     //}
     if (
       localStorage.getItem("identity").includes("委员长") ||
@@ -50,6 +75,37 @@ export default {
     }
   },
   methods: {
+    updateInfo() {
+      axios({
+        method: "post",
+        url: "/user/updateInfo",
+        data: {
+          email: this.infoForm.email,
+          fax: this.infoForm.fax,
+          mobilePhone: this.infoForm.mobilePhone,
+          officePhone: this.infoForm.officePhone,
+        },
+      })
+        .then((res) => {
+          if (res.data.code === 200) {
+            localStorage.setItem("email", this.infoForm.email);
+            localStorage.setItem("office_phone", this.infoForm.officePhone);
+            localStorage.setItem("phone", this.infoForm.mobilePhone);
+            localStorage.setItem("fax", this.infoForm.fax);
+            this.changeInfoDialogVisible=false;
+            this.$alert("您已成功修改个人信息", "修改成功", {
+              confirmButtonText: "确认",
+              type: "success",
+            });
+          } else this.$alert(res.data.message, "修改失败", {
+              confirmButtonText: "确认",
+              type: "info",
+            });
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    },
     jmp: function (path) {
       this.$router.replace("/backstage/" + path).catch((err) => {
         err;
@@ -70,9 +126,12 @@ export default {
           if (res.data.code === 200) {
             this.information = res.data.data.name + " " + res.data.data.userId;
             localStorage.setItem("email", res.data.data.email);
+            this.infoForm.email = res.data.data.email;
             localStorage.setItem("institution", res.data.data.department);
             localStorage.setItem("office_phone", res.data.data.officePhone);
+            this.infoForm.officePhone = res.data.data.officePhone;
             localStorage.setItem("phone", res.data.data.mobilePhone);
+            this.infoForm.mobilePhone = res.data.data.mobilePhone;
           } else this.information = res.data.code;
         })
         .catch(() => {
@@ -96,8 +155,8 @@ export default {
 <style scoped>
 #info {
   width: 200px;
-  right: 10%;
-  top: 20px;
+  right: 15%;
+  top: 16px;
   font-size: 18px;
   position: absolute;
   color: white;
@@ -105,12 +164,24 @@ export default {
 button#logout {
   background: rgba(0, 0, 0, 0);
   height: 10%;
-  width: 10%;
+  width: 5%;
   position: absolute;
   left: 90%;
   top: 22%;
   font-size: 18px;
-  color: #fefefe;
+  color: white;
+  border: 0px;
+  z-index: 5;
+}
+button#changeInfo {
+  background: rgba(0, 0, 0, 0);
+  height: 10%;
+  width: 5%;
+  position: absolute;
+  right: 10%;
+  top: 22%;
+  font-size: 18px;
+  color: white;
   border: 0px;
   z-index: 5;
 }
