@@ -3,7 +3,7 @@
     <template>
       <el-table
         ref="multipleTable"
-        :data="information.userApplicationList"
+        :data="projectList.userApplicationList"
         style="width: 95%; height: 100%"
         id="list"
       >
@@ -48,6 +48,15 @@
               </el-form-item>
               <el-form-item label="结束时间">
                 <span>{{ props.row.endTime }}</span>
+              </el-form-item>
+              <br />
+              <el-form-item
+                v-if="
+                  props.row.rejectReason != '' && props.row.creationTime != null
+                "
+                label="驳回原因"
+              >
+                <span>{{ props.row.rejectReason }}</span>
               </el-form-item>
               <br />
               <el-form-item label="">
@@ -123,11 +132,12 @@
 
 <script>
 import axios from "axios";
+import {Download} from "@/components/commonScript.js";
 export default {
   name: "myapplications",
   data() {
     return {
-      information: "",
+      projectList: "",
     };
   },
   mounted() {
@@ -145,7 +155,8 @@ export default {
             this.$alert("项目编号为" + id + "的申请已提交", "提交成功", {
               confirmButtonText: "确定",
             });
-          } else this.$alert("项目编号为" + id + res.data.message, "提交失败", {
+          } else
+            this.$alert("项目编号为" + id + res.data.message, "提交失败", {
               confirmButtonText: "确认",
               type: "info",
             });
@@ -153,9 +164,9 @@ export default {
         .catch((err) => {
           alert(err);
         });
-        this.load();
+      this.load();
     },
-    confirmSubmit:function(id){
+    confirmSubmit: function (id) {
       this.$confirm("您确定要提交项目编号为" + id + "的项目吗？", "确认信息", {
         distinguishCancelAndClose: true,
         type: "success",
@@ -163,7 +174,7 @@ export default {
         cancelButtonText: "放弃",
       })
         .then(() => {
-          this.submitApplication(id)
+          this.submitApplication(id);
         })
         .catch((action) => {
           this.$message({
@@ -184,7 +195,7 @@ export default {
             type: "info",
             message: "进行删除",
           });
-          this.deleteApplication(id)
+          this.deleteApplication(id);
         })
         .catch((action) => {
           this.$message({
@@ -204,7 +215,8 @@ export default {
             this.$alert("项目编号为" + id + "的申请已被删除", "删除成功", {
               confirmButtonText: "确定",
             });
-          } else this.$alert("项目编号为" + id + res.data.message, "删除失败", {
+          } else
+            this.$alert("项目编号为" + id + res.data.message, "删除失败", {
               confirmButtonText: "确认",
               type: "info",
             });
@@ -212,28 +224,10 @@ export default {
         .catch((err) => {
           alert(err);
         });
-        this.load();
+      this.load();
     },
     download: function (url) {
-      axios({
-        method: "get",
-        url: "/file/download?fileAddress=" + url,
-        data: {},
-        responseType: "blob"
-      })
-        .then((res) => {
-          var new_element = document.createElement('a');
-          new_element.download = res.config.url.slice(res.config.url.search('---')+3);
-          new_element.style.display = 'none';
-          var blob = new Blob([res.data]);
-          new_element.href = URL.createObjectURL(blob);
-          document.body.appendChild(new_element);
-          new_element.click();
-          document.body.removeChild(new_element);
-        })
-        .catch((err) => {
-          alert(err);
-        });
+      Download(url)
     },
     contract: function (row) {
       this.$refs.multipleTable.toggleRowExpansion(row, false);
@@ -262,6 +256,7 @@ export default {
             row.fundingSource = res.data.data.fundingSource;
             row.projectAbstract = res.data.data.projectAbstract;
             row.applicationFile = res.data.data.applicationFile;
+            row.rejectReason = res.data.data.rejectReason;
             this.$refs.multipleTable.toggleRowExpansion(row, true);
           } else alert(res.data.code);
         })
@@ -276,8 +271,8 @@ export default {
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.information = res.data.data;
-          } else this.information = res.data.code;
+            this.projectList = res.data.data;
+          } else this.projectList = res.data.code;
         })
         .catch((err) => {
           alert(err);
