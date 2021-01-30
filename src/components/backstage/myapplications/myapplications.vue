@@ -172,6 +172,54 @@
                 >
                 </template>
               </el-form-item>
+
+              <el-form-item
+                v-if="props.row.status == '执行情况表与总结待提交'&&props.row.type=='1'"
+                label="执行情况表与总结"
+              >
+                <template slot-scope="scope">
+                  <el-upload
+                    class="upload"
+                    action="/api/file/upload"
+                    :headers="headers"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :before-remove="beforeRemove"
+                    :on-success="uploadExecuteInfo"
+                    multiple
+                    accept=".pdf"
+                    :limit="1"
+                    :on-exceed="handleExceed"
+                    :file-list="fileList"
+                  >
+                    <el-button size="small" type="primary">上传执行文件</el-button>
+                  </el-upload>
+                  <el-upload
+                    class="upload"
+                    action="/api/file/upload"
+                    :headers="headers"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :before-remove="beforeRemove"
+                    :on-success="uploadSummary"
+                    multiple
+                    accept=".pdf"
+                    :limit="1"
+                    :on-exceed="handleExceed"
+                    :file-list="fileList"
+                  >
+                    <el-button size="small" type="primary">上传总结</el-button>
+                  </el-upload>
+                  <el-button
+                  size="medium"
+                  type="success"
+                  @click="projectProcessManagement(props.row.id)"
+                  >确认上传</el-button
+                >
+                </template>
+              </el-form-item>
+
+
             </el-form>
           </template>
         </el-table-column>
@@ -523,6 +571,39 @@ export default {
     this.load();
   },
   methods: {
+    projectProcessManagement: function(id){
+      if(this.ExecuteInfo==''){
+        this.$alert("您忘记上传文件了！", "请上传文件", {
+              confirmButtonText: "确定",
+            });
+            return;
+      }
+      axios({
+                method:'post',
+                url:'/user/projectProcessManagement',
+                data:{
+                    executeInfo: this.ExecuteInfo,
+                    summary: this.summary,
+                    id: id
+                }
+            }).then((res)=>
+            {
+                if(res.data.code===200)
+                {
+                    this.$alert("您已成功上传执行文件", "上传成功", {
+                      confirmButtonText: "确定",
+                      });
+                }
+                else this.$alert("错误信息："+res.data.message, "上传失败", {
+                      confirmButtonText: "确定",
+                      });
+            }).catch((err)=>{
+                alert(err);
+            })
+      this.ExecuteInfo=''
+      this.summary=''
+      this.load();
+    },
     articleProcessManagement: function(id){
       if(this.ExecuteInfo==''){
         this.$alert("您忘记上传文件了！", "请上传文件", {
