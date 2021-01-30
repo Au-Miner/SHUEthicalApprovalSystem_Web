@@ -72,9 +72,9 @@
             <el-form-item label>
               <!--按钮，无名称-->
               <template slot-scope="scope">
-                <el-button size="mini" type="success" @click="approval(1)">批准</el-button>
-                <el-button size="mini" type="warning" @click="approval(0)">修改</el-button>
-                <el-button size="mini" type="danger" @click="approval(-1)">驳回</el-button>
+                <el-button size="mini" type="success" @click="approval(props.row, 1)">批准</el-button>
+                <el-button size="mini" type="warning" @click="approval(props.row, 0)">修改</el-button>
+                <el-button size="mini" type="danger" @click="approval(props.row, -1)">驳回</el-button>
               </template>
             </el-form-item>
           </el-form>
@@ -111,6 +111,30 @@ export default {
     this.load();
   },
   methods: {
+    approval: function (row, choice) {
+      axios({
+        method: "post",
+        url: "/member/approval",
+        data: {
+          applicationId: row.id,
+          rejectReason: this.textarea,
+          state: choice,
+        },
+      })
+        .then((res) => {
+          if (res.data.code === 200) {
+            this.$alert("项目编号为" + row.id + "的申请已审核", "审核成功", {
+              confirmButtonText: "确定",
+            });
+            this.load();
+          } else this.$alert("错误信息："+res.data.message, "审核失败", {
+                      confirmButtonText: "确定",
+                      });
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    },
     download: function (url) {
       axios({
         method: "get",
