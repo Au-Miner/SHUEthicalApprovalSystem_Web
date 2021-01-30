@@ -41,8 +41,8 @@
                 <span>{{ props.row.creationTime }}</span> </el-form-item
               ><br />
               <el-form-item label="申请同意时间">
-                <span>{{ props.row.beginTime }}</span>
-              </el-form-item><!--
+                <span>{{ props.row.beginTime }}</span> </el-form-item
+              ><!--
               <el-form-item label="执行期">
                 <span>{{ props.row.executionTime }}</span>
               </el-form-item>-->
@@ -139,6 +139,39 @@
                   >确认项目状态</el-button
                 >
               </el-form-item>
+
+              <el-form-item
+                v-if="props.row.status == '执行情况表待提交'"
+                label="执行情况表"
+              >
+                <template slot-scope="scope">
+                  <el-upload
+                    class="upload"
+                    action="/api/file/upload"
+                    :headers="headers"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :before-remove="beforeRemove"
+                    :on-success="uploadExecuteInfo"
+                    multiple
+                    accept=".pdf"
+                    :limit="1"
+                    :on-exceed="handleExceed"
+                    :file-list="fileList"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <div slot="tip" class="el-upload__tip">
+                      只能上传pdf
+                    </div>
+                  </el-upload>
+                  <el-button
+                  size="medium"
+                  type="success"
+                  @click="articleProcessManagement(props.row.id)"
+                  >确认上传</el-button
+                >
+                </template>
+              </el-form-item>
             </el-form>
           </template>
         </el-table-column>
@@ -184,7 +217,7 @@
         </el-table-column>
       </el-table>
     </template>
-<!--临时解决措施-->
+    <!--临时解决措施-->
     <el-dialog
       title="修改项目信息"
       :visible.sync="updateProjectDialogVisible"
@@ -482,16 +515,53 @@ export default {
         desc: "",
         application_file: "",
       },
+      ExecuteInfo: "",
+      summary: "",
     };
   },
   mounted() {
     this.load();
   },
   methods: {
-    getProjectInfo: function(id){
+    articleProcessManagement: function(id){
+      if(this.ExecuteInfo==''){
+        this.$alert("您忘记上传文件了！", "请上传文件", {
+              confirmButtonText: "确定",
+            });
+            return;
+      }
+      axios({
+                method:'post',
+                url:'/user/articleProcessManagement',
+                data:{
+                    executeInfo: this.ExecuteInfo,
+                    id: id
+                }
+            }).then((res)=>
+            {
+                if(res.data.code===200)
+                {
+                    this.$alert("您已成功上传执行文件", "上传成功", {
+                      confirmButtonText: "确定",
+                      });
+                }
+                else this.$alert("错误信息："+res.data.message, "上传失败", {
+                      confirmButtonText: "确定",
+                      });
+            }).catch((err)=>{
+                alert(err);
+            })
+      this.ExecuteInfo=''
+      this.load();
+    },
+    uploadExecuteInfo: function(response, file, fileList) {
+      //console.log(response.data);
+      this.ExecuteInfo = response.data;
+    },
+    getProjectInfo: function (id) {
       axios({
         method: "get",
-        url: "/user/applicationInfo?applicationId="+id,
+        url: "/user/applicationInfo?applicationId=" + id,
         data: {},
       })
         .then((res) => {
