@@ -8,11 +8,11 @@
         id="mishu"
       >学院秘书审批</el-button>
       <el-button
-        @click="jmp('member_approve')"
+        @click="jmp('leader_approve')"
         style="display:none;"
         type="primary"
-        id="weiyuan"
-      >委员审批</el-button>
+        id="lingdao"
+      >领导审批</el-button>
       <el-button
         @click="jmp('chairman_approve')"
         style="display:none;"
@@ -20,11 +20,11 @@
         id="weiyuanzhang"
       >委员长审批</el-button>
       <el-button
-        @click="jmp('leader_approve')"
+        @click="jmp('member_approve')"
         style="display:none;"
         type="primary"
-        id="lingdao"
-      >领导审批</el-button>
+        id="weiyuan"
+      >委员审批</el-button>
     </el-button-group>
     <div id="approve_type">
       <router-view></router-view>
