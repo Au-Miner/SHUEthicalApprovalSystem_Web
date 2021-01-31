@@ -207,9 +207,8 @@
                   @click="othersProcessManagement(props.row.id)"
                   >确认上传</el-button
                 >
-              </el-form-item>
+              </el-form-item>      
 
-              
               <el-form-item
                 v-if="
                   props.row.status == '执行情况表待提交' &&
@@ -246,7 +245,7 @@
                 </template>
               </el-form-item>
 
-              <el-form-item
+              <!-- <el-form-item
                 v-if="
                   props.row.status == '执行情况表与总结待提交' &&
                   props.row.type == '1'
@@ -295,7 +294,101 @@
                     >确认上传</el-button
                   >
                 </template>
+              </el-form-item> -->
+
+
+
+
+
+              <el-form-item
+                v-if="
+                  props.row.status.search('执行情况表') != -1 &&
+                  props.row.status.search('待审核') == -1 &&
+                  props.row.type == '1'
+                "
+                label="执行情况表"
+              >
+                <el-upload
+                  class="upload"
+                  action="/api/file/upload"
+                  :headers="headers"
+                  :on-preview="handlePreview"
+                  :on-remove="handleRemove"
+                  :before-remove="beforeRemove"
+                  :on-success="uploadExecuteInfo"
+                  multiple
+                  accept=".pdf"
+                  :limit="1"
+                  :on-exceed="handleExceed"
+                  :file-list="fileList"
+                >
+                  <el-button size="small" type="primary"
+                    >上传执行情况表</el-button
+                  >
+                </el-upload>
               </el-form-item>
+              <el-form-item
+                v-if="
+                  props.row.status.search('总结') != -1 &&
+                  props.row.status.search('待审核') == -1 &&
+                  props.row.type == '1'
+                "
+                label="总结"
+              >
+                <template slot-scope="scope">
+                  <el-upload
+                    class="upload"
+                    action="/api/file/upload"
+                    :headers="headers"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :before-remove="beforeRemove"
+                    :on-success="uploadSummary"
+                    multiple
+                    accept=".pdf"
+                    :limit="1"
+                    :on-exceed="handleExceed"
+                    :file-list="fileList"
+                  >
+                    <el-button size="small" type="primary">上传总结</el-button>
+                  </el-upload>
+                </template>
+              </el-form-item>
+
+              <el-form-item
+                v-if="
+                  props.row.status.search('待提交') != -1 &&
+                  props.row.status.search('跟踪') == -1 &&
+                  props.row.type == '1'
+                "
+                label=""
+              >
+                <el-button
+                  size="medium"
+                  type="success"
+                  @click="projectProcessManagement(props.row.id)"
+                  >确认上传</el-button
+                >
+              </el-form-item>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
               <el-form-item
                 v-if="props.row.status == '跟踪情况表待提交'"
@@ -329,6 +422,43 @@
                   >
                 </template>
               </el-form-item>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </el-form>
           </template>
         </el-table-column>
