@@ -13,14 +13,17 @@
               <span>{{ props.row.projectType }}</span>
             </el-form-item>
             <el-form-item label="研究方向">
-              <span>{{ props.row.direction }}</span> </el-form-item
-            ><br />
+              <span>{{ props.row.direction }}</span>
+            </el-form-item>
+            <br />
             <el-form-item label="项目摘要">
-              <span>{{ props.row.projectAbstract }}</span> </el-form-item
-            ><br />
+              <span>{{ props.row.projectAbstract }}</span>
+            </el-form-item>
+            <br />
             <el-form-item label="项目单位">
-              <span>{{ props.row.institution }}</span> </el-form-item
-            ><br />
+              <span>{{ props.row.institution }}</span>
+            </el-form-item>
+            <br />
             <el-form-item label="学院秘书经办人">
               <span>{{ props.row.secretaryAgent }}</span>
             </el-form-item>
@@ -31,14 +34,16 @@
               <span>{{ props.row.chairmanAgent }}</span>
             </el-form-item>
             <el-form-item label="委员经办人">
-              <span>{{ props.row.memberAgent }}</span> </el-form-item
-            ><br />
+              <span>{{ props.row.memberAgent }}</span>
+            </el-form-item>
+            <br />
             <el-form-item label="预定的起止时间">
               <span>{{ props.row.scheduleTime }}</span>
             </el-form-item>
             <el-form-item label="申请创建时间">
-              <span>{{ props.row.creationTime }}</span> </el-form-item
-            ><br />
+              <span>{{ props.row.creationTime }}</span>
+            </el-form-item>
+            <br />
             <el-form-item label="申请同意时间">
               <span>{{ props.row.beginTime }}</span>
             </el-form-item>
@@ -46,8 +51,9 @@
               <span>{{ props.row.executionTime }}</span>
             </el-form-item>
             <el-form-item label="结束时间">
-              <span>{{ props.row.endTime }}</span> </el-form-item
-            ><br />
+              <span>{{ props.row.endTime }}</span>
+            </el-form-item>
+            <br />
             <el-form-item label="状态">
               <span>{{ props.row.status }}</span>
             </el-form-item>
@@ -59,8 +65,7 @@
                 placeholder="若批准则不需要输入"
                 v-model="textarea"
                 @input="change($event)"
-              >
-              </el-input>
+              ></el-input>
             </el-form-item>
             <br />
             <el-form-item label="附件">
@@ -71,32 +76,21 @@
                   size="mini"
                   type="primary"
                   @click="download(props.row.applicationFile)"
-                  >下载附件</el-button
-                >
+                >下载附件</el-button>
+                <el-button
+                  size="mini"
+                  type="primary"
+                  @click="download(props.row.applicationPdf)"
+                >下载PDF</el-button>
               </template>
             </el-form-item>
             <br />
-            <el-form-item label=""
-              ><!--按钮，无名称-->
+            <el-form-item label>
+              <!--按钮，无名称-->
               <template slot-scope="scope">
-                <el-button
-                  size="mini"
-                  type="success"
-                  @click="approval(props.row, 1)"
-                  >批准</el-button
-                >
-                <el-button
-                  size="mini"
-                  type="warning"
-                  @click="approval(props.row, 0)"
-                  >修改</el-button
-                >
-                <el-button
-                  size="mini"
-                  type="danger"
-                  @click="approval(props.row, -1)"
-                  >驳回</el-button
-                >
+                <el-button size="mini" type="success" @click="approval(props.row, 1)">批准</el-button>
+                <el-button size="mini" type="warning" @click="approval(props.row, 0)">修改</el-button>
+                <el-button size="mini" type="danger" @click="approval(props.row, -1)">驳回</el-button>
               </template>
             </el-form-item>
           </el-form>
@@ -104,31 +98,15 @@
       </el-table-column>
 
       <el-table-column width="100" prop="id" label="项目编号"></el-table-column>
-      <el-table-column
-        width="200"
-        prop="name"
-        label="项目名称"
-      ></el-table-column>
-      <el-table-column
-        width="200"
-        prop="userId"
-        label="用户Id"
-      ></el-table-column>
-      <el-table-column
-        width="250"
-        prop="creationTime"
-        label="创建时间"
-      ></el-table-column>
+      <el-table-column width="200" prop="name" label="项目名称"></el-table-column>
+      <el-table-column width="200" prop="userId" label="用户Id"></el-table-column>
+      <el-table-column width="250" prop="creationTime" label="创建时间"></el-table-column>
       <el-table-column width="200" prop="type" label="类型"></el-table-column>
       <el-table-column width="200" prop="status" label="状态"></el-table-column>
       <el-table-column width="150" fixed="right" label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary" @click="expand(scope.row)"
-            >展开</el-button
-          >
-          <el-button size="mini" type="info" @click="contract(scope.row)"
-            >收起</el-button
-          >
+          <el-button size="mini" type="primary" @click="expand(scope.row)">展开</el-button>
+          <el-button size="mini" type="info" @click="contract(scope.row)">收起</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -137,42 +115,42 @@
 
 <script>
 import axios from "axios";
-import {Download} from "@/components/commonScript.js";
+import { Download } from "@/components/commonScript.js";
 export default {
   name: "secretary_approve",
   data() {
     return {
       information: "",
-      textarea: "",
+      textarea: ""
     };
   },
   mounted() {
     this.load();
   },
   methods: {
-    approval: function (row, choice) {
+    approval: function(row, choice) {
       axios({
         method: "post",
         url: "/secretary/approval",
         data: {
           applicationId: row.id,
           rejectReason: this.textarea,
-          state: choice,
-        },
+          state: choice
+        }
       })
-        .then((res) => {
+        .then(res => {
           if (res.data.code === 200) {
             this.$alert("项目编号为" + row.id + "的申请已审核", "审核成功", {
-              confirmButtonText: "确定",
+              confirmButtonText: "确定"
             });
             this.load();
           } else alert(res.data.code);
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
     },
-    download: function (url) {
+    download: function(url) {
       Download(url);
     },
     change(event) {
@@ -181,16 +159,16 @@ export default {
     contract(row) {
       this.$refs.multipleTable.toggleRowExpansion(row, false);
     },
-    print: function (sth) {
+    print: function(sth) {
       console.log(sth);
     },
-    expand: function (row) {
+    expand: function(row) {
       axios({
         method: "get",
         url: "/user/applicationInfo?applicationId=" + row.id,
-        data: {},
+        data: {}
       })
-        .then((res) => {
+        .then(res => {
           if (res.data.code === 200) {
             row.leaderAgent = res.data.data.leaderAgent;
             row.institution = res.data.data.institution;
@@ -208,30 +186,31 @@ export default {
             row.fundingSource = res.data.data.fundingSource;
             row.projectAbstract = res.data.data.projectAbstract;
             row.applicationFile = res.data.data.applicationFile;
+            row.applicationPdf = res.data.data.applicationPdf;
             row.id = res.data.data.id;
             this.$refs.multipleTable.toggleRowExpansion(row, true);
           } else alert(res.data.code);
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
     },
-    load: function () {
+    load: function() {
       axios({
         url: "/secretary/auditSet",
-        method: "get",
+        method: "get"
       })
-        .then((res) => {
+        .then(res => {
           if (res.data.code === 200) {
             this.information = res.data.data;
           } else this.information = res.data.code;
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
     },
-    test_post() {},
-  },
+    test_post() {}
+  }
 };
 </script>
 

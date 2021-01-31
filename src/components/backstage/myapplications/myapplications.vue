@@ -14,14 +14,17 @@
                 <span>{{ props.row.projectType }}</span>
               </el-form-item>
               <el-form-item label="研究方向">
-                <span>{{ props.row.direction }}</span> </el-form-item
-              ><br />
+                <span>{{ props.row.direction }}</span>
+              </el-form-item>
+              <br />
               <el-form-item label="项目摘要">
-                <span>{{ props.row.projectAbstract }}</span> </el-form-item
-              ><br />
+                <span>{{ props.row.projectAbstract }}</span>
+              </el-form-item>
+              <br />
               <el-form-item label="项目单位">
-                <span>{{ props.row.institution }}</span> </el-form-item
-              ><br />
+                <span>{{ props.row.institution }}</span>
+              </el-form-item>
+              <br />
               <el-form-item label="学院秘书经办人">
                 <span>{{ props.row.secretaryAgent }}</span>
               </el-form-item>
@@ -32,17 +35,20 @@
                 <span>{{ props.row.chairmanAgent }}</span>
               </el-form-item>
               <el-form-item label="委员经办人">
-                <span>{{ props.row.memberAgent }}</span> </el-form-item
-              ><br />
+                <span>{{ props.row.memberAgent }}</span>
+              </el-form-item>
+              <br />
               <el-form-item label="预定的起止时间">
                 <span>{{ props.row.scheduleTime }}</span>
               </el-form-item>
               <el-form-item label="申请创建时间">
-                <span>{{ props.row.creationTime }}</span> </el-form-item
-              ><br />
+                <span>{{ props.row.creationTime }}</span>
+              </el-form-item>
+              <br />
               <el-form-item label="申请同意时间">
-                <span>{{ props.row.beginTime }}</span> </el-form-item
-              ><!--
+                <span>{{ props.row.beginTime }}</span>
+              </el-form-item>
+              <!--
               <el-form-item label="执行期">
                 <span>{{ props.row.executionTime }}</span>
               </el-form-item>-->
@@ -65,29 +71,23 @@
                   size="mini"
                   type="primary"
                   @click="download(props.row.applicationFile)"
-                  >下载附件</el-button
-                >
+                >下载附件</el-button>
+                <el-button
+                  size="mini"
+                  type="primary"
+                  @click="download(props.row.applicationPdf)"
+                >下载PDF</el-button>
               </el-form-item>
               <br />
               <el-form-item
                 v-if="
                   props.row.status == '未提交' || props.row.status == '驳回修改'
                 "
-                label=""
+                label
               >
                 <template slot-scope="scope">
-                  <el-button
-                    size="mini"
-                    type="success"
-                    @click="confirmSubmit(props.row.id)"
-                    >提交</el-button
-                  >
-                  <el-button
-                    size="mini"
-                    type="danger"
-                    @click="confirmDelete(props.row.id)"
-                    >删除</el-button
-                  >
+                  <el-button size="mini" type="success" @click="confirmSubmit(props.row.id)">提交</el-button>
+                  <el-button size="mini" type="danger" @click="confirmDelete(props.row.id)">删除</el-button>
                   <el-button
                     size="mini"
                     type="warning"
@@ -96,40 +96,24 @@
                       updateId = props.row.id;
                       getProjectInfo(props.row.id);
                     "
-                    >修改</el-button
-                  >
+                  >修改</el-button>
                 </template>
               </el-form-item>
               <br />
-              <el-form-item
-                v-if="props.row.status == '确认项目状态'"
-                label="项目状态确认"
-              >
-                <el-select
-                  size="mini"
-                  v-model="value"
-                  filterable
-                  placeholder="确认项目状态"
-                >
+              <el-form-item v-if="props.row.status == '确认项目状态'" label="项目状态确认">
+                <el-select size="mini" v-model="value" filterable placeholder="确认项目状态">
                   <el-option
                     v-for="item in options"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value"
-                  >
-                  </el-option>
+                  ></el-option>
                 </el-select>
-                <el-button
-                  size="mini"
-                  type="primary"
-                  @click="confirmProject(props.row.id)"
-                  >确认项目状态</el-button
-                >
+                <el-button size="mini" type="primary" @click="confirmProject(props.row.id)">确认项目状态</el-button>
               </el-form-item>
 
               <el-form-item
                 v-if="
-                  props.row.status == '执行情况表待提交' &&
                   props.row.type == '2'
                 "
                 label="执行情况表"
@@ -171,8 +155,7 @@
                     size="medium"
                     type="success"
                     @click="othersProcessManagement(props.row.id)"
-                    >确认上传</el-button
-                  >
+                  >确认上传</el-button>
                 </template>
               </el-form-item>
 
@@ -205,8 +188,7 @@
                     size="medium"
                     type="success"
                     @click="articleProcessManagement(props.row.id)"
-                    >确认上传</el-button
-                  >
+                  >确认上传</el-button>
                 </template>
               </el-form-item>
 
@@ -232,9 +214,7 @@
                     :on-exceed="handleExceed"
                     :file-list="fileList"
                   >
-                    <el-button size="small" type="primary"
-                      >上传执行情况表</el-button
-                    >
+                    <el-button size="small" type="primary">上传执行情况表</el-button>
                   </el-upload>
                   <el-upload
                     class="upload"
@@ -256,62 +236,63 @@
                     size="medium"
                     type="success"
                     @click="projectProcessManagement(props.row.id)"
-                    >确认上传</el-button
+                  >确认上传</el-button>
+                </template>
+              </el-form-item>
+
+              <el-form-item
+                v-if="
+                  props.row.status == '跟踪情况表待提交' 
+                "
+                label="跟踪情况表"
+              >
+                <template slot-scope="scope">
+                  <el-upload
+                    class="upload"
+                    action="/api/file/upload"
+                    :headers="headers"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :before-remove="beforeRemove"
+                    :on-success="uploadTrackFile"
+                    multiple
+                    accept=".pdf"
+                    :limit="1"
+                    :on-exceed="handleExceed"
+                    :file-list="fileList"
                   >
+                    <el-button size="small" type="primary">上传跟踪情况表</el-button>
+                    <div slot="tip" class="el-upload__tip">只能上传pdf</div>
+                  </el-upload>
+                  <el-button
+                    size="medium"
+                    type="success"
+                    @click="trackManagement(props.row.id)"
+                  >确认上传</el-button>
                 </template>
               </el-form-item>
             </el-form>
           </template>
         </el-table-column>
 
-        <el-table-column
-          width="125"
-          prop="id"
-          label="项目编号"
-        ></el-table-column>
+        <el-table-column width="125" prop="id" label="项目编号"></el-table-column>
         <!--<el-table-column width="200" prop="ordernum" label="ordernum"></el-table-column>-->
-        <el-table-column
-          width="400"
-          prop="name"
-          label="项目名称"
-        ></el-table-column>
+        <el-table-column width="400" prop="name" label="项目名称"></el-table-column>
         <!--<el-table-column width="200" prop="userId" label="用户Id"></el-table-column>-->
-        <el-table-column
-          width="200"
-          prop="creationTime"
-          label="创建时间"
-        ></el-table-column>
-        <el-table-column
-          width="200"
-          prop="beginTime"
-          label="开始时间"
-        ></el-table-column>
+        <el-table-column width="200" prop="creationTime" label="创建时间"></el-table-column>
+        <el-table-column width="200" prop="beginTime" label="开始时间"></el-table-column>
         <!--<el-table-column width="75" prop="type" label="类型"></el-table-column>-->
-        <el-table-column
-          width="175"
-          prop="status"
-          label="状态"
-          fixed="right"
-        ></el-table-column>
+        <el-table-column width="175" prop="status" label="状态" fixed="right"></el-table-column>
         <el-table-column width="150" fixed="right" label="操作">
           <template slot-scope="scope">
-            <el-button size="mini" type="primary" @click="expand(scope.row)"
-              >展开</el-button
-            >
-            <el-button size="mini" type="info" @click="contract(scope.row)"
-              >收起</el-button
-            >
+            <el-button size="mini" type="primary" @click="expand(scope.row)">展开</el-button>
+            <el-button size="mini" type="info" @click="contract(scope.row)">收起</el-button>
           </template>
         </el-table-column>
       </el-table>
     </template>
     <!--临时解决措施-->
-    <el-dialog
-      title="修改项目信息"
-      :visible.sync="updateProjectDialogVisible"
-      fullscreen
-      append-to-body
-    >
+    <el-dialog title="修改项目信息" :visible.sync="updateProjectDialogVisible" fullscreen append-to-body>
       <div>
         <el-upload
           class="upload-demo"
@@ -327,9 +308,7 @@
           :file-list="fileList"
         >
           <el-button size="small" type="primary">点击上传</el-button>
-          <div slot="tip" class="el-upload__tip">
-            只能上传rar,zip,7z格式的文件,若无修改不需要点击上传
-          </div>
+          <div slot="tip" class="el-upload__tip">只能上传rar,zip,7z格式的文件,若无修改不需要点击上传</div>
         </el-upload>
         <el-form ref="form" :model="form">
           <el-form-item
@@ -364,9 +343,7 @@
                 value-format="yyyy-MM"
               ></el-date-picker>
             </el-col>
-            <el-col class="line" :span="2" id="apply_program_timeCol01"
-              >-</el-col
-            >
+            <el-col class="line" :span="2" id="apply_program_timeCol01">-</el-col>
             <el-col :span="8">
               <el-date-picker
                 placeholder="选择日期"
@@ -380,26 +357,10 @@
           </el-form-item>
           <el-form-item label="项目类别" label-width="10%" id="el-form-item01">
             <el-radio-group v-model="watch_project_type">
-              <el-radio
-                label="A.新药物临床实验"
-                class="apply_program_programClass"
-                style="height: 20px"
-              ></el-radio>
-              <el-radio
-                label="B.新器械临床实验"
-                class="apply_program_programClass"
-                style="height: 20px"
-              ></el-radio>
-              <el-radio
-                label="C.新技术应用"
-                class="apply_program_programClass"
-                style="height: 20px"
-              ></el-radio>
-              <el-radio
-                label="D.人体标本收集"
-                class="apply_program_programClass"
-                style="height: 20px"
-              ></el-radio>
+              <el-radio label="A.新药物临床实验" class="apply_program_programClass" style="height: 20px"></el-radio>
+              <el-radio label="B.新器械临床实验" class="apply_program_programClass" style="height: 20px"></el-radio>
+              <el-radio label="C.新技术应用" class="apply_program_programClass" style="height: 20px"></el-radio>
+              <el-radio label="D.人体标本收集" class="apply_program_programClass" style="height: 20px"></el-radio>
               <br />
               <el-radio
                 label="E.其他（请注明）"
@@ -502,15 +463,10 @@
             class="apply_program_input01"
             id="apply_program_project_abstract"
           >
-            <el-input
-              type="textarea"
-              v-model="form.project_abstract"
-            ></el-input>
+            <el-input type="textarea" v-model="form.project_abstract"></el-input>
           </el-form-item>
         </el-form>
-        <el-button type="primary" id="apply_submit" @click="Update"
-          >修改完成</el-button
-        >
+        <el-button type="primary" id="apply_submit" @click="Update">修改完成</el-button>
       </div>
     </el-dialog>
   </div>
@@ -520,6 +476,7 @@
 <script>
 import axios from "axios";
 import { Download } from "@/components/commonScript.js";
+// import func from "../../../vue-temp/vue-editor-bridge";
 export default {
   name: "myapplications",
   watch: {
@@ -550,17 +507,17 @@ export default {
           this.disable_type_input = false;
           break;
       }
-    },
+    }
   },
   computed: {
     headers() {
       return {
-        Authorization: localStorage.getItem("token"),
+        Authorization: localStorage.getItem("token")
       };
     },
     Watch_project_type() {
       return this.watch_project_type;
-    },
+    }
   },
   data() {
     return {
@@ -569,16 +526,16 @@ export default {
       options: [
         {
           value: 0,
-          label: "暂未立项",
+          label: "暂未立项"
         },
         {
           value: 1,
-          label: "未获批",
+          label: "未获批"
         },
         {
           value: 2,
-          label: "获批资助",
-        },
+          label: "获批资助"
+        }
       ],
       updateId: "",
       updateProjectDialogVisible: false,
@@ -601,90 +558,126 @@ export default {
         temp: [],
         project_type: "",
         desc: "",
-        application_file: "",
+        application_file: ""
       },
       ExecuteInfo: "",
       summary: "",
+      trackFile: ""
     };
   },
   mounted() {
     this.load();
   },
   methods: {
-    othersProcessManagement: function(id){
-      if (this.ExecuteInfo == "") {
-        this.$alert("您忘记上传必要的文件了！", "请上传执行情况表", {
-          confirmButtonText: "确定",
-        });
-        return;
-      }
+    othersProcessManagement: function(id) {
+      // if (this.ExecuteInfo == "") {
+      //   this.$alert("您忘记上传必要的文件了！", "请上传执行情况表", {
+      //     confirmButtonText: "确定"
+      //   });
+      //   return;
+      // }
       axios({
         method: "post",
         url: "/user/othersProcessManagement",
         data: {
           executeInfo: this.ExecuteInfo,
           summary: this.summary,
-          id: id,
-        },
+          id: id
+        }
       })
-        .then((res) => {
+        .then(res => {
           if (res.data.code === 200) {
             this.$alert("您已成功上传文件", "上传成功", {
-              confirmButtonText: "确定",
+              confirmButtonText: "确定"
             });
           } else
             this.$alert("错误信息：" + res.data.message, "上传失败", {
-              confirmButtonText: "确定",
+              confirmButtonText: "确定"
             });
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
       this.ExecuteInfo = "";
       this.summary = "";
       this.load();
     },
-    uploadSummary: function (response, file, fileList) {
+    uploadTrackFile: function(response, file, fileList) {
+      //console.log(response.data);
+      this.trackFile = response.data;
+    },
+    uploadSummary: function(response, file, fileList) {
       //console.log(response.data);
       this.summary = response.data;
     },
-    projectProcessManagement: function (id) {
-      if (this.ExecuteInfo == "" || this.summary == "") {
-        this.$alert("您忘记上传文件了！", "请上传文件", {
-          confirmButtonText: "确定",
-        });
-        return;
-      }
+    projectProcessManagement: function(id) {
+      // if (this.ExecuteInfo == "" || this.summary == "") {
+      //   this.$alert("您忘记上传文件了！", "请上传文件", {
+      //     confirmButtonText: "确定"
+      //   });
+      //   return;
+      // }
       axios({
         method: "post",
         url: "/user/projectProcessManagement",
         data: {
           executeInfo: this.ExecuteInfo,
           summary: this.summary,
-          id: id,
-        },
+          id: id
+        }
       })
-        .then((res) => {
+        .then(res => {
           if (res.data.code === 200) {
             this.$alert("您已成功上传文件", "上传成功", {
-              confirmButtonText: "确定",
+              confirmButtonText: "确定"
             });
           } else
             this.$alert("错误信息：" + res.data.message, "上传失败", {
-              confirmButtonText: "确定",
+              confirmButtonText: "确定"
             });
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
       this.ExecuteInfo = "";
       this.summary = "";
       this.load();
     },
-    articleProcessManagement: function (id) {
+    trackManagement: function(id) {
+      // if (this.trackFile == "") {
+      //   this.$alert("您忘记上传文件了！", "请上传文件", {
+      //     confirmButtonText: "确定"
+      //   });
+      //   return;
+      // }
+      axios({
+        method: "post",
+        url: "/user/trackManagement",
+        data: {
+          trackFile: this.trackFile,
+          id: id
+        }
+      })
+        .then(res => {
+          if (res.data.code === 200) {
+            this.$alert("您已成功上传文件", "上传成功", {
+              confirmButtonText: "确定"
+            });
+          } else
+            this.$alert("错误信息：" + res.data.message, "上传失败", {
+              confirmButtonText: "确定"
+            });
+        })
+        .catch(err => {
+          alert(err);
+        });
+      this.TrackFile = "";
+      this.load();
+    },
+    articleProcessManagement: function(id) {
       if (this.ExecuteInfo == "") {
         this.$alert("您忘记上传文件了！", "请上传文件", {
-          confirmButtonText: "确定",
+          confirmButtonText: "确定"
         });
         return;
       }
@@ -693,36 +686,36 @@ export default {
         url: "/user/articleProcessManagement",
         data: {
           executeInfo: this.ExecuteInfo,
-          id: id,
-        },
+          id: id
+        }
       })
-        .then((res) => {
+        .then(res => {
           if (res.data.code === 200) {
             this.$alert("您已成功上传执行情况表", "上传成功", {
-              confirmButtonText: "确定",
+              confirmButtonText: "确定"
             });
           } else
             this.$alert("错误信息：" + res.data.message, "上传失败", {
-              confirmButtonText: "确定",
+              confirmButtonText: "确定"
             });
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
       this.ExecuteInfo = "";
       this.load();
     },
-    uploadExecuteInfo: function (response, file, fileList) {
+    uploadExecuteInfo: function(response, file, fileList) {
       //console.log(response.data);
       this.ExecuteInfo = response.data;
     },
-    getProjectInfo: function (id) {
+    getProjectInfo: function(id) {
       axios({
         method: "get",
         url: "/user/applicationInfo?applicationId=" + id,
-        data: {},
+        data: {}
       })
-        .then((res) => {
+        .then(res => {
           if (res.data.code === 200) {
             this.form.institution = res.data.data.institution;
             this.form.name = res.data.data.name;
@@ -731,17 +724,17 @@ export default {
             this.form.application_file = res.data.data.applicationFile;
           } else alert(res.data.code);
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
     },
-    Update: function () {
+    Update: function() {
       if (this.form.application_file == "") {
         this.$alert("您忘记上传文件了！", "请上传文件", {
           confirmButtonText: "确定",
-          callback: (action) => {
+          callback: action => {
             return;
-          },
+          }
         });
         return;
       }
@@ -763,13 +756,13 @@ export default {
           project_direction: this.form.project_direction,
           project_type: this.form.project_type,
           schedule_time: this.form.time1 + "-" + this.form.time2,
-          user_id: parseInt(localStorage.getItem("userId")),
-        },
+          user_id: parseInt(localStorage.getItem("userId"))
+        }
       })
-        .then((res) => {
+        .then(res => {
           if (res.data.code == 200) {
             this.$alert("请前往“我的申请”查看", "上传成功", {
-              confirmButtonText: "确定",
+              confirmButtonText: "确定"
             });
             this.updateProjectDialogVisible = false;
             this.load();
@@ -777,11 +770,11 @@ export default {
             alert(res.data.message);
           }
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
     },
-    fundingSource: function (choice) {
+    fundingSource: function(choice) {
       this.form.type = choice;
     },
     change(event) {
@@ -800,136 +793,136 @@ export default {
     },
     handleExceed(files, fileList) {
       this.$message.warning(
-        `当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
-          files.length + fileList.length
-        } 个文件`
+        `当前限制选择 1 个文件，本次选择了 ${
+          files.length
+        } 个文件，共选择了 ${files.length + fileList.length} 个文件`
       );
     },
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
-    confirmProject: function (id) {
+    confirmProject: function(id) {
       axios({
         method: "post",
         url: "/user/confirm",
         data: {
           applicationId: id,
-          state: this.value,
-        },
+          state: this.value
+        }
       })
-        .then((res) => {
+        .then(res => {
           if (res.data.code === 200) {
             this.$alert("成功确认项目状态", "成功", {
               confirmButtonText: "确定",
-              type: "success",
+              type: "success"
             });
           } else {
             this.$alert(res.data.message, "失败", {
               confirmButtonText: "确定",
-              type: "info",
+              type: "info"
             });
           }
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
       this.load();
     },
-    submitApplication: function (id) {
+    submitApplication: function(id) {
       axios({
         method: "get",
         url: "/user/submitApplicationDemo?applicationId=" + id,
-        data: {},
+        data: {}
       })
-        .then((res) => {
+        .then(res => {
           if (res.data.code === 200) {
             this.$alert("项目编号为" + id + "的申请已提交", "提交成功", {
-              confirmButtonText: "确定",
+              confirmButtonText: "确定"
             });
           } else
             this.$alert("项目编号为" + id + res.data.message, "提交失败", {
               confirmButtonText: "确认",
-              type: "info",
+              type: "info"
             });
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
       this.load();
     },
-    confirmSubmit: function (id) {
+    confirmSubmit: function(id) {
       this.$confirm("您确定要提交项目编号为" + id + "的项目吗？", "确认信息", {
         distinguishCancelAndClose: true,
         type: "success",
         confirmButtonText: "确认",
-        cancelButtonText: "放弃",
+        cancelButtonText: "放弃"
       })
         .then(() => {
           this.submitApplication(id);
         })
-        .catch((action) => {
+        .catch(action => {
           this.$message({
             type: "info",
-            message: "放弃申请",
+            message: "放弃申请"
           });
         });
     },
-    confirmDelete: function (id) {
+    confirmDelete: function(id) {
       this.$confirm("您确定要删除项目编号为" + id + "的项目吗？", "确认信息", {
         distinguishCancelAndClose: true,
         type: "warning",
         confirmButtonText: "确认",
-        cancelButtonText: "放弃",
+        cancelButtonText: "放弃"
       })
-        .then((res) => {
+        .then(res => {
           this.$message({
             type: "info",
-            message: "进行删除",
+            message: "进行删除"
           });
           this.deleteApplication(id);
         })
-        .catch((action) => {
+        .catch(action => {
           this.$message({
             type: "info",
-            message: "放弃删除",
+            message: "放弃删除"
           });
         });
     },
-    deleteApplication: function (id) {
+    deleteApplication: function(id) {
       axios({
         method: "get",
         url: "/user/deleteApplicationDemo?applicationId=" + id,
-        data: {},
+        data: {}
       })
-        .then((res) => {
+        .then(res => {
           if (res.data.code === 200) {
             this.$alert("项目编号为" + id + "的申请已被删除", "删除成功", {
-              confirmButtonText: "确定",
+              confirmButtonText: "确定"
             });
           } else
             this.$alert("项目编号为" + id + res.data.message, "删除失败", {
               confirmButtonText: "确认",
-              type: "info",
+              type: "info"
             });
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
       this.load();
     },
-    download: function (url) {
+    download: function(url) {
       Download(url);
     },
-    contract: function (row) {
+    contract: function(row) {
       this.$refs.multipleTable.toggleRowExpansion(row, false);
     },
-    expand: function (row) {
+    expand: function(row) {
       axios({
         method: "get",
         url: "/user/applicationInfo?applicationId=" + row.id,
-        data: {},
+        data: {}
       })
-        .then((res) => {
+        .then(res => {
           if (res.data.code === 200) {
             row.leaderAgent = res.data.data.leaderAgent;
             row.institution = res.data.data.institution;
@@ -948,28 +941,31 @@ export default {
             row.projectAbstract = res.data.data.projectAbstract;
             row.applicationFile = res.data.data.applicationFile;
             row.rejectReason = res.data.data.rejectReason;
+            row.applicationPdf = res.data.data.applicationPdf;
             this.$refs.multipleTable.toggleRowExpansion(row, true);
           } else alert(res.data.code);
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
     },
-    load: function () {
-      axios({
-        url: "/user/applicationList",
-        method: "get",
-      })
-        .then((res) => {
-          if (res.data.code === 200) {
-            this.projectList = res.data.data;
-          } else this.projectList = res.data.code;
+    load: function() {
+      (this.ExecuteInfo = ""),
+        (this.summary = ""),
+        axios({
+          url: "/user/applicationList",
+          method: "get"
         })
-        .catch((err) => {
-          alert(err);
-        });
-    },
-  },
+          .then(res => {
+            if (res.data.code === 200) {
+              this.projectList = res.data.data;
+            } else this.projectList = res.data.code;
+          })
+          .catch(err => {
+            alert(err);
+          });
+    }
+  }
 };
 </script>
 <style scoped>

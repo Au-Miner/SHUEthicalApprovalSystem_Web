@@ -14,13 +14,16 @@
             </el-form-item>
             <el-form-item label="研究方向">
               <span>{{ props.row.direction }}</span>
-            </el-form-item><br />
+            </el-form-item>
+            <br />
             <el-form-item label="项目摘要">
               <span>{{ props.row.projectAbstract }}</span>
-            </el-form-item><br />
+            </el-form-item>
+            <br />
             <el-form-item label="项目单位">
               <span>{{ props.row.institution }}</span>
-            </el-form-item><br />
+            </el-form-item>
+            <br />
             <el-form-item label="学院秘书经办人">
               <span>{{ props.row.secretaryAgent }}</span>
             </el-form-item>
@@ -32,13 +35,15 @@
             </el-form-item>
             <el-form-item label="委员经办人">
               <span>{{ props.row.memberAgent }}</span>
-            </el-form-item><br />
+            </el-form-item>
+            <br />
             <el-form-item label="预定的起止时间">
               <span>{{ props.row.scheduleTime }}</span>
             </el-form-item>
             <el-form-item label="申请创建时间">
               <span>{{ props.row.creationTime }}</span>
-            </el-form-item><br />
+            </el-form-item>
+            <br />
             <el-form-item label="申请同意时间">
               <span>{{ props.row.beginTime }}</span>
             </el-form-item>
@@ -47,7 +52,8 @@
             </el-form-item>
             <el-form-item label="结束时间">
               <span>{{ props.row.endTime }}</span>
-            </el-form-item><br />
+            </el-form-item>
+            <br />
             <el-form-item label="状态">
               <span>{{ props.row.status }}</span>
             </el-form-item>
@@ -65,7 +71,17 @@
             <el-form-item label="附件">
               <!--按钮，无名称-->
               <template slot-scope="scope">
-                <el-button :disabled="props.row.applicationFile==''" size="mini" type="primary" @click="download(props.row.applicationFile)">下载附件</el-button>
+                <el-button
+                  :disabled="props.row.applicationFile==''"
+                  size="mini"
+                  type="primary"
+                  @click="download(props.row.applicationFile)"
+                >下载附件</el-button>
+                                <el-button
+                  size="mini"
+                  type="primary"
+                  @click="download(props.row.applicationPdf)"
+                >下载PDF</el-button>
               </template>
             </el-form-item>
             <br />
@@ -99,7 +115,7 @@
 
 <script>
 import axios from "axios";
-import {Download} from "@/components/commonScript.js";
+import { Download } from "@/components/commonScript.js";
 export default {
   name: "leader_approve",
   data() {
@@ -112,30 +128,30 @@ export default {
     this.load();
   },
   methods: {
-    approval: function (row, choice) {
+    approval: function(row, choice) {
       axios({
         method: "post",
         url: "/leader/approval",
         data: {
           applicationId: row.id,
           rejectReason: this.textarea,
-          state: choice,
-        },
+          state: choice
+        }
       })
-        .then((res) => {
+        .then(res => {
           if (res.data.code === 200) {
             this.$alert("项目编号为" + row.id + "的申请已审核", "审核成功", {
-              confirmButtonText: "确定",
+              confirmButtonText: "确定"
             });
             this.load();
           } else alert(res.data.code);
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
     },
-    download: function (url) {
-      Download(url)
+    download: function(url) {
+      Download(url);
     },
     change(event) {
       this.$forceUpdate();
@@ -170,11 +186,12 @@ export default {
             row.fundingSource = res.data.data.fundingSource;
             row.projectAbstract = res.data.data.projectAbstract;
             row.applicationFile = res.data.data.applicationFile;
+            row.applicationPdf = res.data.data.applicationPdf;
             row.id = res.data.data.id;
             this.$refs.multipleTable.toggleRowExpansion(row, true);
           } else alert(res.data.code);
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
     },
@@ -188,7 +205,7 @@ export default {
             this.information = res.data.data;
           } else this.information = res.data.code;
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
     },

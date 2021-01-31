@@ -72,10 +72,41 @@
                   @click="download(props.row.applicationFile)"
                   >下载附件</el-button
                 >
+                <el-button
+                  :disabled="props.row.applicationPdf == ''"
+                  size="mini"
+                  type="primary"
+                  @click="download(props.row.applicationPdf)"
+                  >下载PDF</el-button
+                >
+                <div v-if="props.row.status!='委员长终审'">
+                <el-button
+                  :disabled="props.row.executeInfo == ''"
+                  size="mini"
+                  type="primary"
+                  @click="download(props.row.executeInfo)"
+                  >下载执行情况表格</el-button
+                >
+                <el-button
+                  :disabled="props.row.summary == ''"
+                  size="mini"
+                  type="primary"
+                  @click="download(props.row.summary)"
+                  >下载总结</el-button
+                >
+                   <el-button
+                  :disabled="props.row.trackFile == ''"
+                  size="mini"
+                  type="primary"
+                  @click="download(props.row.trackFile)"
+                  >下载后跟踪文件</el-button
+                >
+                </div>            
               </template>
             </el-form-item>
             <br />
-            <el-form-item label="" v-if="props.row.status=='执行情况表与总结待审核'||props.row.status=='执行情况表待审核'">
+            <el-form-item label="" v-if="props.row.status=='执行情况表与总结待审核'||props.row.status=='执行情况表待审核'
+            ||props.row.status=='跟踪情况表待审核'||props.row.status=='伦理工作总结待审核'">
               <!--按钮，无名称-->
               <template slot-scope="scope">
                 <el-button
@@ -408,6 +439,10 @@ export default {
             row.fundingSource = res.data.data.fundingSource;
             row.projectAbstract = res.data.data.projectAbstract;
             row.applicationFile = res.data.data.applicationFile;
+            row.applicationPdf = res.data.data.applicationPdf;
+            row.executeInfo = res.data.data.executeInfo;
+            row.summary = res.data.data.summary;
+            row.trackFile = res.data.data.trackFile;
             row.id = res.data.data.id;
             this.$refs.multipleTable.toggleRowExpansion(row, true);
           } else alert(res.data.code);

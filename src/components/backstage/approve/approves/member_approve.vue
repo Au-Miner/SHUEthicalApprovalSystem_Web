@@ -14,13 +14,16 @@
             </el-form-item>
             <el-form-item label="研究方向">
               <span>{{ props.row.direction }}</span>
-            </el-form-item><br />
+            </el-form-item>
+            <br />
             <el-form-item label="项目摘要">
               <span>{{ props.row.projectAbstract }}</span>
-            </el-form-item><br />
+            </el-form-item>
+            <br />
             <el-form-item label="项目单位">
               <span>{{ props.row.institution }}</span>
-            </el-form-item><br />
+            </el-form-item>
+            <br />
             <el-form-item label="学院秘书经办人">
               <span>{{ props.row.secretaryAgent }}</span>
             </el-form-item>
@@ -32,13 +35,15 @@
             </el-form-item>
             <el-form-item label="委员经办人">
               <span>{{ props.row.memberAgent }}</span>
-            </el-form-item><br />
+            </el-form-item>
+            <br />
             <el-form-item label="预定的起止时间">
               <span>{{ props.row.scheduleTime }}</span>
             </el-form-item>
             <el-form-item label="申请创建时间">
               <span>{{ props.row.creationTime }}</span>
-            </el-form-item><br />
+            </el-form-item>
+            <br />
             <el-form-item label="申请同意时间">
               <span>{{ props.row.beginTime }}</span>
             </el-form-item>
@@ -47,7 +52,8 @@
             </el-form-item>
             <el-form-item label="结束时间">
               <span>{{ props.row.endTime }}</span>
-            </el-form-item><br />
+            </el-form-item>
+            <br />
             <el-form-item label="状态">
               <span>{{ props.row.status }}</span>
             </el-form-item>
@@ -65,7 +71,17 @@
             <el-form-item label="附件">
               <!--按钮，无名称-->
               <template slot-scope="scope">
-                <el-button :disabled="props.row.applicationFile==''" size="mini" type="primary" @click="download(props.row.applicationFile)">下载附件</el-button>
+                <el-button
+                  :disabled="props.row.applicationFile==''"
+                  size="mini"
+                  type="primary"
+                  @click="download(props.row.applicationFile)"
+                >下载附件</el-button>
+                <el-button
+                  size="mini"
+                  type="primary"
+                  @click="download(props.row.applicationPdf)"
+                >下载PDF</el-button>
               </template>
             </el-form-item>
             <br />
@@ -73,21 +89,21 @@
               <!--按钮，无名称-->
               <template slot-scope="scope">
                 <el-upload
-                    class="upload"
-                    action="/api/file/upload"
-                    :headers="headers"
-                    :on-preview="handlePreview"
-                    :on-remove="handleRemove"
-                    :before-remove="beforeRemove"
-                    :on-success="uploadConsent"
-                    multiple
-                    accept=".pdf"
-                    :limit="1"
-                    :on-exceed="handleExceed"
-                    :file-list="fileList"
-                  >
-                    <el-button size="small" type="primary">上传同意书</el-button>
-                  </el-upload>
+                  class="upload"
+                  action="/api/file/upload"
+                  :headers="headers"
+                  :on-preview="handlePreview"
+                  :on-remove="handleRemove"
+                  :before-remove="beforeRemove"
+                  :on-success="uploadConsent"
+                  multiple
+                  accept=".pdf"
+                  :limit="1"
+                  :on-exceed="handleExceed"
+                  :file-list="fileList"
+                >
+                  <el-button size="small" type="primary">上传同意书</el-button>
+                </el-upload>
                 <el-button size="mini" type="success" @click="approval(props.row, 1)">批准</el-button>
                 <el-button size="mini" type="warning" @click="approval(props.row, 0)">修改</el-button>
                 <el-button size="mini" type="danger" @click="approval(props.row, -1)">驳回</el-button>
@@ -115,15 +131,14 @@
 
 <script>
 import axios from "axios";
-import {Download} from "@/components/commonScript.js";
+import { Download } from "@/components/commonScript.js";
 export default {
   name: "member_approve",
   data() {
     return {
       information: "",
       textarea: "",
-      fileUrl: "",
-
+      fileUrl: ""
     };
   },
   mounted() {
@@ -132,9 +147,9 @@ export default {
   computed: {
     headers() {
       return {
-        Authorization: localStorage.getItem("token"),
+        Authorization: localStorage.getItem("token")
       };
-    },
+    }
   },
   methods: {
     uploadConsent(response, file, fileList) {
@@ -149,15 +164,15 @@ export default {
     },
     handleExceed(files, fileList) {
       this.$message.warning(
-        `当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
-          files.length + fileList.length
-        } 个文件`
+        `当前限制选择 1 个文件，本次选择了 ${
+          files.length
+        } 个文件，共选择了 ${files.length + fileList.length} 个文件`
       );
     },
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
-    approval: function (row, choice) {
+    approval: function(row, choice) {
       axios({
         method: "post",
         url: "/member/approval",
@@ -165,26 +180,27 @@ export default {
           applicationId: row.id,
           rejectReason: this.textarea,
           state: choice,
-          fileUri: this.fileUrl,
-        },
+          fileUri: this.fileUrl
+        }
       })
-        .then((res) => {
+        .then(res => {
           if (res.data.code === 200) {
             this.$alert("项目编号为" + row.id + "的申请已审核", "审核成功", {
-              confirmButtonText: "确定",
+              confirmButtonText: "确定"
             });
-          } else this.$alert("错误信息："+res.data.message, "审核失败", {
-                      confirmButtonText: "确定",
-                      });
+          } else
+            this.$alert("错误信息：" + res.data.message, "审核失败", {
+              confirmButtonText: "确定"
+            });
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
-        this.load();
-        this.fileUrl='';
+      this.load();
+      this.fileUrl = "";
     },
-    download: function (url) {
-      Download(url)
+    download: function(url) {
+      Download(url);
     },
     change(event) {
       this.$forceUpdate();
@@ -214,15 +230,16 @@ export default {
             row.executionTime = res.data.data.executionTime;
             row.endTime = res.data.data.endTime;
             row.status = res.data.data.status;
-            row.projectType = res.data.data.projectType
-            row.direction = res.data.data.direction
-            row.fundingSource = res.data.data.fundingSource
-            row.projectAbstract = res.data.data.projectAbstract
+            row.projectType = res.data.data.projectType;
+            row.direction = res.data.data.direction;
+            row.fundingSource = res.data.data.fundingSource;
+            row.projectAbstract = res.data.data.projectAbstract;
             row.applicationFile = res.data.data.applicationFile;
+            row.applicationPdf = res.data.data.applicationPdf;
             this.$refs.multipleTable.toggleRowExpansion(row, true);
           } else alert(res.data.code);
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
     },
@@ -236,7 +253,7 @@ export default {
             this.information = res.data.data;
           } else this.information = res.data.code;
         })
-        .catch((err) => {
+        .catch(err => {
           alert(err);
         });
     },
