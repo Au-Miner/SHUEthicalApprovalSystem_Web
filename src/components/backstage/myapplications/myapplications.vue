@@ -750,7 +750,7 @@ export default {
         url: "/user/updateApplicationDemoForProject",
         data: {
           application_file: this.form.application_file,
-          application_type: 0,
+          application_type: 0, //项目类型可修改，待增加按钮
           email: this.form.email,
           fax: this.form.fax,
           funding_source: this.form.type,

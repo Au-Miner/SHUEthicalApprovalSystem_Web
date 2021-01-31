@@ -1,4 +1,5 @@
 import { MessageBox } from 'element-ui';
+import axios from 'axios';
 function Download(url) {
     if (url == "" || url == null) {
         MessageBox.alert("找不到文件", "下载失败", {
