@@ -75,6 +75,24 @@
               </template>
             </el-form-item>
             <br />
+            <el-form-item label="" v-if="props.row.status=='执行情况表与总结待审核'||props.row.status=='执行情况表待审核'">
+              <!--按钮，无名称-->
+              <template slot-scope="scope">
+                <el-button
+                    size="mini"
+                    type="success"
+                    @click="confirm(props.row.id, 1)"
+                    >批准</el-button
+                  >
+                <el-button
+                    size="mini"
+                    type="danger"
+                    @click="confirm(props.row.id, -1)"
+                    >驳回</el-button
+                  >
+              </template>
+            </el-form-item>
+            <br />
             <el-form-item label v-if='props.row.status=="委员长终审"'>
               <!--按钮，无名称-->
               <template slot-scope="scope">
@@ -87,13 +105,13 @@
                 <el-button
                     size="mini"
                     type="warning"
-                    @click="confirmRejct(props.row.id, 0)"
+                    @click="confirmReject(props.row.id, 0)"
                     >修改</el-button
                   >
                 <el-button
                     size="mini"
                     type="danger"
-                    @click="confirmRejct(props.row.id,-1)"
+                    @click="confirmReject(props.row.id,-1)"
                     >驳回</el-button
                   >
                 <el-dialog
@@ -206,6 +224,59 @@ export default {
     this.load();
   },
   methods: {
+    approvalTrack: function(applicationId,method){
+      if(this.textarea==''&&method==-1){this.$alert("未填写驳回原因", "失败", {
+                      confirmButtonText: "确定",
+                      });return;}
+      axios({
+                method:'post',
+                url:'/chairman/approvalTrack',
+                data:{
+                    applicationId: applicationId,
+                    rejectReason: this.textarea,
+                    state: method,
+                }
+            }).then((res)=>
+            {
+                if(res.data.code===200)
+                {
+                    this.$alert("已审核项目编号为："+applicationId+"的项目", "审核成功", {
+                      confirmButtonText: "确定",
+                      });
+                      this.load();
+                }
+                else this.$alert("错误信息："+res.data.message, "审核失败", {
+                      confirmButtonText: "确定",
+                      });
+                      this.load();
+            }).catch((err)=>{
+                alert(err);
+            })
+            this.load();
+    },
+    confirm(applicationId,method){
+      if(this.textarea==''&&method==-1){this.$alert("未填写驳回原因", "失败", {
+                      confirmButtonText: "确定",
+                      });return;}
+      this.$confirm("您确定要"+ (method==1?"批准":"驳回") +"项目：" +applicationId+"吗？", "确认信息", {
+        type: "info",
+        confirmButtonText: "确认",
+        cancelButtonText: "放弃",
+      })
+        .then((res) => {
+          this.$message({
+            type: "info",
+            message: "进行审批",
+          });
+          this.approvalTrack(applicationId,method)
+        })
+        .catch((action) => {
+          this.$message({
+            type: "info",
+            message: "放弃审批",
+          });
+        });
+    },
     reject: function(applicationId,method){
       axios({
                 method:'post',
@@ -233,7 +304,10 @@ export default {
             })
             this.load();
     },
-    confirmRejct: function(applicationId,method){
+    confirmReject: function(applicationId,method){
+      if(this.textarea==''&&method!=1){this.$alert("未填写驳回原因", "失败", {
+                      confirmButtonText: "确定",
+                      });return;}
       this.$confirm("您确定要修改/驳回项目：" +applicationId+"吗？", "确认信息", {
         type: "warning",
         confirmButtonText: "确认",
@@ -343,6 +417,7 @@ export default {
         });
     },
     load: function () {
+      this.textarea="";
       axios({
         url: "/chairman/auditSet",
         method: "get",
