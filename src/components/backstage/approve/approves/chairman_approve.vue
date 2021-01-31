@@ -75,7 +75,7 @@
               </template>
             </el-form-item>
             <br />
-            <el-form-item label>
+            <el-form-item label v-if='props.row.status=="委员长终审"'>
               <!--按钮，无名称-->
               <template slot-scope="scope">
                 <el-button
