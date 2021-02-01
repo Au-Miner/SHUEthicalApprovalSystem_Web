@@ -67,6 +67,7 @@
         :on-success="handleSuccess"
         multiple
         :limit="1"
+        accept=".rar,.zip,.7z"
         :on-exceed="handleExceed"
         :file-list="fileList"
       >
@@ -423,6 +424,7 @@ export default {
       console.log("submit!");
     },
     Submit: function () {
+      this.saveInfo();
       if(this.form.application_file==""){
         this.$alert("您忘记上传文件了！", "请上传文件", {
               confirmButtonText: "确定",
@@ -462,10 +464,9 @@ export default {
                 this.$router.replace("/backstage/myapplications").catch((err) => {err;});
               },
             });
-          } else {
-            alert(res.data.code);
-            this.saveInfo();
-          }
+          }else this.$alert("错误信息：" + res.data.message, "失败", {
+              confirmButtonText: "确定"
+            });
         })
         .catch((err) => {
           alert(err);

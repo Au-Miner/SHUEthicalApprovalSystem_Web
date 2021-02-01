@@ -79,6 +79,27 @@
                   @click="download(props.row.applicationPdf)"
                   >下载PDF</el-button
                 >
+                                <el-button
+                  :disabled="props.row.executeInfo == ''"
+                  size="mini"
+                  type="primary"
+                  @click="download(props.row.executeInfo)"
+                  >下载执行情况表格</el-button
+                >
+                <el-button
+                  :disabled="props.row.summary == ''"
+                  size="mini"
+                  type="primary"
+                  @click="download(props.row.summary)"
+                  >下载总结</el-button
+                >
+                   <el-button
+                  :disabled="props.row.trackFile == ''"
+                  size="mini"
+                  type="primary"
+                  @click="download(props.row.trackFile)"
+                  >下载后跟踪文件</el-button
+                >
               </el-form-item>
               <br />
               <el-form-item
@@ -114,7 +135,7 @@
               </el-form-item>
               <br />
               <el-form-item
-                v-if="props.row.status == '确认项目状态'"
+                v-if="props.row.status == '确认项目状态'||props.row.status == '暂未立项'"
                 label="项目状态确认"
               >
                 <el-select
@@ -245,32 +266,14 @@
                 </template>
               </el-form-item>
 
-              <!-- <el-form-item
+              <!--<el-form-item
                 v-if="
-                  props.row.status == '执行情况表与总结待提交' &&
-                  props.row.type == '1'
+                  props.row.status == '伦理工作总结待提交' &&
+                  props.row.type == '0'
                 "
-                label="执行情况表与总结"
+                label="执行情况表"
               >
                 <template slot-scope="scope">
-                  <el-upload
-                    class="upload"
-                    action="/api/file/upload"
-                    :headers="headers"
-                    :on-preview="handlePreview"
-                    :on-remove="handleRemove"
-                    :before-remove="beforeRemove"
-                    :on-success="uploadExecuteInfo"
-                    multiple
-                    accept=".pdf"
-                    :limit="1"
-                    :on-exceed="handleExceed"
-                    :file-list="fileList"
-                  >
-                    <el-button size="small" type="primary"
-                      >上传执行情况表</el-button
-                    >
-                  </el-upload>
                   <el-upload
                     class="upload"
                     action="/api/file/upload"
@@ -285,19 +288,20 @@
                     :on-exceed="handleExceed"
                     :file-list="fileList"
                   >
-                    <el-button size="small" type="primary">上传总结</el-button>
+                    <el-button size="small" type="primary"
+                      >上传总结</el-button
+                    >
+                    <div slot="tip" class="el-upload__tip">只能上传pdf</div>
                   </el-upload>
                   <el-button
                     size="medium"
                     type="success"
-                    @click="projectProcessManagement(props.row.id)"
+                    @click="articleProcessManagement(props.row.id)"
                     >确认上传</el-button
                   >
                 </template>
-              </el-form-item> -->
-
-
-
+              </el-form-item>
+-->
 
 
               <el-form-item
@@ -1185,6 +1189,10 @@ export default {
             row.applicationFile = res.data.data.applicationFile;
             row.rejectReason = res.data.data.rejectReason;
             row.applicationPdf = res.data.data.applicationPdf;
+            row.executeInfo = res.data.data.executeInfo;
+            row.summary = res.data.data.summary;
+            row.trackFile = res.data.data.trackFile;
+            row.id = res.data.data.id;
             this.$refs.multipleTable.toggleRowExpansion(row, true);
           } else alert(res.data.code);
         })
