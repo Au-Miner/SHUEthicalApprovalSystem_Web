@@ -4,7 +4,7 @@
       <el-table
         ref="multipleTable"
         :data="projectList.userApplicationList"
-        style="height:width: 95%; height: 100%"
+        style="width: 96%; height: 100%"
         id="list"
       >
         <el-table-column type="expand" width="1">
