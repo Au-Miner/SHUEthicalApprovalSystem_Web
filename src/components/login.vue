@@ -34,7 +34,7 @@ export default {
             localStorage.setItem("token", res.data.data.token);
             localStorage.setItem("userId", res.data.data.userId);
             localStorage.setItem("name", res.data.data.name);
-            localStorage.setItem("identity", res.data.data.identity);
+            localStorage.setItem("identity",JSON.stringify(res.data.data.identity));
             localStorage.setItem("department", res.data.data.department);
             this.$router.push("backstage");
           } else alert(res.data.code);

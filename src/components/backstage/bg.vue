@@ -29,17 +29,42 @@
       </el-dialog>
       <el-button size="mini" @click="logout()" type="primary" id="logout">退出登录</el-button>
     </div>
-    <div id="lightblue_sidebar">
-      <el-button @click="jmp('tutorial')" type="primary" id="tutorial">申报指南</el-button><br />
-      <el-button @mouseenter.native="show('applies')" @mouseleave.native="hide('applies')" type="primary" id="apply">申请</el-button><br />
-      <el-button @click="jmp('myapplications')" type="primary" id="myapplies">我的申请</el-button><br />
-      <el-button style="display:none;" @click="jmp('approve')" type="primary" id="approve">项目审批</el-button><br />
-      <el-button @click="jmp('appointment')" type="primary" id="appointment">委员指派</el-button>
-    </div>
-    <div id="applies">
-        <el-button @mouseenter.native="show('applies')" @mouseleave.native="hide('applies')" @click="jmp('apply_program')" @mouseleave="hide_applies()" type="primary" id="apply">项目申请</el-button><br />
-        <el-button @mouseenter.native="show('applies')" @mouseleave.native="hide('applies')" @click="jmp('apply_personal')" @mouseleave="hide_applies()" type="primary" id="apply">文章申请</el-button><br />
-        <el-button @mouseenter.native="show('applies')" @mouseleave.native="hide('applies')" @click="jmp('apply_other')" @mouseleave="hide_applies()" type="primary" id="apply">其他申请</el-button>
+    <div id="el-sidebar">
+    <el-menu
+      router
+      default-active="1"
+      class="el-menu-vertical-demo"
+      @open="handleOpen"
+      @close="handleClose"
+      background-color="#f0f8fa"
+      text-color="#000"
+      active-text-color="#245086">
+      <el-menu-item @click="jmp('tutorial')" index="1">
+        <template slot="title">
+          <i class="el-icon-question"></i>
+          <span @click="jmp('tutorial')">申报指南</span>
+        </template>
+      </el-menu-item>
+      <el-submenu index="2">
+        <template slot="title">
+        <i class="el-icon-edit-outline"></i>
+        <span>申请</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item @click="jmp('apply_program')" index="2-1">项目申请</el-menu-item>
+          <el-menu-item @click="jmp('apply_personal')" index="2-2">文章申请</el-menu-item>
+          <el-menu-item @click="jmp('apply_other')" index="2-2">其他申请</el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+      <el-menu-item @click="jmp('myapplications')" index="3">
+        <i class="el-icon-notebook-2"></i>
+        <span @click="jmp('myapplications')" slot="title">我的申请</span>
+      </el-menu-item>
+      <el-menu-item @click="jmp('approve')" :disabled="disableApprove" index="4">
+        <i class="el-icon-s-check"></i>
+        <span @click="jmp('approve')" slot="title">项目审批</span>
+      </el-menu-item>
+    </el-menu>
     </div>
     <div class="content">
       <router-view></router-view>
@@ -58,23 +83,23 @@ export default {
       information: "",
       changeInfoDialogVisible: false,
       infoForm: { email: "", fax: "", mobilePhone: "", officePhone: "" },
+      disableApprove:true,
     };
   },
   mounted() {
     this.info_update();
-    //if (!localStorage.getItem("identity").includes("委员长")) {
-    this.hide("appointment");
-    //}
+    var identities = JSON.parse(localStorage.getItem('identity'));
     if (
-      localStorage.getItem("identity").includes("委员长") ||
-      localStorage.getItem("identity").includes("学院秘书") ||
-      localStorage.getItem("identity").includes("部门领导") ||
-      localStorage.getItem("identity").includes("委员")
-    ) {
-      this.show("approve");
-    }
+      !identities.includes("普通用户") 
+     ) this.disableApprove = false;
   },
   methods: {
+    handleOpen(key, keyPath) {
+        //console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        //console.log(key, keyPath);
+      },
     updateInfo() {
       axios({
         method: "post",
@@ -92,12 +117,13 @@ export default {
             localStorage.setItem("office_phone", this.infoForm.officePhone);
             localStorage.setItem("phone", this.infoForm.mobilePhone);
             localStorage.setItem("fax", this.infoForm.fax);
-            this.changeInfoDialogVisible=false;
+            this.changeInfoDialogVisible = false;
             this.$alert("您已成功修改个人信息", "修改成功", {
               confirmButtonText: "确认",
               type: "success",
             });
-          } else this.$alert(res.data.message, "修改失败", {
+          } else
+            this.$alert(res.data.message, "修改失败", {
               confirmButtonText: "确认",
               type: "info",
             });
@@ -110,12 +136,6 @@ export default {
       this.$router.replace("/backstage/" + path).catch((err) => {
         err;
       });
-    },
-    show: function (id) {
-      document.getElementById(id).style.display = "inline";
-    },
-    hide: function (id) {
-      document.getElementById(id).style.display = "none";
     },
     info_update() {
       axios({
@@ -156,7 +176,7 @@ export default {
 #info {
   width: 200px;
   right: 15%;
-  top: 16px;
+  top: 26px;
   font-size: 18px;
   position: absolute;
   color: white;
@@ -185,17 +205,9 @@ button#changeInfo {
   border: 0px;
   z-index: 5;
 }
-#applies {
-  width: 200px;
-  position: absolute;
-  top: 100px;
-  left: 200px;
-  z-index: 5;
-  display: none;
-}
 #darkblue_bg {
   width: 100%;
-  height: 60px;
+  height: 100px;
   background-image: linear-gradient(#245086);
   position: absolute;
   top: 0%;
@@ -210,49 +222,22 @@ button#changeInfo {
   left: 0%;
   z-index: 2;
 }
-#lightblue_sidebar {
+.el-menu--popup {
+width: 200px;
+}
+#el-sidebar{
   bottom: 0px;
   width: 200px;
-  background-image: linear-gradient(#bfe1fd);
-  position: absolute;
-  top: 60px;
+  top: 100px;
   left: 0%;
-  visibility: visible;
-  z-index: 1;
-  border-right: 3px solid;
-  border-right-color: #245086;
-}
-button {
-  font-size: 18px;
-  height: 40px;
-  width: 100%;
-  background-image: linear-gradient(#769dc5);
-  border-radius: 0px;
-  border: none;
-}
-button#tutorial {
-  font-size: 18px;
-  height: 40px;
-  width: 100%;
-  background-image: linear-gradient(#245086, #769dc5);
-  border-radius: 0px;
-  border: none;
-}
-button#tutorial:hover {
-  background-image: linear-gradient(#66b1ff);
-  border-radius: 0px;
-  border: none;
-}
-button#tutorial:active {
-  background-image: linear-gradient(#3a8ee6);
-  border-radius: 0px;
-  border: none;
+  position: absolute;
+  background-image: linear-gradient(#f0f8fa);
 }
 .content {
   background-image: linear-gradient(#f0f8fa);
   position: absolute;
   left: 200px;
-  top: 60px;
+  top: 100px;
   bottom: 0px;
   right: 0px;
   overflow: auto;
