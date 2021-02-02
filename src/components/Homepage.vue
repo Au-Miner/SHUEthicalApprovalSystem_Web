@@ -19,19 +19,44 @@
     </div>
 
     <div id="knowledge_Ethics" style="display:none">
-      <el-carousel trigger="focus">
-        <div v-if="choice > 0">
-          <el-button
-            type="warning"
-            icon="el-icon-close"
-            id="knowledge_Ethics_Getback"
-            @click="clickEvent01"
-          ></el-button>
-          <el-carousel-item v-for="item in imgList2" :key="item.name">
-            <img :src="item.src" style="height:100%;width:100%;" />
-          </el-carousel-item>
-        </div>
-      </el-carousel>
+      <div id="knowledge_Ethics_left">
+        <el-carousel trigger="focus">
+          <div v-if="choice > 0">
+            <el-button
+              type="warning"
+              icon="el-icon-close"
+              id="knowledge_Ethics_Getback"
+              @click="clickEvent01"
+            ></el-button>
+            <el-carousel-item v-for="item in imgList2" :key="item.name">
+              <img :src="item.src" style="height:100%;width:100%;" />
+            </el-carousel-item>
+          </div>
+        </el-carousel>
+      </div>
+      <div id="knowledge_Ethics_right">
+        <p class="knowledge_Ethics_right_class">有一座城市，叫众志成城;有一批战士，叫白衣天使;有一种精神，叫逆流而上;有一种信心，叫万众一心!</p>
+        <p
+          class="knowledge_Ethics_right_class"
+        >2020年的春节，在所有中国人的心里，注定是一个永生难忘的记忆。新型冠状病毒的肆虐，让辞旧迎新的钟声更加沉重，人们脸上的那一个个口罩，让这个春节倍感冷清。</p>
+        <p
+          class="knowledge_Ethics_right_class"
+        >这个冬天，梅花依然宁静地开放;这个冬天，蓝天依旧明净如洗;这个冬天的武汉却非常艰难，全国人民却非常艰难。在这特殊的日子里，我们谨遵医嘱，静静地待在家中。我们为武汉忧心忡忡，我们为治愈病例的增多而感到高兴，为武汉的人们牵肠挂肚。</p>
+        <p
+          class="knowledge_Ethics_right_class"
+        >与此同时，有一群人，他们正冲在前方，用自己的平凡之躯为身后的亿万中国人筑起防护的堡垒,他们舍小家为大家，不眠不休，战斗在这场没有硝烟的战场上的最前沿。他们是来自全国各地的最美逆行者，他们是新时代的最美先锋人物，他们是可亲可敬的白衣天使。</p>
+        <p
+          class="knowledge_Ethics_right_class"
+        >这世上哪有什么岁月静好，只是因为有人在替我们负重前行罢了，这世上哪有什么天生的英雄，只有因为人们需要，才有人愿意牺牲自己成为英雄。</p>
+        <p
+          class="knowledge_Ethics_right_class"
+        >普通的我们无法到达正面战场与病毒作战，我们只能做好我们的后勤工作，不出门，少出门，勤洗手，戴口罩，这是为了不给他们添麻烦，祝愿他们平安早日凯旋。</p>
+        <p class="knowledge_Ethics_right_class">彩虹为证，千古不变，我要高歌。为生命喜悦，万物都歌颂你的慈爱，大地诉说你的恩情。</p>
+        <p class="knowledge_Ethics_right_class">致敬白衣天使!</p>
+        <p class="knowledge_Ethics_right_class">致敬最美逆行者!</p>
+        <p class="knowledge_Ethics_right_class">致敬抗击疫情的每一个人!</p>
+      </div>
+      <img src="../assets/knowledge_ethics_pic04.jpg" id="knowledge_Ethics_right_pic01" />
     </div>
 
     <div id="mainbody_Interface" style="display:none">
@@ -246,8 +271,8 @@ export default {
       change4.style.display = "inline";
       change5.style.display = "inline";
     },
-    jmp: function(path){
-      this.$router.push(path)
+    jmp: function(path) {
+      this.$router.push(path);
     }
   }
 };
@@ -262,7 +287,8 @@ export default {
   top: 0px;
   left: 0px;
   width: 100%;
-  height: 170px;
+  /* height: 170px; */
+  height: 125px;
   z-index: 10;
 }
 #title_Start:hover #background01 {
@@ -280,7 +306,8 @@ export default {
 #background01 {
   transition: all 0.2s ease-in;
   width: 100%;
-  height: 170px;
+  height: 125px;
+  /* height: 170px; */
   background-image: linear-gradient(#245086, #698cb6 70%);
   position: absolute;
   top: 0px;
@@ -297,12 +324,12 @@ export default {
   z-index: 10;
 }
 #title_text01 {
-  height: 40px;
+  height: 30%;
   width: 17.2%;
   position: absolute;
   left: 20.3%;
   top: 45px;
-  font-size: 40px;
+  font-size: 220%;
   color: #fefefe;
   z-index: 10;
 }
@@ -396,26 +423,26 @@ export default {
 
 
 <style>
-#knowledge_Ethics .el-carousel {
+#knowledge_Ethics_left .el-carousel {
   position: absolute;
-  width: 100%;
+  width: 65%;
   height: 937px;
   top: 0px;
   left: 0px;
 }
-#knowledge_Ethics #knowledge_Ethics_Getback {
+#knowledge_Ethics_left #knowledge_Ethics_Getback {
   border-radius: 100px;
   position: absolute;
   top: 405px;
-  width: 4.2%;
-  height: 80px;
+  width: 6%;
+  height: 24%;
   left: 2.6%;
   background-color: rgb(240, 137, 137);
   opacity: 0.5;
-  font-size: 30px;
+  font-size: 150%;
   z-index: 3;
 }
-#knowledge_Ethics .el-carousel__arrow.el-carousel__arrow--right {
+#knowledge_Ethics_left .el-carousel__arrow.el-carousel__arrow--right {
   position: absolute;
   top: 405px;
   width: 4.2%;
@@ -426,24 +453,49 @@ export default {
   font-size: 30px;
   display: none;
 }
-#knowledge_Ethics .el-carousel__arrow.el-carousel__arrow--right:hover {
+#knowledge_Ethics_left .el-carousel__arrow.el-carousel__arrow--right:hover {
   opacity: 0.7;
   display: none;
 }
-#knowledge_Ethics .el-carousel__arrow.el-carousel__arrow--left {
+#knowledge_Ethics_left .el-carousel__arrow.el-carousel__arrow--left {
   display: none;
 }
-#knowledge_Ethics .el-carousel__item:nth-child(2n) {
+#knowledge_Ethics_left .el-carousel__item:nth-child(2n) {
   background-color: #99a9bf;
   height: 937px;
 }
-#knowledge_Ethics .el-carousel__button {
+#knowledge_Ethics_left .el-carousel__button {
   width: 5.2%;
   height: 8px;
 }
-#knowledge_Ethics .el-carousel__item:nth-child(2n + 1) {
+#knowledge_Ethics_left .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
   height: 937px;
+}
+#knowledge_Ethics_right {
+  position: absolute;
+  width: 35%;
+  height: 937px;
+  top: 0px;
+  left: 65%;
+}
+.knowledge_Ethics_right_class {
+  position: relative;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  font-size: 120%;
+  text-align: left;
+  z-index: 7;
+  color: #d3dce6;
+}
+#knowledge_Ethics_right_pic01 {
+  position: absolute;
+  width: 35%;
+  height: 937px;
+  top: 0px;
+  left: 65%;
+  z-index: 6;
 }
 </style>
 
@@ -702,7 +754,7 @@ export default {
 }
 #background #background_text12 {
   left: 39.1%;
- top: 1840px;
+  top: 1840px;
 }
 #background_fake {
   position: absolute;
