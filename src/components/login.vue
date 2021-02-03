@@ -37,10 +37,10 @@ export default {
             localStorage.setItem("identity",JSON.stringify(res.data.data.identity));
             localStorage.setItem("department", res.data.data.department);
             this.$router.push("backstage");
-          } else alert(res.data.code);
+          } else this.$message.error(res.data.message);;
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
     },
   },

@@ -151,8 +151,8 @@ export default {
             this.infoForm.mobilePhone = res.data.data.mobilePhone;
           } else this.information = res.data.code;
         })
-        .catch(() => {
-          console.log("error occur");
+        .catch((err) => {
+          this.$message.error(err);
         });
     },
     logout() {
