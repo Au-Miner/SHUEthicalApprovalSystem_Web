@@ -173,7 +173,7 @@ export default {
 #info {
   width: 200px;
   right: 15%;
-  top: 26px;
+  top: 36px;
   font-size: 18px;
   position: absolute;
   color: white;
@@ -184,7 +184,7 @@ button#logout {
   width: 5%;
   position: absolute;
   left: 90%;
-  top: 22%;
+  top: 32px;
   font-size: 18px;
   color: white;
   border: 0px;
@@ -196,7 +196,7 @@ button#changeInfo {
   width: 5%;
   position: absolute;
   right: 10%;
-  top: 22%;
+  top: 32px;
   font-size: 18px;
   color: white;
   border: 0px;

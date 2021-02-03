@@ -453,7 +453,7 @@ export default {
       .then(res => {
           if (res.data.code == 200) {
             this.$message({
-          message: '成功',
+          message: '成功，请在我的申请中提交项目',
           type: 'success'
         });
             this.$router.replace("/backstage/myapplications").catch((err) => {err;});

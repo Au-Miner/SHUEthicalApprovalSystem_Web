@@ -2,7 +2,7 @@ import { Message } from 'element-ui';
 import axios from 'axios';
 function Download(url) {
     if (url == "" || url == null) {
-      Message.error("找不到文件");
+      Message.error("请在点击提交后重试");
       return;
     }
     axios({

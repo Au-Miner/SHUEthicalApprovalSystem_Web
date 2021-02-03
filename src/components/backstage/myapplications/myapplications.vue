@@ -485,7 +485,6 @@
           label="创建时间"
         ></el-table-column>
         <el-table-column
-          width="200"
           prop="beginTime"
           label="开始时间"
         ></el-table-column>
