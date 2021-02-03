@@ -10,7 +10,7 @@
   <div id="steps1">
   <el-steps :active="3" align-center :space="200">
     <el-step icon="el-icon-edit" title="申请人创建申请" description="文章/项目/其他申请"></el-step>
-    <el-step icon="el-icon-upload" title="申请人提交申请"></el-step>
+    <el-step icon="el-icon-upload" title="申请人提交申请" description="进入我的申请页面提交申请"></el-step>
     <el-step icon="el-icon-s-check" title="进入审核流程"></el-step>
   </el-steps>
   </div>
