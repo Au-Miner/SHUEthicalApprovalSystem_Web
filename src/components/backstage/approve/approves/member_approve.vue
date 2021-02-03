@@ -138,7 +138,8 @@ export default {
     return {
       information: "",
       textarea: "",
-      fileUrl: ""
+      fileUrl: "",
+      fileList:[],
     };
   },
   mounted() {
