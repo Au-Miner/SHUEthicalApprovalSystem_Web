@@ -129,6 +129,8 @@ export default {
   },
   methods: {
     approval: function(row, choice) {
+      if(this.textarea==''&&(choice==-1||choice==0)){
+                      this.$message.error('未填写驳回原因');return;}
       axios({
         method: "post",
         url: "/secretary/approval",
