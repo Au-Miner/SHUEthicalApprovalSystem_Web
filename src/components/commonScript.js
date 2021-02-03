@@ -1,8 +1,8 @@
-import { MessageBox } from 'element-ui';
+import { Message } from 'element-ui';
 import axios from 'axios';
 function Download(url) {
     if (url == "" || url == null) {
-      this.$message.error("找不到文件");
+      Message.error("找不到文件");
       return;
     }
     axios({
@@ -24,7 +24,7 @@ function Download(url) {
         document.body.removeChild(new_element);
       })
       .catch((err) => {
-        this.$message.error(err);
+        Message.error(err);
       });
   }
   export{
