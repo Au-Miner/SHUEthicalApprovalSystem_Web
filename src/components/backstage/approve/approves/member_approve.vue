@@ -185,16 +185,15 @@ export default {
       })
         .then(res => {
           if (res.data.code === 200) {
-            this.$alert("项目编号为" + row.id + "的申请已审核", "审核成功", {
-              confirmButtonText: "确定"
-            });
+            this.$message({
+          message: '成功',
+          type: 'success'
+        });
           } else
-            this.$alert("错误信息：" + res.data.message, "审核失败", {
-              confirmButtonText: "确定"
-            });
+            this.$message.error(res.data.message);
         })
         .catch(err => {
-          alert(err);
+          this.$message.error(err);
         });
       this.load();
       this.fileUrl = "";
@@ -237,10 +236,10 @@ export default {
             row.applicationFile = res.data.data.applicationFile;
             row.applicationPdf = res.data.data.applicationPdf;
             this.$refs.multipleTable.toggleRowExpansion(row, true);
-          } else alert(res.data.code);
+          } else this.$message.error(res.data.message);
         })
         .catch(err => {
-          alert(err);
+          this.$message.error(err);
         });
     },
     load: function() {
@@ -254,7 +253,7 @@ export default {
           } else this.information = res.data.code;
         })
         .catch(err => {
-          alert(err);
+          this.$message.error(err);
         });
     },
     test_post() {}

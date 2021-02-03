@@ -118,18 +118,15 @@ export default {
             localStorage.setItem("phone", this.infoForm.mobilePhone);
             localStorage.setItem("fax", this.infoForm.fax);
             this.changeInfoDialogVisible = false;
-            this.$alert("您已成功修改个人信息", "修改成功", {
-              confirmButtonText: "确认",
-              type: "success",
-            });
+            this.$message({
+          message: '成功',
+          type: 'success'
+        });
           } else
-            this.$alert(res.data.message, "修改失败", {
-              confirmButtonText: "确认",
-              type: "info",
-            });
+            this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
     },
     jmp: function (path) {

@@ -426,12 +426,7 @@ export default {
     Submit: function () {
       this.saveInfo();
       if(this.form.application_file==""){
-        this.$alert("您忘记上传文件了！", "请上传文件", {
-              confirmButtonText: "确定",
-              callback: (action) => {
-                return;
-              },
-            });
+        this.$message.error('您忘记上传文件了!');
             return;
       }
       axios({
@@ -458,18 +453,15 @@ export default {
       .then(res => {
           if (res.data.code == 200) {
             this.saveInfo();
-            this.$alert("请前往“我的申请”查看", "上传成功", {
-              confirmButtonText: "确定",
-              callback: (action) => {
-                this.$router.replace("/backstage/myapplications").catch((err) => {err;});
-              },
-            });
-          } else this.$alert("错误信息：" + res.data.message, "失败", {
-              confirmButtonText: "确定"
-            });
+            this.$message({
+          message: '成功',
+          type: 'success'
+        });
+            this.$router.replace("/backstage/myapplications").catch((err) => {err;});
+          } else this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
     },
     fundingSource: function (choice) {

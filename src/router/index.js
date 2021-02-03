@@ -9,7 +9,6 @@ import apply_personal from '@/components/backstage/apply/apply_personal'
 import apply_other from '@/components/backstage/apply/apply_other'
 import myapplications from '@/components/backstage/myapplications/myapplications'
 import login from '@/components/login'
-import appointment from '@/components/backstage/appointment/appointment'
 import member_approve from '@/components/backstage/approve/approves/member_approve'
 import chairman_approve from '@/components/backstage/approve/approves/chairman_approve'
 import leader_approve from '@/components/backstage/approve/approves/leader_approve'
@@ -23,74 +22,69 @@ export default new Router({
     {
       path: '',
       name: 'Homepage',
-      component: Homepage
+      component: resolve=>require(['@/components/Homepage'],resolve)
     },
     {
       path: '/login',
       name: 'login',
-      component: login
+      component: resolve=>require(['@/components/login'],resolve)
     },
     {
       path: '/backstage',
       name: 'backstage',
-      component: bg,
+      component: resolve=>require(['@/components/backstage/bg'],resolve),
       redirect:{name:'tutorial'},
       children: [
       {
         path: 'tutorial',
         name:'tutorial',
-        component: tutorial
+        component: resolve=>require(['@/components/backstage/tutorial/tutorial'],resolve)
       },
       {
         path: 'apply_program',
-        name:'apply_other',
-        component: apply_program
+        name:'apply_program',
+        component: resolve=>require(['@/components/backstage/apply/apply_program'],resolve)
       },
       {
         path: 'apply_other',
         name:'apply_other',
-        component: apply_other
+        component: resolve=>require(['@/components/backstage/apply/apply_other'],resolve)
       },
       {
         path: 'apply_personal',
         name:'apply_personal',
-        component: apply_personal
+        component: resolve=>require(['@/components/backstage/apply/apply_personal'],resolve)
       },
       {
         path: 'approve',
         name:'approve',
-        component: approve,
+        component: resolve=>require(['@/components/backstage/approve/approve'],resolve),
         children: [{
           path:'member_approve',
           name:'member_approve',
-          component:member_approve
+          component:resolve=>require(['@/components/backstage/approve/approves/member_approve'],resolve)
         },
         {
           path:'chairman_approve',
           name:'chairman_approve',
-          component:chairman_approve
+          component:resolve=>require(['@/components/backstage/approve/approves/chairman_approve'],resolve)
         },
         {
           path:'leader_approve',
           name:'leader_approve',
-          component:leader_approve
+          component:resolve=>require(['@/components/backstage/approve/approves/leader_approve'],resolve)
         },
         {
           path:'secretary_approve',
           name:'secretary_approve',
-          component:secretary_approve
+          component:resolve=>require(['@/components/backstage/approve/approves/secretary_approve'],resolve)
         },
       ]
       },
       {
         path: 'myapplications',
         name:'myapplications',
-        component: myapplications
-      },
-      {
-        path: 'appointment',
-        name: 'appointment',
-        component: appointment
+        component: resolve=>require(['@/components/backstage/myapplications/myapplications'],resolve)
       }
     ]
     }

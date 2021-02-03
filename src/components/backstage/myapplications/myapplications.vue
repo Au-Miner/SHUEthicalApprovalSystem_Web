@@ -817,12 +817,6 @@ export default {
   },
   methods: {
     othersProcessManagement: function (id) {
-      // if (this.ExecuteInfo == "") {
-      //   this.$alert("您忘记上传必要的文件了！", "请上传执行情况表", {
-      //     confirmButtonText: "确定"
-      //   });
-      //   return;
-      // }
       axios({
         method: "post",
         url: "/user/othersProcessManagement",
@@ -834,16 +828,15 @@ export default {
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.$alert("您已成功上传文件", "上传成功", {
-              confirmButtonText: "确定",
-            });
+            this.$message({
+          message: '成功',
+          type: 'success'
+        });
           } else
-            this.$alert("错误信息：" + res.data.message, "上传失败", {
-              confirmButtonText: "确定",
-            });
+            this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
       this.ExecuteInfo = "";
       this.summary = "";
@@ -858,12 +851,6 @@ export default {
       this.summary = response.data;
     },
     projectProcessManagement: function (id) {
-      // if (this.ExecuteInfo == "" || this.summary == "") {
-      //   this.$alert("您忘记上传文件了！", "请上传文件", {
-      //     confirmButtonText: "确定"
-      //   });
-      //   return;
-      // }
       axios({
         method: "post",
         url: "/user/projectProcessManagement",
@@ -875,28 +862,21 @@ export default {
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.$alert("您已成功上传文件", "上传成功", {
-              confirmButtonText: "确定",
-            });
+            this.$message({
+          message: '成功',
+          type: 'success'
+        });
           } else
-            this.$alert("错误信息：" + res.data.message, "上传失败", {
-              confirmButtonText: "确定",
-            });
+            this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
       this.ExecuteInfo = "";
       this.summary = "";
       this.load();
     },
     trackManagement: function (id) {
-      // if (this.trackFile == "") {
-      //   this.$alert("您忘记上传文件了！", "请上传文件", {
-      //     confirmButtonText: "确定"
-      //   });
-      //   return;
-      // }
       axios({
         method: "post",
         url: "/user/trackManagement",
@@ -907,25 +887,22 @@ export default {
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.$alert("您已成功上传文件", "上传成功", {
-              confirmButtonText: "确定",
-            });
+            this.$message({
+          message: '成功',
+          type: 'success'
+        });
           } else
-            this.$alert("错误信息：" + res.data.message, "上传失败", {
-              confirmButtonText: "确定",
-            });
+            this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
       this.TrackFile = "";
       this.load();
     },
     articleProcessManagement: function (id) {
       if (this.ExecuteInfo == "") {
-        this.$alert("您忘记上传文件了！", "请上传文件", {
-          confirmButtonText: "确定",
-        });
+        this.$message.error("您忘记上传文件了!");
         return;
       }
       axios({
@@ -938,16 +915,15 @@ export default {
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.$alert("您已成功上传执行情况表", "上传成功", {
-              confirmButtonText: "确定",
-            });
+            this.$message({
+          message: '成功',
+          type: 'success'
+        });
           } else
-            this.$alert("错误信息：" + res.data.message, "上传失败", {
-              confirmButtonText: "确定",
-            });
+            this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
       this.ExecuteInfo = "";
       this.load();
@@ -969,20 +945,15 @@ export default {
             this.form.project_direction = res.data.data.direction;
             this.form.project_abstract = res.data.data.projectAbstract;
             this.form.application_file = res.data.data.applicationFile;
-          } else alert(res.data.code);
+          } else this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
     },
     Update: function () {
       if (this.form.application_file == "") {
-        this.$alert("您忘记上传文件了！", "请上传文件", {
-          confirmButtonText: "确定",
-          callback: (action) => {
-            return;
-          },
-        });
+        this.$message.error("您忘记上传文件了!");
         return;
       }
       axios({
@@ -1008,17 +979,18 @@ export default {
       })
         .then((res) => {
           if (res.data.code == 200) {
-            this.$alert("请前往“我的申请”查看", "上传成功", {
-              confirmButtonText: "确定",
-            });
+            this.$message({
+          message: '成功',
+          type: 'success'
+        });
             this.updateProjectDialogVisible = false;
             this.load();
           } else {
-            alert(res.data.message);
+            this.$message.error(res.data.message);
           }
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
     },
     fundingSource: function (choice) {
@@ -1059,19 +1031,16 @@ export default {
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.$alert("成功确认项目状态", "成功", {
-              confirmButtonText: "确定",
-              type: "success",
-            });
+            this.$message({
+          message: '成功',
+          type: 'success'
+        });
           } else {
-            this.$alert(res.data.message, "失败", {
-              confirmButtonText: "确定",
-              type: "info",
-            });
+            this.$message.error(res.data.message);
           }
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
       this.load();
     },
@@ -1083,17 +1052,15 @@ export default {
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.$alert("项目编号为" + id + "的申请已提交", "提交成功", {
-              confirmButtonText: "确定",
-            });
+            this.$message({
+          message: '成功',
+          type: 'success'
+        });
           } else
-            this.$alert("项目编号为" + id + res.data.message, "提交失败", {
-              confirmButtonText: "确认",
-              type: "info",
-            });
+            this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
       this.load();
     },
@@ -1143,17 +1110,15 @@ export default {
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.$alert("项目编号为" + id + "的申请已被删除", "删除成功", {
-              confirmButtonText: "确定",
-            });
+            this.$message({
+          message: '成功',
+          type: 'success'
+        });
           } else
-            this.$alert("项目编号为" + id + res.data.message, "删除失败", {
-              confirmButtonText: "确认",
-              type: "info",
-            });
+            this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
       this.load();
     },
@@ -1194,10 +1159,10 @@ export default {
             row.trackFile = res.data.data.trackFile;
             row.id = res.data.data.id;
             this.$refs.multipleTable.toggleRowExpansion(row, true);
-          } else alert(res.data.code);
+          } else this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
     },
     load: function () {
@@ -1213,7 +1178,7 @@ export default {
             } else this.projectList = res.data.code;
           })
           .catch((err) => {
-            alert(err);
+            this.$message.error(err);
           });
     },
   },

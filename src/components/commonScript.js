@@ -2,9 +2,7 @@ import { MessageBox } from 'element-ui';
 import axios from 'axios';
 function Download(url) {
     if (url == "" || url == null) {
-        MessageBox.alert("找不到文件", "下载失败", {
-        confirmButtonText: "确定",
-      });
+      this.$message.error("找不到文件");
       return;
     }
     axios({
@@ -26,7 +24,7 @@ function Download(url) {
         document.body.removeChild(new_element);
       })
       .catch((err) => {
-        alert(err);
+        this.$message.error(err);
       });
   }
   export{

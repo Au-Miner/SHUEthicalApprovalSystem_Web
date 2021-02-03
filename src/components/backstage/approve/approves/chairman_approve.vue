@@ -256,9 +256,8 @@ export default {
   },
   methods: {
     approvalTrack: function(applicationId,method){
-      if(this.textarea==''&&method==-1){this.$alert("未填写驳回原因", "失败", {
-                      confirmButtonText: "确定",
-                      });return;}
+      if(this.textarea==''&&method==-1){
+                      this.$message.error('未填写驳回原因');return;}
       axios({
                 method:'post',
                 url:'/chairman/approvalTrack',
@@ -271,24 +270,21 @@ export default {
             {
                 if(res.data.code===200)
                 {
-                    this.$alert("已审核项目编号为："+applicationId+"的项目", "审核成功", {
-                      confirmButtonText: "确定",
-                      });
+                    this.$message({
+          message: '成功',
+          type: 'success'
+        });
                       this.load();
                 }
-                else this.$alert("错误信息："+res.data.message, "审核失败", {
-                      confirmButtonText: "确定",
-                      });
+                else this.$message.error(res.data.message);
                       this.load();
             }).catch((err)=>{
-                alert(err);
+                this.$message.error(err);
             })
             this.load();
     },
     confirm(applicationId,method){
-      if(this.textarea==''&&method==-1){this.$alert("未填写驳回原因", "失败", {
-                      confirmButtonText: "确定",
-                      });return;}
+      if(this.textarea==''&&method==-1){this.$message.error('未填写驳回原因');return;}
       this.$confirm("您确定要"+ (method==1?"批准":"驳回") +"项目：" +applicationId+"吗？", "确认信息", {
         type: "info",
         confirmButtonText: "确认",
@@ -321,24 +317,21 @@ export default {
             {
                 if(res.data.code===200)
                 {
-                    this.$alert("已审核项目编号为："+applicationId+"的项目", "审核成功", {
-                      confirmButtonText: "确定",
-                      });
+                    this.$message({
+          message: '成功',
+          type: 'success'
+        });
                       this.load();
                 }
-                else this.$alert("错误信息："+res.data.message, "审核失败", {
-                      confirmButtonText: "确定",
-                      });
+                else this.$message.error(res.data.message);
                       this.load();
             }).catch((err)=>{
-                alert(err);
+                this.$message.error(err);
             })
             this.load();
     },
     confirmReject: function(applicationId,method){
-      if(this.textarea==''&&method!=1){this.$alert("未填写驳回原因", "失败", {
-                      confirmButtonText: "确定",
-                      });return;}
+      if(this.textarea==''&&method!=1){this.$message.error('未填写驳回原因');return;}
       this.$confirm("您确定要修改/驳回项目：" +applicationId+"吗？", "确认信息", {
         type: "warning",
         confirmButtonText: "确认",
@@ -391,15 +384,14 @@ export default {
             {
                 if(res.data.code===200)
                 {
-                    this.$alert("已委任" + this.value + "为项目"+applicationId+"的委员", "委任成功", {
-                      confirmButtonText: "确定",
-                      });
+                    this.$message({
+          message: '成功',
+          type: 'success'
+        });
                 }
-                else this.$alert("错误信息："+res.data.message, "委任失败", {
-                      confirmButtonText: "确定",
-                      });
+                else this.$message.error(res.data.message);
             }).catch((err)=>{
-                alert(err);
+                this.$message.error(err);
             })
             this.load();
     },
@@ -445,10 +437,10 @@ export default {
             row.trackFile = res.data.data.trackFile;
             row.id = res.data.data.id;
             this.$refs.multipleTable.toggleRowExpansion(row, true);
-          } else alert(res.data.code);
+          } else this.$message.error(res.data.message);
         })
-        .catch(() => {
-          alert("error");
+        .catch((err) => {
+          this.$message.error(err);
         });
     },
     load: function () {
@@ -463,7 +455,7 @@ export default {
           } else this.information = res.data.code;
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
       axios({
         url: "/chairman/memberList",
@@ -476,7 +468,7 @@ export default {
           } else this.memberlist = res.data.code;
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
     },
   },
