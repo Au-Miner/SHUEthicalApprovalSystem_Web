@@ -79,7 +79,7 @@
                   @click="download(props.row.applicationPdf)"
                   >下载PDF</el-button
                 >
-                                <el-button
+                <el-button
                   :disabled="props.row.executeInfo == ''"
                   size="mini"
                   type="primary"
@@ -93,7 +93,7 @@
                   @click="download(props.row.summary)"
                   >下载总结</el-button
                 >
-                   <el-button
+                <el-button
                   :disabled="props.row.trackFile == ''"
                   size="mini"
                   type="primary"
@@ -135,7 +135,10 @@
               </el-form-item>
               <br />
               <el-form-item
-                v-if="props.row.status == '确认项目状态'||props.row.status == '暂未立项'"
+                v-if="
+                  props.row.status == '确认项目状态' ||
+                  props.row.status == '暂未立项'
+                "
                 label="项目状态确认"
               >
                 <el-select
@@ -228,7 +231,7 @@
                   @click="othersProcessManagement(props.row.id)"
                   >确认上传</el-button
                 >
-              </el-form-item>      
+              </el-form-item>
 
               <el-form-item
                 v-if="
@@ -303,7 +306,6 @@
               </el-form-item>
 -->
 
-
               <el-form-item
                 v-if="
                   props.row.status.search('执行情况表') != -1 &&
@@ -375,25 +377,6 @@
                 >
               </el-form-item>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
               <el-form-item
                 v-if="props.row.status == '跟踪情况表待提交'"
                 label="跟踪情况表"
@@ -426,43 +409,6 @@
                   >
                 </template>
               </el-form-item>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </el-form>
           </template>
         </el-table-column>
@@ -484,11 +430,7 @@
           prop="creationTime"
           label="创建时间"
         ></el-table-column>
-        <el-table-column
-          width="200"
-          prop="beginTime"
-          label="开始时间"
-        ></el-table-column>
+        <el-table-column prop="beginTime" label="开始时间"></el-table-column>
         <!--<el-table-column width="75" prop="type" label="类型"></el-table-column>-->
         <el-table-column
           width="175"
@@ -526,6 +468,7 @@
           :on-success="handleSuccess"
           multiple
           :limit="1"
+          accept=".rar,.zip,.7z"
           :on-exceed="handleExceed"
           :file-list="fileList"
         >
@@ -534,183 +477,185 @@
             只能上传rar,zip,7z格式的文件,若无修改不需要点击上传
           </div>
         </el-upload>
+
         <el-form ref="form" :model="form">
-          <el-form-item
-            label="项目单位"
-            label-width="20%"
-            class="apply_program_input01"
-            id="apply_program_institution"
-          >
-            <el-col :span="12">
-              <el-input v-model="form.institution"></el-input>
-            </el-col>
-          </el-form-item>
-          <el-form-item
-            label="项目名称"
-            label-width="20%"
-            class="apply_program_input01"
-            id="apply_program_name"
-          >
-            <el-col :span="12">
-              <el-input v-model="form.name"></el-input>
-            </el-col>
-          </el-form-item>
-          <el-form-item label="预定的起止时间" id="apply_program_timeLabel01">
-            <el-col :span="8">
-              <el-date-picker
-                type="date"
-                placeholder="选择日期"
-                v-model="form.time1"
-                style="width: 100%"
-                id="apply_program_time1"
-                class="apply_program_input01"
-                value-format="yyyy-MM"
-              ></el-date-picker>
-            </el-col>
-            <el-col class="line" :span="2" id="apply_program_timeCol01"
-              >-</el-col
+          <el-row>
+            <el-form-item
+              label="项目单位"
+              label-width="150"
+              class="apply"
+              id="apply_program_institution"
             >
-            <el-col :span="8">
-              <el-date-picker
-                placeholder="选择日期"
-                v-model="form.time2"
-                style="width: 100%"
-                id="apply_program_time2"
-                class="apply_program_input01"
-                value-format="yyyy-MM"
-              ></el-date-picker>
-            </el-col>
-          </el-form-item>
-          <el-form-item label="项目类别" label-width="10%" id="el-form-item01">
-            <el-radio-group v-model="watch_project_type">
-              <el-radio
-                label="A.新药物临床实验"
-                class="apply_program_programClass"
-                style="height: 20px"
-              ></el-radio>
-              <el-radio
-                label="B.新器械临床实验"
-                class="apply_program_programClass"
-                style="height: 20px"
-              ></el-radio>
-              <el-radio
-                label="C.新技术应用"
-                class="apply_program_programClass"
-                style="height: 20px"
-              ></el-radio>
-              <el-radio
-                label="D.人体标本收集"
-                class="apply_program_programClass"
-                style="height: 20px"
-              ></el-radio>
-              <br />
-              <el-radio
-                label="E.其他（请注明）"
-                class="apply_program_programClass"
-                id="apply_program_programId05"
-                style="height: 20px"
-              ></el-radio>
-              <el-col :span="10">
-                <el-input
-                  @input="change($event)"
-                  :disabled="disable_type_input"
-                  v-model="project_typeE"
-                  id="apply_program_programInput"
-                ></el-input>
+              <el-col :span="6">
+                <el-input v-model="form.institution"></el-input>
               </el-col>
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item
-            label="办公电话"
-            label-width="20%"
-            class="apply_program_input01"
-            id="apply_program_office_phone"
-          >
-            <el-col :span="12">
-              <el-input v-model="form.office_phone"></el-input>
-            </el-col>
-          </el-form-item>
-          <el-form-item
-            label="传真"
-            label-width="20%"
-            class="apply_program_input01"
-            id="apply_program_fax"
-          >
-            <el-col :span="12">
-              <el-input v-model="form.fax"></el-input>
-            </el-col>
-          </el-form-item>
-          <el-form-item
-            label="手机"
-            label-width="20%"
-            class="apply_program_input01"
-            id="apply_program_phone"
-          >
-            <el-col :span="12">
-              <el-input v-model="form.phone"></el-input>
-            </el-col>
-          </el-form-item>
-          <el-form-item
-            label="电子邮箱"
-            label-width="20%"
-            class="apply_program_input01"
-            id="apply_program_email"
-          >
-            <el-col :span="12">
-              <el-input v-model="form.email"></el-input>
-            </el-col>
-          </el-form-item>
-          <el-form-item
-            label="目前主要研究方向"
-            label-width="20%"
-            class="apply_program_input01"
-            id="apply_program_project_direction"
-          >
-            <el-col :span="20">
-              <el-input v-model="form.project_direction"></el-input>
-            </el-col>
-          </el-form-item>
-          <el-form-item label="经费来源" label-width="10%">
-            <el-checkbox-group v-model="form.temp">
-              <el-checkbox
-                label="政府"
-                name="temp"
-                class="apply_program_moneyFromClass"
-                @click="fundingSource(1)"
-              ></el-checkbox>
-              <el-checkbox
-                label="基金会"
-                name="temp"
-                class="apply_program_moneyFromClass"
-                @click="fundingSource(2)"
-              ></el-checkbox>
-              <el-checkbox
-                label="国际组织"
-                name="temp"
-                class="apply_program_moneyFromClass"
-                @click="fundingSource(3)"
-              ></el-checkbox>
-              <el-checkbox
-                label="其他"
-                name="temp"
-                class="apply_program_moneyFromClass"
-                @click="fundingSource(4)"
-              ></el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
-          <el-form-item
-            label="研究内容摘要："
-            prop="desc"
-            label-width="30%"
-            class="apply_program_input01"
-            id="apply_program_project_abstract"
-          >
-            <el-input
-              type="textarea"
-              v-model="form.project_abstract"
-            ></el-input>
-          </el-form-item>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item
+              label="项目名称"
+              label-width="150"
+              class="apply"
+              id="apply_program_name"
+            >
+              <el-col :span="12">
+                <el-input v-model="form.name"></el-input>
+              </el-col>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="起止时间" id="apply_program_timeLabel01">
+              <el-col :span="8">
+                <el-date-picker
+                  type="date"
+                  placeholder="开始日期"
+                  v-model="form.time1"
+                  style="width: 100%"
+                  id="apply_program_time1"
+                  class="apply"
+                  value-format="yyyy-MM"
+                ></el-date-picker>
+              </el-col>
+              <el-col class="line" :span="1" id="apply_program_timeCol01"
+                >----------</el-col
+              >
+              <el-col :span="8">
+                <el-date-picker
+                  placeholder="结束日期"
+                  v-model="form.time2"
+                  style="width: 100%"
+                  id="apply_program_time2"
+                  class="apply"
+                  value-format="yyyy-MM"
+                ></el-date-picker>
+              </el-col>
+            </el-form-item>
+          </el-row>
+
+          <el-row>
+            <el-form-item label="项目类别" id="el-form-item01">
+              <el-radio-group v-model="watch_project_type">
+                <el-col :span="20">
+                  <el-radio label="A.新药物临床实验" class="apply"></el-radio>
+                  <el-radio label="B.新器械临床实验" class="apply"></el-radio>
+                  <el-radio label="C.新技术应用" class="apply"></el-radio>
+                  <el-radio label="D.人体标本收集" class="apply"></el-radio>
+                  <el-radio label="E.其他（请注明）" class="apply"></el-radio>
+                </el-col>
+                <el-col :span="4">
+                  <el-input
+                    size="mini"
+                    @input="change($event)"
+                    :disabled="disable_type_input"
+                    v-model="project_typeE"
+                    id="apply_program_programInput"
+                  ></el-input>
+                </el-col>
+              </el-radio-group>
+            </el-form-item>
+          </el-row>
+
+          <el-row>
+            <el-form-item
+              label="办公电话"
+              class="apply"
+              id="apply_program_office_phone"
+            >
+              <el-col :span="6">
+                <el-input v-model="form.office_phone"></el-input>
+              </el-col>
+            </el-form-item>
+          </el-row>
+
+          <el-row>
+            <el-form-item label="传真" class="apply" id="apply_program_fax">
+              <el-col :span="6">
+                <el-input v-model="form.fax"></el-input>
+              </el-col>
+            </el-form-item>
+          </el-row>
+
+          <el-row>
+            <el-form-item label="手机" class="apply" id="apply_program_phone">
+              <el-col :span="6">
+                <el-input v-model="form.phone"></el-input>
+              </el-col>
+            </el-form-item>
+          </el-row>
+
+          <el-row>
+            <el-form-item
+              label="电子邮箱"
+              class="apply"
+              id="apply_program_email"
+            >
+              <el-col :span="6">
+                <el-input v-model="form.email"></el-input>
+              </el-col>
+            </el-form-item>
+          </el-row>
+
+          <el-row>
+            <el-form-item
+              label="目前主要研究方向"
+              class="apply"
+              id="apply_program_project_direction"
+            >
+              <el-col :span="12">
+                <el-input v-model="form.project_direction"></el-input>
+              </el-col>
+            </el-form-item>
+          </el-row>
+
+          <el-row>
+            <el-form-item label="经费来源">
+              <el-col :span="12">
+                <el-checkbox-group v-model="form.temp">
+                  <el-checkbox
+                    label="政府"
+                    name="temp"
+                    class="apply"
+                    @click="fundingSource(1)"
+                  ></el-checkbox>
+                  <el-checkbox
+                    label="基金会"
+                    name="temp"
+                    class="apply"
+                    @click="fundingSource(2)"
+                  ></el-checkbox>
+                  <el-checkbox
+                    label="国际组织"
+                    name="temp"
+                    class="apply"
+                    @click="fundingSource(3)"
+                  ></el-checkbox>
+                  <el-checkbox
+                    label="其他"
+                    name="temp"
+                    class="apply"
+                    @click="fundingSource(4)"
+                  ></el-checkbox>
+                </el-checkbox-group>
+              </el-col>
+            </el-form-item>
+          </el-row>
+
+          <el-row>
+            <el-form-item
+              label="研究内容摘要："
+              prop="desc"
+              class="apply"
+              id="apply_program_project_abstract"
+            >
+              <el-input
+                type="textarea"
+                autosize
+                v-model="form.project_abstract"
+              ></el-input>
+            </el-form-item>
+          </el-row>
         </el-form>
+
         <el-button type="primary" id="apply_submit" @click="Update"
           >修改完成</el-button
         >
@@ -817,12 +762,6 @@ export default {
   },
   methods: {
     othersProcessManagement: function (id) {
-      // if (this.ExecuteInfo == "") {
-      //   this.$alert("您忘记上传必要的文件了！", "请上传执行情况表", {
-      //     confirmButtonText: "确定"
-      //   });
-      //   return;
-      // }
       axios({
         method: "post",
         url: "/user/othersProcessManagement",
@@ -834,16 +773,14 @@ export default {
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.$alert("您已成功上传文件", "上传成功", {
-              confirmButtonText: "确定",
+            this.$message({
+              message: "成功",
+              type: "success",
             });
-          } else
-            this.$alert("错误信息：" + res.data.message, "上传失败", {
-              confirmButtonText: "确定",
-            });
+          } else this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
       this.ExecuteInfo = "";
       this.summary = "";
@@ -858,12 +795,6 @@ export default {
       this.summary = response.data;
     },
     projectProcessManagement: function (id) {
-      // if (this.ExecuteInfo == "" || this.summary == "") {
-      //   this.$alert("您忘记上传文件了！", "请上传文件", {
-      //     confirmButtonText: "确定"
-      //   });
-      //   return;
-      // }
       axios({
         method: "post",
         url: "/user/projectProcessManagement",
@@ -875,28 +806,20 @@ export default {
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.$alert("您已成功上传文件", "上传成功", {
-              confirmButtonText: "确定",
+            this.$message({
+              message: "成功",
+              type: "success",
             });
-          } else
-            this.$alert("错误信息：" + res.data.message, "上传失败", {
-              confirmButtonText: "确定",
-            });
+          } else this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
       this.ExecuteInfo = "";
       this.summary = "";
       this.load();
     },
     trackManagement: function (id) {
-      // if (this.trackFile == "") {
-      //   this.$alert("您忘记上传文件了！", "请上传文件", {
-      //     confirmButtonText: "确定"
-      //   });
-      //   return;
-      // }
       axios({
         method: "post",
         url: "/user/trackManagement",
@@ -907,25 +830,21 @@ export default {
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.$alert("您已成功上传文件", "上传成功", {
-              confirmButtonText: "确定",
+            this.$message({
+              message: "成功",
+              type: "success",
             });
-          } else
-            this.$alert("错误信息：" + res.data.message, "上传失败", {
-              confirmButtonText: "确定",
-            });
+          } else this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
       this.TrackFile = "";
       this.load();
     },
     articleProcessManagement: function (id) {
       if (this.ExecuteInfo == "") {
-        this.$alert("您忘记上传文件了！", "请上传文件", {
-          confirmButtonText: "确定",
-        });
+        this.$message.error("您忘记上传文件了!");
         return;
       }
       axios({
@@ -938,16 +857,14 @@ export default {
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.$alert("您已成功上传执行情况表", "上传成功", {
-              confirmButtonText: "确定",
+            this.$message({
+              message: "成功",
+              type: "success",
             });
-          } else
-            this.$alert("错误信息：" + res.data.message, "上传失败", {
-              confirmButtonText: "确定",
-            });
+          } else this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
       this.ExecuteInfo = "";
       this.load();
@@ -969,20 +886,15 @@ export default {
             this.form.project_direction = res.data.data.direction;
             this.form.project_abstract = res.data.data.projectAbstract;
             this.form.application_file = res.data.data.applicationFile;
-          } else alert(res.data.code);
+          } else this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
     },
     Update: function () {
       if (this.form.application_file == "") {
-        this.$alert("您忘记上传文件了！", "请上传文件", {
-          confirmButtonText: "确定",
-          callback: (action) => {
-            return;
-          },
-        });
+        this.$message.error("您忘记上传文件了!");
         return;
       }
       axios({
@@ -1008,17 +920,18 @@ export default {
       })
         .then((res) => {
           if (res.data.code == 200) {
-            this.$alert("请前往“我的申请”查看", "上传成功", {
-              confirmButtonText: "确定",
+            this.$message({
+              message: "成功",
+              type: "success",
             });
             this.updateProjectDialogVisible = false;
             this.load();
           } else {
-            alert(res.data.message);
+            this.$message.error(res.data.message);
           }
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
     },
     fundingSource: function (choice) {
@@ -1059,19 +972,16 @@ export default {
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.$alert("成功确认项目状态", "成功", {
-              confirmButtonText: "确定",
+            this.$message({
+              message: "成功",
               type: "success",
             });
           } else {
-            this.$alert(res.data.message, "失败", {
-              confirmButtonText: "确定",
-              type: "info",
-            });
+            this.$message.error(res.data.message);
           }
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
       this.load();
     },
@@ -1083,17 +993,14 @@ export default {
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.$alert("项目编号为" + id + "的申请已提交", "提交成功", {
-              confirmButtonText: "确定",
+            this.$message({
+              message: "成功",
+              type: "success",
             });
-          } else
-            this.$alert("项目编号为" + id + res.data.message, "提交失败", {
-              confirmButtonText: "确认",
-              type: "info",
-            });
+          } else this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
       this.load();
     },
@@ -1143,17 +1050,14 @@ export default {
       })
         .then((res) => {
           if (res.data.code === 200) {
-            this.$alert("项目编号为" + id + "的申请已被删除", "删除成功", {
-              confirmButtonText: "确定",
+            this.$message({
+              message: "成功",
+              type: "success",
             });
-          } else
-            this.$alert("项目编号为" + id + res.data.message, "删除失败", {
-              confirmButtonText: "确认",
-              type: "info",
-            });
+          } else this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
       this.load();
     },
@@ -1194,10 +1098,10 @@ export default {
             row.trackFile = res.data.data.trackFile;
             row.id = res.data.data.id;
             this.$refs.multipleTable.toggleRowExpansion(row, true);
-          } else alert(res.data.code);
+          } else this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
     },
     load: function () {
@@ -1213,7 +1117,7 @@ export default {
             } else this.projectList = res.data.code;
           })
           .catch((err) => {
-            alert(err);
+            this.$message.error(err);
           });
     },
   },

@@ -57,254 +57,212 @@
     </div>
 
     <div id="apply_program_next" style="display: none">
-      <el-upload
-        class="upload-demo"
-        action="/api/file/upload"
-        :headers="headers"
-        :on-preview="handlePreview"
-        :on-remove="handleRemove"
-        :before-remove="beforeRemove"
-        :on-success="handleSuccess"
-        multiple
-        :limit="1"
-        accept=".rar,.zip,.7z"
-        :on-exceed="handleExceed"
-        :file-list="fileList"
-      >
-        <el-button size="small" type="primary">点击上传</el-button>
-        <div slot="tip" class="el-upload__tip">
-          只能上传rar,zip,7z格式的文件
-        </div>
-      </el-upload>
-
-      <!-- label-width="auto" -->
-      <!-- label-position="left" -->
       <el-form ref="form" :model="form">
-        <el-form-item
-          label="项目单位"
-          label-width="20%"
-          class="apply_program_input01"
-          id="apply_program_institution"
-        >
-          <el-col :span="12">
-            <el-input v-model="form.institution"></el-input>
-          </el-col>
-        </el-form-item>
-        <el-form-item
-          label="项目名称"
-          label-width="20%"
-          class="apply_program_input01"
-          id="apply_program_name"
-        >
-          <el-col :span="12">
-            <el-input v-model="form.name"></el-input>
-          </el-col>
-        </el-form-item>
-        <el-form-item label="预定的起止时间" id="apply_program_timeLabel01">
-          <el-col :span="8">
-            <el-date-picker
-              type="date"
-              placeholder="选择日期"
-              v-model="form.time1"
-              style="width: 100%"
-              id="apply_program_time1"
-              class="apply_program_input01"
-              value-format="yyyy-MM"
-            ></el-date-picker>
-          </el-col>
-          <el-col class="line" :span="2" id="apply_program_timeCol01">-</el-col>
-          <el-col :span="8">
-            <el-date-picker
-              placeholder="选择日期"
-              v-model="form.time2"
-              style="width: 100%"
-              id="apply_program_time2"
-              class="apply_program_input01"
-              value-format="yyyy-MM"
-            ></el-date-picker>
-          </el-col>
-        </el-form-item>
-        <el-form-item label="项目类别" label-width="10%" id="el-form-item01">
-          <el-radio-group v-model="watch_project_type">
-            <el-radio
-              label="A.新药物临床实验"
-              class="apply_program_programClass"
-              style="height: 20px"
-            ></el-radio>
-            <el-radio
-              label="B.新器械临床实验"
-              class="apply_program_programClass"
-              style="height: 20px"
-            ></el-radio>
-            <el-radio
-              label="C.新技术应用"
-              class="apply_program_programClass"
-              style="height: 20px"
-            ></el-radio>
-            <el-radio
-              label="D.人体标本收集"
-              class="apply_program_programClass"
-              style="height: 20px"
-            ></el-radio>
-            <br />
-            <el-radio
-              label="E.其他（请注明）"
-              class="apply_program_programClass"
-              id="apply_program_programId05"
-              style="height: 20px"
-            ></el-radio>
-            <el-col :span="10">
-              <el-input
-                @input="change($event)"
-                :disabled="disable_type_input"
-                v-model="project_typeE"
-                id="apply_program_programInput"
-              ></el-input>
+        <el-row>
+          <el-form-item
+            label="项目附件"
+            label-width="150"
+            class="apply"
+          >
+            <el-col :span="1">
+              <el-upload
+                class="upload-demo"
+                action="/api/file/upload"
+                :headers="headers"
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :before-remove="beforeRemove"
+                :on-success="handleSuccess"
+                multiple
+                :limit="1"
+                accept=".rar,.zip,.7z"
+                :on-exceed="handleExceed"
+                :file-list="fileList"
+              >
+                <el-button size="small" type="primary">点击上传</el-button>
+              </el-upload>
             </el-col>
-          </el-radio-group>
-        </el-form-item>
-        <!--
-        <el-form-item
-          label="姓名"
-          label-width="20%"
-          class="apply_program_input01"
-          id="apply_program_block6"
-        >
-          <el-col :span="12">
-            <el-input v-model="form.block6"></el-input>
-          </el-col>
-        </el-form-item>
+            <el-col :span="6">
+              <div>
+                  只能上传rar,zip,7z格式的文件
+                </div>
+            </el-col>
+          </el-form-item>
+        </el-row>
 
-        <el-form-item
-          label="工号"
-          label-width="20%"
-          class="apply_program_input01"
-          id="apply_program_user_id"
-        >
-          <el-col :span="12">
-            <el-input v-model="form.user_id"></el-input>
-          </el-col>
-        </el-form-item>
-        
-        <el-form-item
-          label="性别"
-          label-width="20%"
-          class="apply_program_input01"
-          id="apply_program_block7"
-        >
-          <el-col :span="12">
-            <el-input v-model="form.block7"></el-input>
-          </el-col>
-        </el-form-item>
-        <el-form-item
-          label="学历"
-          label-width="20%"
-          class="apply_program_input01"
-          id="apply_program_block8"
-        >
-          <el-col :span="12">
-            <el-input v-model="form.block8"></el-input>
-          </el-col>
-        </el-form-item>
-        <el-form-item
-          label="科室"
-          label-width="20%"
-          class="apply_program_input01"
-          id="apply_program_block9"
-        >
-          <el-col :span="12">
-            <el-input v-model="form.block9"></el-input>
-          </el-col>
-        </el-form-item>
-        -->
-        <el-form-item
-          label="办公电话"
-          label-width="20%"
-          class="apply_program_input01"
-          id="apply_program_office_phone"
-        >
-          <el-col :span="12">
-            <el-input v-model="form.office_phone"></el-input>
-          </el-col>
-        </el-form-item>
-        <el-form-item
-          label="传真"
-          label-width="20%"
-          class="apply_program_input01"
-          id="apply_program_fax"
-        >
-          <el-col :span="12">
-            <el-input v-model="form.fax"></el-input>
-          </el-col>
-        </el-form-item>
-        <el-form-item
-          label="手机"
-          label-width="20%"
-          class="apply_program_input01"
-          id="apply_program_phone"
-        >
-          <el-col :span="12">
-            <el-input v-model="form.phone"></el-input>
-          </el-col>
-        </el-form-item>
-        <el-form-item
-          label="电子邮箱"
-          label-width="20%"
-          class="apply_program_input01"
-          id="apply_program_email"
-        >
-          <el-col :span="12">
-            <el-input v-model="form.email"></el-input>
-          </el-col>
-        </el-form-item>
-        <el-form-item
-          label="目前主要研究方向"
-          label-width="20%"
-          class="apply_program_input01"
-          id="apply_program_project_direction"
-        >
-          <el-col :span="20">
-            <el-input v-model="form.project_direction"></el-input>
-          </el-col>
-        </el-form-item>
-        <el-form-item label="经费来源" label-width="10%">
-          <el-checkbox-group v-model="form.temp">
-            <el-checkbox
-              label="政府"
-              name="temp"
-              class="apply_program_moneyFromClass"
-              @click="fundingSource(1)"
-            ></el-checkbox>
-            <el-checkbox
-              label="基金会"
-              name="temp"
-              class="apply_program_moneyFromClass"
-              @click="fundingSource(2)"
-            ></el-checkbox>
-            <el-checkbox
-              label="国际组织"
-              name="temp"
-              class="apply_program_moneyFromClass"
-              @click="fundingSource(3)"
-            ></el-checkbox>
-            <el-checkbox
-              label="其他"
-              name="temp"
-              class="apply_program_moneyFromClass"
-              @click="fundingSource(4)"
-            ></el-checkbox>
-          </el-checkbox-group>
-        </el-form-item>
-        <el-form-item
-          label="研究内容摘要："
-          prop="desc"
-          label-width="30%"
-          class="apply_program_input01"
-          id="apply_program_project_abstract"
-        >
-          <el-input type="textarea" v-model="form.project_abstract"></el-input>
-        </el-form-item>
+        <el-row>
+          <el-form-item
+            label="项目单位"
+            label-width="150"
+            class="apply"
+            id="apply_program_institution"
+          >
+            <el-col :span="6">
+              <el-input v-model="form.institution"></el-input>
+            </el-col>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item
+            label="项目名称"
+            label-width="150"
+            class="apply"
+            id="apply_program_name"
+          >
+            <el-col :span="12">
+              <el-input v-model="form.name"></el-input>
+            </el-col>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="起止时间" id="apply_program_timeLabel01">
+            <el-col :span="8">
+              <el-date-picker
+                type="date"
+                placeholder="开始日期"
+                v-model="form.time1"
+                style="width: 100%"
+                id="apply_program_time1"
+                class="apply"
+                value-format="yyyy-MM"
+              ></el-date-picker>
+            </el-col>
+            <el-col class="line" :span="1" id="apply_program_timeCol01"
+              >----------</el-col
+            >
+            <el-col :span="8">
+              <el-date-picker
+                placeholder="结束日期"
+                v-model="form.time2"
+                style="width: 100%"
+                id="apply_program_time2"
+                class="apply"
+                value-format="yyyy-MM"
+              ></el-date-picker>
+            </el-col>
+          </el-form-item>
+        </el-row>
+
+        <el-row>
+          <el-form-item label="项目类别" id="el-form-item01">
+            <el-radio-group v-model="watch_project_type">
+              <el-col :span="20">
+                <el-radio label="A.新药物临床实验" class="apply"></el-radio>
+                <el-radio label="B.新器械临床实验" class="apply"></el-radio>
+                <el-radio label="C.新技术应用" class="apply"></el-radio>
+                <el-radio label="D.人体标本收集" class="apply"></el-radio>
+                <el-radio label="E.其他（请注明）" class="apply"></el-radio>
+              </el-col>
+              <el-col :span="4">
+                <el-input
+                  size="mini"
+                  @input="change($event)"
+                  :disabled="disable_type_input"
+                  v-model="project_typeE"
+                  id="apply_program_programInput"
+                ></el-input>
+              </el-col>
+            </el-radio-group>
+          </el-form-item>
+        </el-row>
+
+        <el-row>
+          <el-form-item
+            label="办公电话"
+            class="apply"
+            id="apply_program_office_phone"
+          >
+            <el-col :span="6">
+              <el-input v-model="form.office_phone"></el-input>
+            </el-col>
+          </el-form-item>
+        </el-row>
+
+        <el-row>
+          <el-form-item label="传真" class="apply" id="apply_program_fax">
+            <el-col :span="6">
+              <el-input v-model="form.fax"></el-input>
+            </el-col>
+          </el-form-item>
+        </el-row>
+
+        <el-row>
+          <el-form-item label="手机" class="apply" id="apply_program_phone">
+            <el-col :span="6">
+              <el-input v-model="form.phone"></el-input>
+            </el-col>
+          </el-form-item>
+        </el-row>
+
+        <el-row>
+          <el-form-item label="电子邮箱" class="apply" id="apply_program_email">
+            <el-col :span="6">
+              <el-input v-model="form.email"></el-input>
+            </el-col>
+          </el-form-item>
+        </el-row>
+
+        <el-row>
+          <el-form-item
+            label="目前主要研究方向"
+            class="apply"
+            id="apply_program_project_direction"
+          >
+            <el-col :span="12">
+              <el-input v-model="form.project_direction"></el-input>
+            </el-col>
+          </el-form-item>
+        </el-row>
+
+        <el-row>
+          <el-form-item label="经费来源">
+            <el-col :span="12">
+              <el-checkbox-group v-model="form.temp">
+                <el-checkbox
+                  label="政府"
+                  name="temp"
+                  class="apply"
+                  @click="fundingSource(1)"
+                ></el-checkbox>
+                <el-checkbox
+                  label="基金会"
+                  name="temp"
+                  class="apply"
+                  @click="fundingSource(2)"
+                ></el-checkbox>
+                <el-checkbox
+                  label="国际组织"
+                  name="temp"
+                  class="apply"
+                  @click="fundingSource(3)"
+                ></el-checkbox>
+                <el-checkbox
+                  label="其他"
+                  name="temp"
+                  class="apply"
+                  @click="fundingSource(4)"
+                ></el-checkbox>
+              </el-checkbox-group>
+            </el-col>
+          </el-form-item>
+        </el-row>
+
+        <el-row>
+          <el-form-item
+            label="研究内容摘要："
+            prop="desc"
+            class="apply"
+            id="apply_program_project_abstract"
+          >
+            <el-input
+              type="textarea"
+              autosize
+              v-model="form.project_abstract"
+            ></el-input>
+          </el-form-item>
+        </el-row>
       </el-form>
+
       <el-button type="primary" plain id="apply_submit" @click="Submit"
         >提交申请</el-button
       >
@@ -426,12 +384,7 @@ export default {
     Submit: function () {
       this.saveInfo();
       if(this.form.application_file==""){
-        this.$alert("您忘记上传文件了！", "请上传文件", {
-              confirmButtonText: "确定",
-              callback: (action) => {
-                return;
-              },
-            });
+        this.$message.error("您忘记上传文件了!");
         return;
       }
       axios({
@@ -458,18 +411,15 @@ export default {
       .then(res => {
           if (res.data.code == 200) {
             this.saveInfo();
-            this.$alert("请前往“我的申请”查看", "上传成功", {
-              confirmButtonText: "确定",
-              callback: (action) => {
-                this.$router.replace("/backstage/myapplications").catch((err) => {err;});
-              },
-            });
-          }else this.$alert("错误信息：" + res.data.message, "失败", {
-              confirmButtonText: "确定"
-            });
+            this.$message({
+          message: '成功，请在我的申请中提交项目',
+          type: 'success'
+        });
+            this.$router.replace("/backstage/myapplications").catch((err) => {err;});
+          }else this.$message.error(res.data.message);
         })
         .catch((err) => {
-          alert(err);
+          this.$message.error(err);
         });
     },
     fundingSource: function (choice) {
@@ -503,68 +453,3 @@ export default {
   margin-top: 10%;
 }
 </style>  
-
-<style>
-#apply_program_next {
-  position: absolute;
-  top: 5%;
-  left: 25%;
-  width: 50%;
-  height: 150%;
-}
-.apply_program_input01 {
-  position: relative;
-  left: 20%;
-  width: 80%;
-}
-#apply_program_programInput {
-  position: relative;
-  top: 20px;
-  left: 90%;
-  width: 100%;
-  height: 30px;
-  margin-top: -10%;
-}
-#apply_program_programId05 {
-  position: relative;
-  top: 20px;
-  height: 20px;
-  left: -45%;
-}
-.apply_program_input01 {
-  position: relative;
-  margin-top: 3%;
-}
-#el-form-item01 {
-  position: relative;
-  margin-top: 3%;
-}
-#apply_program_block6 {
-  position: relative;
-  margin-top: 5%;
-}
-#apply_program_project_direction {
-  position: relative;
-  left: 10%;
-}
-.apply_program_moneyFromClass {
-  width: 12%;
-  position: relative;
-  left: -8%;
-}
-#apply_program_project_abstract {
-  position: relative;
-  left: 0%;
-}
-#apply_program_button02 {
-  position: relative;
-  top: 1%;
-}
-#apply_program_timeCol01 {
-  font-size: 20px;
-  width: 6%;
-  position: relative;
-  left: 6.5%;
-  margin-top: 0.8%;
-}
-</style>

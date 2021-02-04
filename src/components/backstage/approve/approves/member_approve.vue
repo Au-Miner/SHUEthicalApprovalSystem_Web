@@ -118,7 +118,7 @@
       <el-table-column width="200" prop="userId" label="用户Id"></el-table-column>
       <el-table-column width="250" prop="creationTime" label="创建时间"></el-table-column>
       <el-table-column width="200" prop="type" label="类型"></el-table-column>
-      <el-table-column width="200" prop="status" label="状态"></el-table-column>
+      <el-table-column prop="status" label="状态"></el-table-column>
       <el-table-column width="150" fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button size="mini" type="primary" @click="expand(scope.row)">展开</el-button>
@@ -138,7 +138,8 @@ export default {
     return {
       information: "",
       textarea: "",
-      fileUrl: ""
+      fileUrl: "",
+      fileList:[],
     };
   },
   mounted() {
@@ -173,6 +174,8 @@ export default {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
     approval: function(row, choice) {
+      if(this.textarea==''&&(choice==-1||choice==0)){
+                      this.$message.error('未填写驳回原因');return;}
       axios({
         method: "post",
         url: "/member/approval",
@@ -185,16 +188,15 @@ export default {
       })
         .then(res => {
           if (res.data.code === 200) {
-            this.$alert("项目编号为" + row.id + "的申请已审核", "审核成功", {
-              confirmButtonText: "确定"
-            });
+            this.$message({
+          message: '成功',
+          type: 'success'
+        });
           } else
-            this.$alert("错误信息：" + res.data.message, "审核失败", {
-              confirmButtonText: "确定"
-            });
+            this.$message.error(res.data.message);
         })
         .catch(err => {
-          alert(err);
+          this.$message.error(err);
         });
       this.load();
       this.fileUrl = "";
@@ -237,10 +239,10 @@ export default {
             row.applicationFile = res.data.data.applicationFile;
             row.applicationPdf = res.data.data.applicationPdf;
             this.$refs.multipleTable.toggleRowExpansion(row, true);
-          } else alert(res.data.code);
+          } else this.$message.error(res.data.message);
         })
         .catch(err => {
-          alert(err);
+          this.$message.error(err);
         });
     },
     load: function() {
@@ -254,7 +256,7 @@ export default {
           } else this.information = res.data.code;
         })
         .catch(err => {
-          alert(err);
+          this.$message.error(err);
         });
     },
     test_post() {}

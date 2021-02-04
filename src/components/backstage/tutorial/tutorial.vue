@@ -1,11 +1,36 @@
 <template>
-  <!-- <p style="color: red; left:25px; position:absolute;">教学页</p> -->
-  <div>
-    <div id="tutorial-button01-father">
+  <div id="whiteBG">
+    <!--<div id="tutorial-button01-father">
       <div id="tutorial-button01">{{tutorial_button01_data}}</div>
-    </div>
-    <div id="tutorial-title01">{{tutorial_title01_data}}</div>
-    <img id="tutorial_img01" v-bind:src="tutorial_img01_data.src"/>
+    </div>-->
+    <h1 id="title">申报指南</h1>
+    <!--<div id="tutorial-title01">{{tutorial_title01_data}}</div>-->
+    <!--<img id="tutorial_img01" v-bind:src="tutorial_img01_data.src"/>-->
+  <h2 style="position:relative;margin: 0 auto;top:150px;">申请创建</h2>
+  <div id="steps1">
+  <el-steps :active="3" align-center :space="200">
+    <el-step icon="el-icon-edit" title="申请人创建申请" description="文章/项目/其他申请"></el-step>
+    <el-step icon="el-icon-upload" title="申请人提交申请" description="进入我的申请页面提交申请"></el-step>
+    <el-step icon="el-icon-s-check" title="进入审核流程"></el-step>
+  </el-steps>
+  </div>
+  <h2 style="position:relative;margin: 0 auto;top:225px;">审核</h2>
+  <div id="steps2">
+  <el-steps :active="4" align-center :space="200">
+    <el-step icon="el-icon-s-check" title="科研秘书初审"></el-step>
+    <el-step icon="el-icon-s-check" title="二级学院领导复审"></el-step>
+    <el-step icon="el-icon-s-check" title="科技伦理委员会审核"></el-step>
+    <el-step icon="el-icon-document-checked" title="委员会出具审查同意书"></el-step>
+  </el-steps>
+  </div>
+  <h2 style="position:relative;margin: 0 auto;top:300px;">完成项目</h2>
+  <div id="steps3">
+  <el-steps :active="3" align-center :space="200">
+    <el-step icon="el-icon-upload" title="提交伦理执行情况表格"></el-step>
+    <el-step icon="el-icon-upload" title="提交伦理工作总结"></el-step>
+    <el-step icon="el-icon-upload" title="提交跟踪情况表"></el-step>
+  </el-steps>
+  </div>
   </div>
 </template>
 
@@ -53,5 +78,35 @@ export default {
   left: 20%;
   width: 55%;
   height: 85%;
+}
+#steps1{
+  position:relative;
+  top:180px;
+  margin: 0 auto;
+  width: 600px;
+}
+#steps2{
+  position: relative;
+  margin: 0 auto;
+  top:250px;
+  width:800px;
+}
+#steps3{
+  position: relative;
+  top:330px;
+  margin: 0 auto;
+  width: 600px;
+}
+#whiteBG{
+  background-image: linear-gradient(white);
+  width: 100%;
+  height:100%;
+  position:absolute;
+}
+#title
+{
+  position: relative;
+  top:50px;
+  margin: 0 auto;
 }
 </style>
