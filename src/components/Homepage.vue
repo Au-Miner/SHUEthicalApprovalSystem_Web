@@ -6,61 +6,93 @@
       <div id="background01"></div>
       <div id="title_text01">项目伦理申报中心</div>
       <el-button @click="clickEvent03" type="primary" id="button01">活动展示</el-button>
-      <el-button @click="clickEvent02" type="primary" id="button02">伦理常识</el-button>
+      <el-button @click="clickEvent02" type="primary" id="button02">上大信息</el-button>
       <el-button @click="jmp('login')" type="primary" id="button03">我要申报</el-button>
     </div>
 
-    <div id="carousel_Map">
-      <el-carousel trigger="click">
+    <div id="carousel_Map" @wheel.prevent="handleScroll1">
+      <el-carousel trigger="click"> 
         <el-carousel-item v-for="item in imgList1" :key="item.name">
           <img :src="item.src" style="height:100%;width:100%;" />
         </el-carousel-item>
       </el-carousel>
     </div>
 
-    <div id="knowledge_Ethics" style="display:none">
-      <div id="knowledge_Ethics_left">
-        <el-carousel trigger="focus">
-          <div v-if="choice > 0">
-            <el-button
-              type="warning"
-              icon="el-icon-close"
-              id="knowledge_Ethics_Getback"
-              @click="clickEvent01"
-            ></el-button>
-            <el-carousel-item v-for="item in imgList2" :key="item.name">
-              <img :src="item.src" style="height:100%;width:100%;" />
-            </el-carousel-item>
+    <div id="knowledge_Ethics" style="display:inline">
+      <div id="knowledge_Ethics_page01">
+          <el-button type="primary"
+           icon="el-icon-back"
+          id="knowledge_Ethics_Getback"
+                @click="clickEvent01"
+          >
+            返回</el-button>
+          <div id="knowledge_Ethics_left01">
+              <div id="knowledge_Ethics_left01_text01">关于·上大</div>
+              <div id="knowledge_Ethics_left01_text02">自强不息 &nbsp 先天下之忧而忧 &nbsp 后天下之乐而乐</div>
           </div>
-        </el-carousel>
-      </div>
-      <div id="knowledge_Ethics_right">
-        <p class="knowledge_Ethics_right_class">有一座城市，叫众志成城;有一批战士，叫白衣天使;有一种精神，叫逆流而上;有一种信心，叫万众一心!</p>
-        <p
-          class="knowledge_Ethics_right_class"
-        >2020年的春节，在所有中国人的心里，注定是一个永生难忘的记忆。新型冠状病毒的肆虐，让辞旧迎新的钟声更加沉重，人们脸上的那一个个口罩，让这个春节倍感冷清。</p>
-        <p
-          class="knowledge_Ethics_right_class"
-        >这个冬天，梅花依然宁静地开放;这个冬天，蓝天依旧明净如洗;这个冬天的武汉却非常艰难，全国人民却非常艰难。在这特殊的日子里，我们谨遵医嘱，静静地待在家中。我们为武汉忧心忡忡，我们为治愈病例的增多而感到高兴，为武汉的人们牵肠挂肚。</p>
-        <p
-          class="knowledge_Ethics_right_class"
-        >与此同时，有一群人，他们正冲在前方，用自己的平凡之躯为身后的亿万中国人筑起防护的堡垒,他们舍小家为大家，不眠不休，战斗在这场没有硝烟的战场上的最前沿。他们是来自全国各地的最美逆行者，他们是新时代的最美先锋人物，他们是可亲可敬的白衣天使。</p>
-        <p
-          class="knowledge_Ethics_right_class"
-        >这世上哪有什么岁月静好，只是因为有人在替我们负重前行罢了，这世上哪有什么天生的英雄，只有因为人们需要，才有人愿意牺牲自己成为英雄。</p>
-        <p
-          class="knowledge_Ethics_right_class"
-        >普通的我们无法到达正面战场与病毒作战，我们只能做好我们的后勤工作，不出门，少出门，勤洗手，戴口罩，这是为了不给他们添麻烦，祝愿他们平安早日凯旋。</p>
-        <p class="knowledge_Ethics_right_class">彩虹为证，千古不变，我要高歌。为生命喜悦，万物都歌颂你的慈爱，大地诉说你的恩情。</p>
-        <p class="knowledge_Ethics_right_class">致敬白衣天使!</p>
-        <p class="knowledge_Ethics_right_class">致敬最美逆行者!</p>
-        <p class="knowledge_Ethics_right_class">致敬抗击疫情的每一个人!</p>
-      </div>
-      <img src="../assets/knowledge_ethics_pic04.jpg" id="knowledge_Ethics_right_pic01" />
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id01"></div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id02">
+            <div class="knowledge_Ethics_block01_num01">35742</div>
+            <div class="knowledge_Ethics_block01_txt01">全日制学生</div>
+          </div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id03"></div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id04"></div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id05"></div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id06">
+                        <div class="knowledge_Ethics_block01_num01">3289</div>
+            <div class="knowledge_Ethics_block01_txt01">教师</div>
+          </div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id07">
+                        <div class="knowledge_Ethics_block01_num01">95</div>
+            <div class="knowledge_Ethics_block01_txt01">本科招生专业</div>
+          </div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id08"></div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id09">
+                        <div class="knowledge_Ethics_block01_num01">1922</div>
+            <div class="knowledge_Ethics_block01_txt01">上大创办时间</div>
+          </div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id10"></div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id11">
+                        <div class="knowledge_Ethics_block01_num01">46</div>
+            <div class="knowledge_Ethics_block01_txt01">博士招生专业</div>
+          </div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id12"></div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id13"></div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id14">
+                        <div class="knowledge_Ethics_block01_num01">23482</div>
+            <div class="knowledge_Ethics_block01_txt01">本科生</div>
+          </div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id15"></div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id16"></div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id17">
+                        <div class="knowledge_Ethics_block01_num01">6</div>
+            <div class="knowledge_Ethics_block01_txt01">两院院士</div>
+          </div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id18">
+                        <div class="knowledge_Ethics_block01_num01">12447</div>
+            <div class="knowledge_Ethics_block01_txt01">研究生</div>
+          </div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id19">
+
+          </div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id20">
+                                    <div class="knowledge_Ethics_block01_num01">742</div>
+            <div class="knowledge_Ethics_block01_txt01">外国留学生</div>
+          </div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id21"></div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id22"></div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id23">
+                        <div class="knowledge_Ethics_block01_num01">242</div>
+            <div class="knowledge_Ethics_block01_txt01">图书馆藏书(万册)</div>
+          </div>
+          <div class="knowledge_Ethics_block01" id="knowledge_Ethics_block01_id24"></div>
+          </div>
     </div>
 
-    <div id="mainbody_Interface" style="display:none">
+    <div id="mainbody_Interface" style="display:inline">
       <div id="title_text02">科技伦理服务系统·要闻</div>
+      <!-- <el-button type="primary" icon="el-icon-arrow-up"></el-button>  -->
+      <el-button class="el-icon-arrow-up" id="mainbody_Interface_returnBotton" @click="handleScroll2"></el-button>
       <el-carousel trigger="focus" id="mainbody_carousel_pic01">
         <el-carousel-item v-for="item in imgList2" :key="item.name">
           <img :src="item.src" style="height:100%;width:100%;" />
@@ -131,7 +163,7 @@
       <img src="../assets/mainbody_Interface_pic03.png" alt id="background_pic02" />
     </div>
 
-    <div id="background" style="display:none">
+    <div id="background" style="display:inline">
       <div id="background_fake"></div>
       <div>
         <img src="../assets/background_pic03.jpg" alt id="background_pic01" />
@@ -157,10 +189,6 @@
     </div>
   </div>
 </template>
-
-
-
-
 
 
 <script>
@@ -228,16 +256,15 @@ export default {
   methods: {
     clickEvent01: function() {
       // this.choice = 0;
-      var change1 = document.getElementById("title_Start");
-      var change2 = document.getElementById("carousel_Map");
       var change3 = document.getElementById("knowledge_Ethics");
       var change4 = document.getElementById("mainbody_Interface");
       var change5 = document.getElementById("background");
-      change1.style.display = "inline";
-      change2.style.display = "inline";
-      change3.style.display = "none";
-      change4.style.display = "none";
-      change5.style.display = "none";
+      change4.style.display = "inline";
+      change5.style.display = "inline";
+      $("#knowledge_Ethics").animate({left: '100%'}, 600);
+            var timer = setTimeout(function(){
+            change3.style.display = "none";
+        },600);
       // change1.style.zIndex="10";
       // change2.style.zIndex=10;
       // console.log(change1.style.zIndex);
@@ -246,34 +273,40 @@ export default {
       // console.log("标题下轮播图打开！");
     },
     clickEvent02: function() {
-      var change1 = document.getElementById("title_Start");
-      var change2 = document.getElementById("carousel_Map");
       var change3 = document.getElementById("knowledge_Ethics");
       var change4 = document.getElementById("mainbody_Interface");
       var change5 = document.getElementById("background");
-      change1.style.display = "none";
-      change2.style.display = "none";
       change3.style.display = "inline";
       change4.style.display = "none";
       change5.style.display = "none";
-      // console.log("标题隐藏！");
-      // console.log("标题下轮播图隐藏！");
+      $("#knowledge_Ethics").animate({left: '0px'}, 600);
     },
     clickEvent03: function() {
-      var change1 = document.getElementById("title_Start");
-      var change2 = document.getElementById("carousel_Map");
-      var change3 = document.getElementById("knowledge_Ethics");
-      var change4 = document.getElementById("mainbody_Interface");
-      var change5 = document.getElementById("background");
-      change1.style.display = "inline";
-      change2.style.display = "none";
-      change3.style.display = "none";
-      change4.style.display = "inline";
-      change5.style.display = "inline";
+      $("#mainbody_Interface").animate({top: '125px'}, 600);
+      $("#background").animate({top: '-758px'}, 1);
     },
     jmp: function(path) {
       this.$router.push(path);
-    }
+    },
+    handleScroll1: function(e) {
+      // console.log(e.wheelDelta);
+      // console.log(typeof(e.wheelDelta));
+      if (e.wheelDelta == -120) {
+        // var tmp = document.getElementById("mainbody_Interface");
+        // tmp.style.transition='width 2s'; 
+
+        // var target = 'mainbody_Interface';
+        // var target_roll_height = $('#' + target).offset().top;
+        // $("html,body").animate({scrollTop: target_roll_height}, 800);
+
+        $("#mainbody_Interface").animate({top: '125px'}, 600);
+        $("#background").animate({top: '-758px'}, 600);
+      }
+    },
+    handleScroll2: function(e) {
+      $("#mainbody_Interface").animate({top: '938px'}, 600);
+      $("#background").animate({top: '55px'}, 600);
+    },
   }
 };
 </script>
@@ -292,11 +325,10 @@ export default {
   z-index: 10;
 }
 #title_Start:hover #background01 {
-  transition: all 0.2s ease-in;
+  transition: all 0.3s ease-in;
   width: 100%;
   height: 125px;
   background-color: #245086;
-  background-image: linear-gradient(#245086, #245086);
   position: absolute;
   top: 0px;
   left: 0px;
@@ -304,16 +336,17 @@ export default {
   opacity: 1;
 }
 #background01 {
-  transition: all 0.2s ease-in;
+  transition: all 0.3s ease-in;
   width: 100%;
   height: 125px;
-  /* height: 170px; */
-  background-image: linear-gradient(#245086, #698cb6 70%);
+  background-image: linear-gradient(#245086, #3375b6 90%);
   position: absolute;
   top: 0px;
   left: 0px;
   z-index: 9;
-  opacity: 0.9;
+  opacity: 0.8;
+  transition: background-image 4s;
+  -webkit-transition:background-image 4s;
 }
 #picture01 {
   height: 180px;
@@ -325,10 +358,10 @@ export default {
 }
 #title_text01 {
   height: 30%;
-  width: 17.2%;
+  width: 30%;
   position: absolute;
-  left: 20.3%;
-  top: 45px;
+  left: 15.3%;
+  top: 35%;
   font-size: 220%;
   color: #fefefe;
   z-index: 10;
@@ -423,26 +456,36 @@ export default {
 
 
 <style>
-#knowledge_Ethics_left .el-carousel {
+#knowledge_Ethics  {
+  position: absolute;
+  top: 0px;
+  left: 100%;
+  width: 100%;
+  z-index: 10;
+  height: 0px;
+}
+#knowledge_Ethics_Getback {
+  border-radius: 200px;
+  border-width: 3px;
+  border-color: aliceblue;
+  position: absolute;
+  top: 60px;
+  width: 6%;
+  height: 60px;
+  left: 2.6%;
+  background-color: rgba(255, 255, 255, 0);
+  opacity: 0.7;
+  font-size: 120%;
+  z-index: 10;
+}
+/* #knowledge_Ethics_left .el-carousel {
   position: absolute;
   width: 65%;
   height: 937px;
   top: 0px;
   left: 0px;
-}
-#knowledge_Ethics_left #knowledge_Ethics_Getback {
-  border-radius: 100px;
-  position: absolute;
-  top: 405px;
-  width: 6%;
-  height: 24%;
-  left: 2.6%;
-  background-color: rgb(240, 137, 137);
-  opacity: 0.5;
-  font-size: 150%;
-  z-index: 3;
-}
-#knowledge_Ethics_left .el-carousel__arrow.el-carousel__arrow--right {
+} */
+/* #knowledge_Ethics_left .el-carousel__arrow.el-carousel__arrow--right {
   position: absolute;
   top: 405px;
   width: 4.2%;
@@ -496,7 +539,7 @@ export default {
   top: 0px;
   left: 65%;
   z-index: 6;
-}
+} */
 </style>
 
 
@@ -506,7 +549,7 @@ export default {
   height: 864px;
   width: 21.8%;
   position: absolute;
-  top: 461px;
+  top: 391px;
   left: 0px;
   z-index: 7;
 }
@@ -517,16 +560,16 @@ export default {
   height: 479px;
   width: 17.6%;
   position: absolute;
-  top: 846px;
+  top: 776px;
   left: 82.3%;
   z-index: 7;
 }
 #mainbody_Interface #title_text02 {
   height: 170px;
-  width: 27.6%;
+  width: 37.6%;
   position: absolute;
-  top: 205px;
-  left: 36.25%;
+  top: 85px;
+  left: 31.25%;
   font-size: 40px;
   z-index: 8;
   text-align: center;
@@ -535,7 +578,7 @@ export default {
   height: 382px;
   width: 35.3%;
   position: absolute;
-  top: 295px;
+  top: 225px;
   left: 13.9%;
   z-index: 8;
 }
@@ -543,7 +586,7 @@ export default {
   height: 382px;
   width: 35.3%;
   position: absolute;
-  top: 707px;
+  top: 637px;
   left: 50.8%;
   z-index: 8;
 }
@@ -556,15 +599,25 @@ export default {
 #mainbody_Interface {
   background-color: #eeebea;
   position: absolute;
-  top: 125px;
+  top: 937px;
   width: 100%;
-  height: 1525px;
+  height: 1265px;
   left: 0px;
+  z-index: 9;
+}
+#mainbody_Interface_returnBotton {
+  position: absolute;
+  left: 4%;
+  top: 70px;
+  width: 5%;
+  height: 60px;
+  z-index: 8;
+    font-size: 200%;
 }
 #mainbody_Interface #mainbody_Interface_background_pic01 {
   position: absolute;
   left: 33.9%;
-  top: 1180px;
+  top: 1110px;
   width: 6.25%;
   height: 80px;
   z-index: 8;
@@ -572,7 +625,7 @@ export default {
 #mainbody_Interface #mainbody_Interface_background_pic02 {
   position: absolute;
   left: 53.1%;
-  top: 1180px;
+  top: 1110px;
   width: 6.25%;
   height: 80px;
   z-index: 8;
@@ -580,7 +633,7 @@ export default {
 #mainbody_Interface #mainbody_Interface_background_text01 {
   position: absolute;
   left: 39.8%;
-  top: 1180px;
+  top: 1110px;
   width: 6.25%;
   height: 80px;
   z-index: 8;
@@ -591,7 +644,7 @@ export default {
 #mainbody_Interface #mainbody_Interface_background_text02 {
   position: absolute;
   left: 59.1%;
-  top: 1180px;
+  top: 1110px;
   width: 6.25%;
   height: 80px;
   z-index: 8;
@@ -613,7 +666,7 @@ export default {
   position: absolute;
   background-color: white;
   left: 50.8%;
-  top: 295px;
+  top: 225px;
   width: 16.9%;
   height: 176px;
   z-index: 8;
@@ -625,7 +678,7 @@ export default {
   background-color: white;
   position: absolute;
   left: 69.2%;
-  top: 295px;
+  top: 225px;
   width: 16.9%;
   height: 176px;
   z-index: 8;
@@ -637,7 +690,7 @@ export default {
   background-color: white;
   position: absolute;
   left: 50.8%;
-  top: 501px;
+  top: 428px;
   width: 16.9%;
   height: 176px;
   z-index: 8;
@@ -649,7 +702,7 @@ export default {
   background-color: white;
   position: absolute;
   left: 69.2%;
-  top: 501px;
+  top: 428px;
   width: 16.9%;
   height: 176px;
   z-index: 8;
@@ -661,7 +714,7 @@ export default {
   background-color: white;
   position: absolute;
   left: 13.9%;
-  top: 707px;
+  top: 637px;
   width: 16.9%;
   height: 176px;
   z-index: 8;
@@ -673,7 +726,7 @@ export default {
   background-color: white;
   position: absolute;
   left: 32.3%;
-  top: 707px;
+  top: 637px;
   width: 16.9%;
   height: 176px;
   z-index: 8;
@@ -685,7 +738,7 @@ export default {
   background-color: white;
   position: absolute;
   left: 13.9%;
-  top: 913px;
+  top: 840px;
   width: 16.9%;
   height: 176px;
   z-index: 8;
@@ -697,7 +750,7 @@ export default {
   background-color: white;
   position: absolute;
   left: 32.3%;
-  top: 913px;
+  top: 840px;
   width: 16.9%;
   height: 176px;
   z-index: 8;
@@ -708,6 +761,21 @@ export default {
 
 
 <style>
+#background {
+  position: absolute;
+  left: 0px;
+  top: 55px;
+  width: 100%;
+  height: 580px;
+} 
+#background_fake {
+  position: absolute;
+  left: 0px;
+  top: 2147px;
+  width: 100%;
+  height: 580px;
+  background-color: #0c4175;
+}
 #background .background_class01 {
   font-size: 20px;
   color: #a0bcd8;
@@ -718,56 +786,48 @@ export default {
 }
 #background #background_text03 {
   left: 28.6%;
-  top: 1600px;
+  top: 2287px;
 }
 #background #background_text04 {
   left: 28.6%;
-  top: 1660px;
+  top: 2347px;
 }
 #background #background_text05 {
   left: 28.6%;
-  top: 1720px;
+  top: 2407px;
 }
 #background #background_text06 {
   left: 28.6%;
-  top: 1780px;
+  top: 2467px;
 }
 #background #background_text07 {
   left: 28.6%;
-  top: 1840px;
+  top: 2527px;
 }
 #background #background_text08 {
   left: 39.1%;
-  top: 1600px;
+  top: 2287px;
 }
 #background #background_text09 {
   left: 39.1%;
-  top: 1660px;
+  top: 2347px;
 }
 #background #background_text10 {
   left: 39.1%;
-  top: 1720px;
+  top: 2407px;
 }
 #background #background_text11 {
   left: 39.1%;
-  top: 1780px;
+  top: 2467px;
 }
 #background #background_text12 {
   left: 39.1%;
-  top: 1840px;
-}
-#background_fake {
-  position: absolute;
-  left: 0px;
-  top: 1460px;
-  width: 100%;
-  height: 580px;
-  background-color: #0c4175;
+  top: 2527px;
 }
 #background #background_pic01 {
   position: absolute;
   left: 4.2%;
-  top: 1470px;
+  top: 2157px;
   width: 3.125%;
   height: 60px;
   z-index: 8;
@@ -775,7 +835,7 @@ export default {
 #background #background_pic02 {
   position: absolute;
   left: 53.1%;
-  top: 1470px;
+  top: 2157px;
   width: 3.125%;
   height: 60px;
   z-index: 8;
@@ -783,7 +843,7 @@ export default {
 #background #background_text01 {
   position: absolute;
   left: 5.2%;
-  top: 1484px;
+  top: 2171px;
   width: 10.4%;
   height: 60px;
   font-size: 20px;
@@ -793,7 +853,7 @@ export default {
 #background #background_text02 {
   position: absolute;
   left: 54.68%;
-  top: 1484px;
+  top: 2171px;
   width: 10.4%;
   height: 60px;
   font-size: 20px;
@@ -803,7 +863,7 @@ export default {
 #background #background_line {
   position: absolute;
   left: 4.2%;
-  top: 1484px;
+  top: 2171px;
   width: 91.7%;
   height: 47px;
   font-size: 20px;
@@ -814,7 +874,7 @@ export default {
 #background #background_pic03 {
   position: absolute;
   left: 4.1%;
-  top: 1554px;
+  top: 2247px;
   width: 18.75%;
   height: 400px;
   font-size: 20px;
@@ -825,12 +885,241 @@ export default {
 #background #background_pic04 {
   position: absolute;
   left: 58.85%;
-  top: 1554px;
+  top: 2247px;
   width: 39.6%;
   height: 469px;
   font-size: 20px;
   color: #a0bcd8;
   z-index: 8;
   border-bottom: 2px solid #a0bcd8;
+}
+</style>
+
+
+<style>
+#knowledge_Ethics_left01 {
+  width: 20%;
+    position: absolute;
+    left: 0%;
+    top: -300%;
+    height: 937px;
+    /* height: 1057px; */
+    background: url(../assets/knowledge_ethics_pic05.jpg) center center no-repeat; 
+    background-size: cover;
+        z-index: 9;
+}
+#knowledge_Ethics_left01_text01 {
+  color: #ffffff;
+  font-size: 45px;
+  text-align: center;
+    width: 15%;
+    position: absolute;
+    left: 30%;
+    top: 30%;
+    height: 937px;
+    z-index: 9;
+}
+#knowledge_Ethics_left01_text02 {
+    color: #ffffff;
+    font-size: 25px;
+  text-align: center;
+    width: 1%;
+    position: absolute;
+    left: 58%;
+    top: 15%;
+    height: 937px;
+    z-index: 9;
+}
+.knowledge_Ethics_block01 {
+  width: 13.333%;
+  height: 234.25px;
+  /* background-color: aqua; */
+}
+#knowledge_Ethics_block01_id01 {
+    position: absolute;
+    left: 20%;
+    top: 0px;
+    z-index: 9;
+    background-color: #6780ad;
+}
+#knowledge_Ethics_block01_id02 {
+    position: absolute;
+    left: 20%;
+    top: 234.25px;
+    z-index: 9;
+    background-color: #4B6695;
+}
+#knowledge_Ethics_block01_id03 {
+    position: absolute;
+    left: 20%;
+    top: 468.5px;
+    z-index: 9;
+    background-color: #263E64;
+    background: url(../assets/SHU_pic05.jpg) center center no-repeat; 
+    background-size: cover;
+}
+#knowledge_Ethics_block01_id04 {
+    position: absolute;
+    left: 20%;
+    top: 702.75px;
+    z-index: 9;
+    background-color: #5B75A3;
+}
+#knowledge_Ethics_block01_id05 {
+    position: absolute;
+    left: 33.33%;
+    top: 0px;
+    z-index: 9;
+    background-color: #4B6695;
+}
+#knowledge_Ethics_block01_id06 {
+    position: absolute;
+    left: 33.33%;
+    top: 234.25px;
+    z-index: 9;
+    background-color: #5772A1;
+}
+#knowledge_Ethics_block01_id07 {
+    position: absolute;
+    left: 33.33%;
+    top: 468.5px;
+    z-index: 9;
+    background-color: #6780AD;
+}
+#knowledge_Ethics_block01_id08 {
+    position: absolute;
+    left: 33.33%;
+    top: 702.75px;
+    z-index: 9;
+    background-color: #314B7D;
+}
+#knowledge_Ethics_block01_id09 {
+    position: absolute;
+    left: 46.67%;
+    top: 0px;
+    z-index: 9;
+    background-color: #385284;
+}
+#knowledge_Ethics_block01_id10 {
+    position: absolute;
+    left: 46.67%;
+    top: 234.25px;
+    z-index: 9;
+    background-color: #263D64;
+    background: url(../assets/SHU_pic02.jpg) center center no-repeat; 
+    background-size: cover;
+}
+#knowledge_Ethics_block01_id11 {
+    position: absolute;
+    left: 46.67%;
+    top: 468.5px;
+    z-index: 9;
+    background-color: #355081;
+}
+#knowledge_Ethics_block01_id12 {
+    position: absolute;
+    left: 46.67%;
+    top: 702.75px;
+    z-index: 9;
+    background-color: #466193;
+        background: url(../assets/SHU_pic07.jpg) center center no-repeat; 
+    background-size: cover;
+}
+#knowledge_Ethics_block01_id13 {
+    position: absolute;
+    left: 60%;
+    top: 0px;
+    z-index: 9;
+    background-color: #445D8C;
+}
+#knowledge_Ethics_block01_id14 {
+    position: absolute;
+    left: 60%;
+    top: 234.25px;
+    z-index: 9;
+    background-color: #2F497A;
+}
+#knowledge_Ethics_block01_id15 {
+    position: absolute;
+    left: 60%;
+    top: 468.5px;
+    z-index: 9;
+    background-color: #416090;
+    background: url(../assets/SHU_pic03.jpg) center center no-repeat; 
+    background-size: cover;
+}
+#knowledge_Ethics_block01_id16 {
+    position: absolute;
+    left: 60%;
+    top: 702.75px;
+    z-index: 9;
+    background-color: #36578B;
+}
+#knowledge_Ethics_block01_id17 {
+    position: absolute;
+    left: 73.33%;
+    top: 0px;
+    z-index: 9;
+    background-color: #5B75A3;
+}
+#knowledge_Ethics_block01_id18 {
+    position: absolute;
+    left: 73.33%;
+    top: 234.25px;
+    z-index: 9;
+    background-color: #3A578A;
+}
+#knowledge_Ethics_block01_id19 {
+    position: absolute;
+    left: 73.33%;
+    top: 468.5px;
+    z-index: 9;
+    background-color: #5B75A3;
+}
+#knowledge_Ethics_block01_id20 {
+    position: absolute;
+    left: 73.33%;
+    top: 702.75px;
+    z-index: 9;
+    background-color: #445D8C;
+}
+#knowledge_Ethics_block01_id21 {
+    position: absolute;
+    left: 86.67%;
+    top: 0px;
+    z-index: 9;
+    background-color: #405A89;
+}
+#knowledge_Ethics_block01_id22 {
+    position: absolute;
+    left: 86.67%;
+    top: 234.25px;
+    z-index: 9;
+    background-color: #314E7F;
+    background: url(../assets/SHU_pic04.jpg) center center no-repeat; 
+    background-size: cover;
+}
+#knowledge_Ethics_block01_id23 {
+    position: absolute;
+     left: 86.67%;
+    top: 468.5px;
+    z-index: 9;
+    background-color: #2F497A;
+}
+#knowledge_Ethics_block01_id24 {
+    position: absolute;
+    left: 86.67%;
+    top: 702.75px;
+    z-index: 9;
+    background-color: #395486;
+}
+.knowledge_Ethics_block01_num01 {
+  font-size: 400%;
+  color: #ffffff;
+    margin-top: 56px;
+}
+.knowledge_Ethics_block01_txt01 {
+  font-size: 150%;
+  color: #ffffff;
 }
 </style>
