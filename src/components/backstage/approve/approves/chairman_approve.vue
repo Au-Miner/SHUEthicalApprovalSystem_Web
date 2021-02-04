@@ -221,7 +221,7 @@
         label="创建时间"
       ></el-table-column>
       <el-table-column width="200" prop="type" label="类型"></el-table-column>
-      <el-table-column width="200" prop="status" label="状态"></el-table-column>
+      <el-table-column prop="status" label="状态"></el-table-column>
       <el-table-column width="150" fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button size="mini" type="primary" @click="expand(scope.row)"
