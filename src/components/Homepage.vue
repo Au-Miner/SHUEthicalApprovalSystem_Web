@@ -18,7 +18,7 @@
       </el-carousel>
     </div>
 
-    <div id="knowledge_Ethics" style="display:inline">
+    <div id="knowledge_Ethics" style="display:none">
       <div id="knowledge_Ethics_page01">
           <el-button type="primary"
            icon="el-icon-back"
@@ -321,7 +321,8 @@ export default {
   left: 0px;
   width: 100%;
   /* height: 170px; */
-  height: 125px;
+  /* height: 125px; */
+  height: 13.3%;
   z-index: 10;
 }
 #title_Start:hover #background01 {
@@ -409,7 +410,7 @@ export default {
 #carousel_Map .el-carousel {
   position: absolute;
   width: 100%;
-  height: 812px;
+  height: 86.65%;
   top: 125px;
   left: 0px;
   z-index: 9;
@@ -463,6 +464,7 @@ export default {
   width: 100%;
   z-index: 10;
   height: 0px;
+  /* height: 100%; */
 }
 #knowledge_Ethics_Getback {
   border-radius: 200px;
