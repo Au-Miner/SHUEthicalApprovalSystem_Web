@@ -358,12 +358,12 @@ export default {
   z-index: 10;
 }
 #title_text01 {
-  height: 30%;
-  width: 30%;
+  height: 40px;
+  width: 20%;
   position: absolute;
-  left: 15.3%;
-  top: 35%;
-  font-size: 220%;
+  left: 17.3%;
+  top: 53px;
+  font-size: 25px;
   color: #fefefe;
   z-index: 10;
 }
